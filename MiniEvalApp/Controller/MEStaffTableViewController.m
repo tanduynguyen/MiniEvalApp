@@ -10,6 +10,7 @@
 #import "MEAppAPIClient.h"
 #import "MEPerson.h"
 #include "MEExtendStaffTableViewController.h"
+#import "MEStaffViewCell.h"
 
 @interface MEStaffTableViewController ()
 
@@ -103,10 +104,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Person Item";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    MEStaffViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+        cell = [[MEStaffViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
     }
 
@@ -119,8 +120,11 @@
     
     if ([obj isKindOfClass:[MEPerson class]]) {
         MEPerson *person = obj;
-        cell.textLabel.text = person.name;
-        cell.detailTextLabel.text = person.userName;
+        cell.nameLabel.text = person.name;
+        cell.userNameLabel.text = person.userName;
+        cell.avatar.image = [UIImage imageNamed:@"person.png"];
+        
+        [cell.textLabel setAutoresizesSubviews:NO];
     }
 
     return cell;
@@ -146,7 +150,6 @@
         destinationVC.person = person;
     }
 }
-
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row % 2) {

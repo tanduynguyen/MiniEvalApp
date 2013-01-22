@@ -10,4 +10,10 @@
 
 @interface MEStaffViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *avatar;
+
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+
 @end

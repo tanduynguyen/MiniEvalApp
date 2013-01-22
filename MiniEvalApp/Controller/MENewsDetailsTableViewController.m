@@ -92,7 +92,7 @@
             cell.detailTextLabel.text = self.news.author;
             break;
         case 3:
-            cell.textLabel.text = @"Content Snippet";
+            cell.textLabel.text = @"Snippet";
             cell.detailTextLabel.text = self.news.contentSnippet;
             break;
         case 4:

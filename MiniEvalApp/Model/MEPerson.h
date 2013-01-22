@@ -10,6 +10,7 @@
 
 @interface MEPerson : NSObject
 
+@property (nonatomic,strong) NSString *userId;
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *userName;
 @property (nonatomic,strong) NSDate *timeStamp;

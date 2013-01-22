@@ -8,22 +8,23 @@
 
 #import "MEAppDelegate.h"
 
+
 @implementation MEAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"arm-orange.jpg"] forBarMetrics:UIBarStyleDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bk.png"] forBarMetrics:UIBarStyleDefault];
     
     [[UINavigationBar appearance] setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIColor whiteColor],
+      [UIColor redColor],
       UITextAttributeTextColor,
       [UIColor colorWithRed:100.0 green:0.0 blue:0.0 alpha:0.8],
       UITextAttributeTextShadowColor,
       [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
       UITextAttributeTextShadowOffset,
-      [UIFont fontWithName:@"NoteWorthy" size:20.0],
+      [UIFont fontWithName:@"Arial" size:20.0],
       UITextAttributeFont,
       nil]];
 

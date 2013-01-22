@@ -31,6 +31,8 @@
     return self;
 }
 
+#define STAFFS_KEY @"MEExtendStaffTableViewController.2359Staffs"
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,7 +43,35 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;    
     
-    self.title = [NSString stringWithFormat:@"%@ - %@", self.navigationItem.title, self.person.name];
+    self.title = [NSString stringWithFormat:@"%@ - %@", self.navigationItem.title, self.person.name];    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
+    
+    NSDictionary *staffs = [[NSDictionary alloc] init];      
+    
+    bool find;
+    
+    for (id obj in [defaults objectForKey:STAFFS_KEY]) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+           NSDictionary *staff = obj;
+            if ([self.person.userId isEqualToString:[staff valueForKey:@"userId"]]) {
+                self.person.visitedCount = [(NSNumber *)[staff valueForKey:@"visited"] unsignedIntValue] + 1;
+                find = true;
+            }            
+            
+            [staffs setValue:self.person forKey:self.person.userId];
+        }
+    }
+    
+    if (!find) {
+        self.person.visitedCount = 1;
+        NSMutableDictionary *staff = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       self.person.name, @"name", nil];
+        [staffs setValue:self.person forKey:self.person.userId];
+    }
+    
+    [defaults setObject:staffs forKey:STAFFS_KEY];
+    [defaults synchronize];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,7 +93,7 @@
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,31 +110,36 @@
     
     switch (indexPath.row) {
         case 0:
+            cell.textLabel.text = @"Visited";
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.person.visitedCount];
+            break;
+            
+        case 1:
             cell.textLabel.text = @"Name";
             cell.detailTextLabel.text = self.person.name;
             break;
             
-        case 1:
+        case 2:
             cell.textLabel.text = @"User Name";
             cell.detailTextLabel.text = self.person.userName;
             break;
             
-        case 2:
+        case 3:
             cell.textLabel.text = @"Role";
             cell.detailTextLabel.text = self.person.role;
             break;
             
-        case 3:
+        case 4:
             cell.textLabel.text = @"Like";
             cell.detailTextLabel.text = self.person.like;
             break;
             
-        case 4:
+        case 5:
             cell.textLabel.text = @"Dislike";
             cell.detailTextLabel.text = self.person.dislike;
             break;
             
-        case 5:
+        case 6:
             cell.textLabel.text = @"Time Stamp";
             // NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             //[dateFormatter setDateFormat:@"dd/mm/YYYY"];
@@ -133,27 +168,27 @@
     // Get the text so we can measure it
     
     switch (indexPath.row) {
-        case 0:
+        case 1:
             text = self.person.name;
             break;
             
-        case 1:
+        case 2:
             text = self.person.userName;
             break;
             
-        case 2:
+        case 3:
             text = self.person.role;
             break;
             
-        case 3:
+        case 4:
             text = self.person.like;
             break;
             
-        case 4:
+        case 5:
             text = self.person.dislike;
             break;
             
-        case 5:
+        case 6:
             text = (NSString *)self.person.timeStamp;
             break;
     }

@@ -25,6 +25,7 @@
     self = [super init];
     
     if (self) {
+        self.userId = [[personDictionary objectForKey:@"_id"] objectForKey:@"$oid"];
         self.name = [personDictionary objectForKey:@"name"];
         self.userName = [personDictionary objectForKey:@"userName"];
         self.role = [personDictionary objectForKey:@"role"];
