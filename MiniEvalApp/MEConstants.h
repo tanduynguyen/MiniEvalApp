@@ -24,5 +24,7 @@ extern NSString * const kAppJSONPath;
 extern int const kLightOrganColor;
 extern int const kDarkOrganColor;
 extern int const kMainColor;
+extern int const kLightBlueColor;
+extern int const kDarkBlueColor;
 
 @end

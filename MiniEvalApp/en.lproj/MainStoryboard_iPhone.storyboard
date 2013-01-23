@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController modalTransitionStyle="crossDissolve" id="6S9-oA-yE3" customClass="MEStaffTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="iPl-L2-hBI">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -21,7 +21,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="22U-S4-iz9">
-                                            <rect key="frame" x="67" y="42" width="222" height="19"/>
+                                            <rect key="frame" x="67" y="41" width="222" height="19"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,15 +30,15 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="wordWrap" baselineAdjustment="none" adjustsFontSizeToFit="NO" id="CQb-UJ-UPv">
                                             <rect key="frame" x="67" y="11" width="233" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                             <color key="textColor" red="1" green="0.49552919031232567" blue="0.050653021105536822" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="yTf-sx-eni">
-                                            <rect key="frame" x="7" y="12" width="48" height="48"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_profile.png" id="yTf-sx-eni">
+                                            <rect key="frame" x="11" y="12" width="48" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="PpC-in-eI5">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_star.png" id="PpC-in-eI5">
                                             <rect key="frame" x="274" y="8" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -51,7 +51,7 @@
                                     <outlet property="nameLabel" destination="CQb-UJ-UPv" id="lL7-iT-LFO"/>
                                     <outlet property="starImage" destination="PpC-in-eI5" id="vL1-S8-U52"/>
                                     <outlet property="userNameLabel" destination="22U-S4-iz9" id="dxQ-8U-QIF"/>
-                                    <segue destination="v2V-g4-Hwz" kind="push" id="UIs-ec-aMG"/>
+                                    <segue destination="ddu-wi-wfX" kind="push" id="Ppw-ay-JdI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -66,30 +66,157 @@
             </objects>
             <point key="canvasLocation" x="616" y="140"/>
         </scene>
+        <!--Staff Details Table View Controller - Details-->
+        <scene sceneID="HZh-Fu-cyJ">
+            <objects>
+                <tableViewController id="ddu-wi-wfX" customClass="MEStaffDetailsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="34" sectionHeaderHeight="22" sectionFooterHeight="22" id="mzt-ef-dJh">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StaffDetails" rowHeight="34" id="RdZ-jt-nkv" customClass="MEStaffDetailsCustomViewCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="34"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="33"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a9X-fm-Hnc">
+                                            <rect key="frame" x="78" y="8" width="222" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="11"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="p09-3T-Cmy">
+                                            <rect key="frame" x="46" y="4" width="24" height="24"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="imageCell" destination="p09-3T-Cmy" id="pIa-9W-Ori"/>
+                                    <outlet property="textCell" destination="a9X-fm-Hnc" id="qVk-fp-tgu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ddu-wi-wfX" id="Le1-Hh-4bY"/>
+                            <outlet property="delegate" destination="ddu-wi-wfX" id="Rxp-8i-m0L"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Details" id="t9i-z4-Q6G">
+                        <barButtonItem key="rightBarButtonItem" image="icon_add_contact.png" style="done" id="sBQ-46-nLm"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kla-Q5-03F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="140"/>
+        </scene>
+        <!--Staff Details View Controller - Details-->
+        <scene sceneID="okA-bB-mUP">
+            <objects>
+                <viewController id="3EK-SJ-UeT" customClass="MEStaffDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eOp-DI-thm">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vqk-Oy-FmH">
+                                <rect key="frame" x="80" y="11" width="222" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_profile.png" id="CtN-C9-SDt">
+                                <rect key="frame" x="8" y="12" width="64" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_email.png" id="5MI-60-Ih4">
+                                <rect key="frame" x="44" y="106" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4FT-I5-luj">
+                                <rect key="frame" x="82" y="135" width="222" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_sms.png" id="TxX-gs-FjA">
+                                <rect key="frame" x="44" y="152" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c1X-sJ-doa">
+                                <rect key="frame" x="82" y="192" width="222" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_like.png" id="QTO-yV-eqz">
+                                <rect key="frame" x="43" y="206" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xGr-UZ-DoY">
+                                <rect key="frame" x="82" y="242" width="222" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_dislike.png" id="Ll7-vu-ZI6">
+                                <rect key="frame" x="44" y="281" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Details" id="e03-lB-NOx">
+                        <barButtonItem key="rightBarButtonItem" image="icon_add_contact.png" width="48" id="KSH-51-Ce0">
+                            <connections>
+                                <action selector="addContact:" destination="3EK-SJ-UeT" id="3bP-Zc-JLh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addContact" destination="KSH-51-Ce0" id="BcN-lK-Zt3"/>
+                        <outlet property="avatar" destination="CtN-C9-SDt" id="4JD-8v-sV2"/>
+                        <outlet property="contactLabel" destination="c1X-sJ-doa" id="ALc-bc-Vok"/>
+                        <outlet property="emailLabel" destination="4FT-I5-luj" id="41Q-g0-yVf"/>
+                        <outlet property="likeLabel" destination="xGr-UZ-DoY" id="qnm-0g-4cg"/>
+                        <outlet property="roleLabel" destination="vqk-Oy-FmH" id="Khm-fD-nTL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gUV-Cg-a40" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1342" y="-513"/>
+        </scene>
         <!--Extend Staff Table View Controller - Details-->
         <scene sceneID="J5l-K1-olK">
             <objects>
                 <tableViewController modalTransitionStyle="partialCurl" id="v2V-g4-Hwz" customClass="MEExtendStaffTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4dB-4f-Bap">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="87" sectionHeaderHeight="22" sectionFooterHeight="22" id="4dB-4f-Bap">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PersonDetails" textLabel="HOR-lp-iG7" detailTextLabel="qZk-a5-PWe" style="IBUITableViewCellStyleValue2" id="CrZ-ZZ-lOi">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PersonDetails" textLabel="HOR-lp-iG7" detailTextLabel="qZk-a5-PWe" rowHeight="87" style="IBUITableViewCellStyleValue2" id="CrZ-ZZ-lOi">
+                                <rect key="frame" x="0.0" y="22" width="320" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HOR-lp-iG7">
-                                            <rect key="frame" x="10" y="15" width="91" height="15"/>
+                                            <rect key="frame" x="10" y="37" width="91" height="15"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                             <color key="textColor" red="0.87973420516304346" green="0.54255399629773071" blue="0.24138797583779295" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qZk-a5-PWe">
-                                            <rect key="frame" x="107" y="12" width="41" height="19"/>
+                                            <rect key="frame" x="107" y="34" width="41" height="19"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" red="0.32129290725924237" green="0.33037533967391308" blue="0.26549914929287244" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -108,14 +235,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mf3-sV-EPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="139"/>
+            <point key="canvasLocation" x="979" y="-513"/>
         </scene>
         <!--News Table View Controller - News-->
         <scene sceneID="BoT-U3-vc3">
             <objects>
                 <tableViewController id="Gws-mq-efF" customClass="MENewsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vjZ-Bv-65o">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -162,7 +289,7 @@
             <objects>
                 <viewController id="cSb-ha-eKc" customClass="MEInfoViewController" sceneMemberID="viewController">
                     <webView key="view" contentMode="scaleToFill" id="inn-md-oQ7">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </webView>
                     <navigationItem key="navigationItem" title="Info" id="n2Z-j8-7S1"/>
@@ -185,14 +312,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="oUh-3X-a1y" kind="relationship" relationship="viewControllers" id="w1J-gq-rUv"/>
-                        <segue destination="BDj-Kn-wVc" kind="relationship" relationship="viewControllers" id="C1d-nM-3BW"/>
-                        <segue destination="4fW-lq-pvV" kind="relationship" relationship="viewControllers" id="ELR-T6-gN5"/>
+                        <segue destination="4fW-lq-pvV" kind="relationship" relationship="viewControllers" id="zaY-es-JOk"/>
+                        <segue destination="oUh-3X-a1y" kind="relationship" relationship="viewControllers" id="6ql-0b-Tby"/>
+                        <segue destination="BDj-Kn-wVc" kind="relationship" relationship="viewControllers" id="dHI-nu-eDA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ll9-oJ-MlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298" y="-186"/>
+            <point key="canvasLocation" x="-348" y="-519"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="guf-7x-09X">
@@ -237,7 +364,7 @@
             <objects>
                 <tableViewController modalTransitionStyle="partialCurl" id="okE-sH-Jbk" customClass="MENewsDetailsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HXz-5C-VFD">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -298,6 +425,15 @@
             <point key="canvasLocation" x="236" y="-1175"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_add_contact.png" width="44" height="44"/>
+        <image name="icon_dislike.png" width="22" height="24"/>
+        <image name="icon_email.png" width="22" height="22"/>
+        <image name="icon_like.png" width="22" height="24"/>
+        <image name="icon_profile.png" width="60" height="60"/>
+        <image name="icon_sms.png" width="22" height="22"/>
+        <image name="icon_star.png" width="25" height="25"/>
+    </resources>
     <classes>
         <class className="MEExtendStaffTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MEExtendStaffTableViewController.h"/>
@@ -323,6 +459,32 @@
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
+        <class className="MEStaffDetailsCustomViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsCustomViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageCell" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="textCell" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MEStaffDetailsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addContact:"/>
+            </relationships>
+        </class>
+        <class className="MEStaffDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addContact:"/>
+                <relationship kind="outlet" name="addContact" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="avatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="contactLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="roleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="MEStaffTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffTableViewController.h"/>
         </class>
@@ -330,6 +492,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

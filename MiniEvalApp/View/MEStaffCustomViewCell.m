@@ -7,8 +7,16 @@
 //
 
 #import "MEStaffCustomViewCell.h"
+#import "MEPerson.h"
 
-@implementation MEStaffCustomViewCell
+#import "UIImageView+AFNetworking.h"
+
+@implementation MEStaffCustomViewCell {    
+@private
+    __strong MEPerson *_person;
+}
+
+@synthesize person = _person;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -18,6 +26,33 @@
     }
     return self;
 }
+
+
+- (void)setPerson:(MEPerson *)person {
+    _person = person;
+    
+    self.nameLabel.text = person.name;
+    self.userNameLabel.text = person.userName;
+    if (person.image) {
+        [self.avatar setImageWithURL:[NSURL URLWithString:person.image] placeholderImage:[UIImage imageNamed:@"icon_profile.png"]];
+    }
+        
+    UIColor *genderCellColor;
+    
+    if ([person.gender isEqualToString:@"male"]) {
+        genderCellColor = UIColorFromRGB(kDarkOrganColor);
+    } else {
+        genderCellColor = UIColorFromRGB(kDarkBlueColor);
+    }
+    
+    [self.nameLabel setTextColor:genderCellColor];
+    
+    [self.nameLabel setNumberOfLines:0];
+    [self.userNameLabel setNumberOfLines:0];
+    
+    [self setNeedsLayout];
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

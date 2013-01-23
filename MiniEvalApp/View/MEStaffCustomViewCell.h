@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class MEPerson;
+
 @interface MEStaffCustomViewCell : UITableViewCell
+
+@property (nonatomic, strong) MEPerson *person;
 
 @property (strong, nonatomic) IBOutlet UIImageView *avatar;
 

@@ -9,7 +9,7 @@
 #import "MEStaffTableViewController.h"
 #import "MEAppAPIClient.h"
 #import "MEPerson.h"
-#include "MEExtendStaffTableViewController.h"
+#import "MEStaffDetailsTableViewController.h"
 #import "MEStaffCustomViewCell.h"
 #import "SVPullToRefresh.h"
 
@@ -19,9 +19,84 @@
 @property (strong, nonatomic) NSMutableArray *filteredArray;
 @property (nonatomic) NSUInteger highestVisitedCount;
 
+- (void)reload:(id)sender;
+
 @end
 
-@implementation MEStaffTableViewController
+@implementation MEStaffTableViewController{
+@private
+    NSMutableArray *persons;
+    
+    __strong UIActivityIndicatorView *_activityIndicatorView;
+}
+
+- (void)reload:(id)sender {
+    [_activityIndicatorView startAnimating];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    __weak MEStaffTableViewController *weakSelf = self;
+    __weak UIActivityIndicatorView *spinner = _activityIndicatorView;
+    
+    // setup pull-to-refresh
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        int64_t delayInSeconds = 0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            [MEPerson globalTimelineContactsWithBlock:^(NSMutableArray *results, NSError *error) {
+                if (error) {
+                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+                } else {                
+                    weakSelf.results = results;
+                    weakSelf.filteredArray = [NSMutableArray arrayWithCapacity:[weakSelf.results count]];
+                    
+                    [weakSelf reloadInformation];
+                    
+                    weakSelf.tableView.scrollEnabled = YES;
+                    [weakSelf.tableView.pullToRefreshView stopAnimating];
+                }
+                
+               [spinner stopAnimating];
+                weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
+            }];
+            
+        });
+    }];
+    
+    // setup infinite scrolling
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        
+        int64_t delayInSeconds = 0.2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            if (self.results.count > 0) {
+                MEPerson *p = [[MEPerson alloc] init];
+                
+                p.name = @"TEST";
+                NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+                [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+                p.userName = [DateFormatter stringFromDate:[NSDate date]];
+                
+                [weakSelf.results addObject:p];
+                
+                [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.results.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+            }
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        });
+    }];
+    
+    // trigger the refresh manually at the end of viewDidLoad
+    [self.tableView triggerPullToRefresh];
+}
+
+#pragma mark - UIViewController
+
+- (void)loadView {
+    [super loadView];
+    
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    _activityIndicatorView.hidesWhenStopped = YES;
+}
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,81 +109,40 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];       
+    [super viewDidLoad];    
     
-    __weak MEStaffTableViewController *weakSelf = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_activityIndicatorView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reload:)];
     
-    // setup pull-to-refresh
-    [self.tableView addPullToRefreshWithActionHandler:^{        
-        int64_t delayInSeconds = 0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [[MEAppAPIClient sharedInstance] getPath:kAppAPIPath parameters:nil
-                                             success:^(AFHTTPRequestOperation *operation, id response) {
-                                                 NSLog(@"Response: %@", response);
-                                                 
-                                                 NSMutableArray *results = [NSMutableArray array];
-                                                 if ([response isKindOfClass:[NSData class]]) {
-                                                     NSError *error;
-                                                     
-                                                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:response options:kNilOptions error:&error];
-                                                     
-                                                     if (error) {
-                                                         NSLog(@"Error parsing JSON: %@", error);
-                                                         return;
-                                                     }
-                                                     
-                                                     for (id obj in json)
-                                                     {
-                                                         if ([obj isKindOfClass:[NSDictionary class]]) {
-                                                             MEPerson *person = [[MEPerson alloc] initWithDictionary:(NSDictionary *)obj];
-                                                             [results addObject:person];
-                                                         }
-                                                     }
-                                                     
-                                                     weakSelf.results = results;                                                     
-                                                     weakSelf.filteredArray = [NSMutableArray arrayWithCapacity:[weakSelf.results count]];
-                                                     
-                                                     [weakSelf reloadInformation];      
-                                                     
-                                                     weakSelf.tableView.scrollEnabled = YES;                                                     
-                                                     [weakSelf.tableView.pullToRefreshView stopAnimating];
-                                                 }
-                                             }
-                                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                 NSLog(@"Error fetching persons!");
-                                                 NSLog(@"%@", error);
-                                             }]; 
+    self.tableView.rowHeight = 72.0f;
+    
+    [self reload:nil];
+    
+    UIImage *imgInfo = [UIImage imageNamed:@"icon_info.png"];
+    UIImage *imgInfoHighlight = [UIImage imageNamed:@"icon_info_selected.png"];
+    
+    UIImage *imgContacts = [UIImage imageNamed:@"icon_contacts.png"];
+    UIImage *imgContactsHighlight = [UIImage imageNamed:@"icon_contacts_selected.png"];
+    
+    UIImage *imgSettings = [UIImage imageNamed:@"middle_button.png"];
+    
+    
+    UITabBar *tabBar = self.tabBarController.tabBar;
+    
+    UITabBarItem *firstTabItem = [tabBar.items objectAtIndex:0];
+    UITabBarItem *secondTabItem = [tabBar.items objectAtIndex:1];
+    UITabBarItem *thirdTabItem = [tabBar.items objectAtIndex:2];
+    
+    [thirdTabItem setFinishedSelectedImage:imgInfoHighlight withFinishedUnselectedImage:imgInfo];
+    [firstTabItem setFinishedSelectedImage:imgContactsHighlight withFinishedUnselectedImage:imgContacts];
+    [secondTabItem setFinishedSelectedImage:imgSettings withFinishedUnselectedImage:imgSettings];
+}
 
-            
-        });
-    }];
-    
-    
-    // setup infinite scrolling
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        
-        int64_t delayInSeconds = 0.2;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            MEPerson *p = [[MEPerson alloc] init];
-            
-            p.name = @"TEST";            
-            NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-            [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-            p.userName = [DateFormatter stringFromDate:[NSDate date]];
-            
-            [weakSelf.results addObject:p];
-            
-            [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.results.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-            
-            [weakSelf.tableView.infiniteScrollingView stopAnimating];
-        });
-    }];
-    
-    // trigger the refresh manually at the end of viewDidLoad
-    [self.tableView triggerPullToRefresh];
 
+- (void)viewDidUnload {
+    _activityIndicatorView = nil;
+    
+    [super viewDidUnload];
 }
 
 - (void)reloadInformation
@@ -196,22 +230,16 @@
     
     if ([obj isKindOfClass:[MEPerson class]]) {
         MEPerson *person = obj;
-        cell.nameLabel.text = person.name;
-        cell.userNameLabel.text = person.userName;
-        cell.avatar.image = [UIImage imageNamed:@"person.png"];
+        cell.person = obj;
         
         if (person.visitedCount == self.highestVisitedCount) {
-            cell.starImage.image = [UIImage imageNamed:@"star.png"];
 //            CGRect myFrame = cell.nameLabel.frame;
 //            myFrame.size.width -= cell.starImage.frame.size.width;
 //            cell.nameLabel.frame = myFrame;
             cell.starImage.hidden = NO;
         } else {
             cell.starImage.hidden = YES;
-        }
-        
-        [cell.nameLabel setNumberOfLines:0];
-        [cell.userNameLabel setNumberOfLines:0];
+        }        
     }
 
     return cell;
@@ -219,7 +247,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.destinationViewController isKindOfClass:[MEExtendStaffTableViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[MEStaffDetailsTableViewController class]]) {
         
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         
@@ -233,7 +261,7 @@
             }
         }
         
-        MEExtendStaffTableViewController *destinationVC = (MEExtendStaffTableViewController *)segue.destinationViewController;
+        MEStaffDetailsTableViewController *destinationVC = (MEStaffDetailsTableViewController *)segue.destinationViewController;
         destinationVC.person = person;
     }
 }

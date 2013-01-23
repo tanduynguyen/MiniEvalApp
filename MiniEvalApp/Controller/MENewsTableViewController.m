@@ -32,8 +32,8 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
+    [super viewDidLoad];    
+        
     
     NSURL *url = [NSURL URLWithString:kAppJSONPath];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
