@@ -31,7 +31,6 @@
     return self;
 }
 
-#define STAFFS_KEY @"MEExtendStaffTableViewController.2359Staffs"
 
 - (void)viewDidLoad
 {
@@ -45,29 +44,32 @@
     
     self.title = [NSString stringWithFormat:@"%@ - %@", self.navigationItem.title, self.person.name];    
     
+    // Use NSUserDefault to store the visit count for each person.
+    // When a user is selected, increase visit count
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
     
-    NSDictionary *staffs = [[NSDictionary alloc] init];      
+    NSMutableDictionary *staffs = [[NSMutableDictionary alloc] init];
     
-    bool find;
+    staffs = [[defaults objectForKey:STAFFS_KEY] mutableCopy];
     
-    for (id obj in [defaults objectForKey:STAFFS_KEY]) {
-        if ([obj isKindOfClass:[NSDictionary class]]) {
-           NSDictionary *staff = obj;
-            if ([self.person.userId isEqualToString:[staff valueForKey:@"userId"]]) {
-                self.person.visitedCount = [(NSNumber *)[staff valueForKey:@"visited"] unsignedIntValue] + 1;
-                find = true;
-            }            
+    if ([staffs objectForKey:self.person.userId]) {
+        id obj = [staffs objectForKey:self.person.userId];
+        if ([obj isKindOfClass:[NSMutableDictionary class]]) {
+            NSMutableDictionary *staff = [obj mutableCopy];
+            self.person.visitedCount = [(NSNumber  *)[staff valueForKey:@"visitedCount"] unsignedIntegerValue]  + 1;
+            [staff setObject:[NSNumber numberWithUnsignedInt:self.person.visitedCount] forKey:@"visitedCount"];
             
-            [staffs setValue:self.person forKey:self.person.userId];
+            [staffs setObject:staff forKey:self.person.userId];
         }
     }
-    
-    if (!find) {
+    else {
         self.person.visitedCount = 1;
-        NSMutableDictionary *staff = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       self.person.name, @"name", nil];
-        [staffs setValue:self.person forKey:self.person.userId];
+        NSMutableDictionary *staff = [NSDictionary dictionaryWithObjectsAndKeys:
+                [NSNumber numberWithUnsignedInt:self.person.visitedCount], @"visitedCount",
+                nil];
+        
+        [staffs setObject:staff forKey:self.person.userId];
     }
     
     [defaults setObject:staffs forKey:STAFFS_KEY];
@@ -110,7 +112,7 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"Visited";
+            cell.textLabel.text = @"Visit Count";
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.person.visitedCount];
             break;
             

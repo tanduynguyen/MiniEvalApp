@@ -10,10 +10,11 @@
 #import "MEAppAPIClient.h"
 #import "MENews.h"
 #import "MENewsDetailsTableViewController.h"
+#import "SVPullToRefresh.h"
 
 @interface MENewsTableViewController ()
 
-@property (strong) NSMutableArray *results;
+@property (strong, nonatomic) NSMutableArray *results;
 @property (strong, nonatomic) NSMutableArray *filteredArray;
 
 @end
@@ -37,29 +38,45 @@
     NSURL *url = [NSURL URLWithString:kAppJSONPath];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation
-                                         JSONRequestOperationWithRequest:request
-                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
-                                             json = [[[json valueForKeyPath:@"responseData"] valueForKeyPath:@"feed"] valueForKeyPath:@"entries"];
-                                             NSMutableArray *results = [NSMutableArray array];
-                                             for (id obj in json)
-                                             {
-                                                 if ([obj isKindOfClass:[NSDictionary class]]) {
-                                                     MENews *news = [[MENews alloc] initWithDictionary:(NSDictionary *)obj];
-                                                     [results addObject:news];
-                                                 }
-                                             }
-                                             
-                                             self.results = results;
-                                             
-                                             self.filteredArray = [NSMutableArray arrayWithCapacity:[self.results count]];
-                                             
-                                             [self.tableView reloadData];
-                                             self.tableView.scrollEnabled = YES;
-                                         } failure:nil];
+       
+    __weak MENewsTableViewController *weakSelf = self;
     
-    [operation start];
-
+    // setup pull-to-refresh
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        int64_t delayInSeconds = 0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            AFJSONRequestOperation *operation = [AFJSONRequestOperation
+                                                 JSONRequestOperationWithRequest:request
+                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
+                                                     json = [[[json valueForKeyPath:@"responseData"] valueForKeyPath:@"feed"] valueForKeyPath:@"entries"];
+                                                     NSMutableArray *results = [NSMutableArray array];
+                                                     for (id obj in json)
+                                                     {
+                                                         if ([obj isKindOfClass:[NSDictionary class]]) {
+                                                             MENews *news = [[MENews alloc] initWithDictionary:(NSDictionary *)obj];
+                                                             [results addObject:news];
+                                                         }
+                                                     }
+                                                     
+                                                     weakSelf.results = results;
+                                                     
+                                                     weakSelf.filteredArray = [NSMutableArray arrayWithCapacity:[weakSelf.results count]];
+                                                     
+                                                     [weakSelf.tableView reloadData];
+                                                     weakSelf.tableView.scrollEnabled = YES;
+                                                     
+                                                     [weakSelf.tableView.pullToRefreshView stopAnimating];
+                                                 } failure:nil];
+            
+            [operation start];
+        });
+    }];
+    
+    
+    // trigger the refresh manually at the end of viewDidLoad
+    [self.tableView triggerPullToRefresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,7 +159,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row % 2) {
-        cell.backgroundColor = UIColorFromRGB(kLightOrganColor, 1.0);
+        cell.backgroundColor = UIColorFromRGB(kLightOrganColor);
     }
 }
 

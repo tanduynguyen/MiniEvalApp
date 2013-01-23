@@ -14,28 +14,34 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bk.png"] forBarMetrics:UIBarStyleDefault];
+    
+    UIColor *DarkOrganColor = UIColorFromRGB(kDarkOrganColor);    
+    UIColor *MainColor = UIColorFromRGB(kMainColor);
+    
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bk.png"] forBarMetrics:UIBarStyleDefault];
+    [[UINavigationBar appearance] setTintColor:MainColor];
     
     [[UINavigationBar appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIColor redColor],
-      UITextAttributeTextColor,
-      [UIColor colorWithRed:100.0 green:0.0 blue:0.0 alpha:0.8],
-      UITextAttributeTextShadowColor,
-      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-      UITextAttributeTextShadowOffset,
-      [UIFont fontWithName:@"Arial" size:20.0],
-      UITextAttributeFont,
+        [NSDictionary dictionaryWithObjectsAndKeys:
+            [UIColor whiteColor],
+            UITextAttributeTextColor,
+            MainColor,
+            UITextAttributeTextShadowColor,
+            [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+            UITextAttributeTextShadowOffset,
+            [UIFont fontWithName:@"Helvetica" size:20.0],
+            UITextAttributeFont,
       nil]];
 
     
-    UIColor *DarkOrganColor = UIColorFromRGB(kDarkOrganColor, 0.95);
     [[UITabBar appearance] setTintColor:DarkOrganColor];
     
     [[UIBarButtonItem appearance] setTintColor:DarkOrganColor];
     
+    
     return YES;
 }
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

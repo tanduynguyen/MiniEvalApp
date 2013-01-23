@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MEStaffViewCell : UITableViewCell
+@interface MEStaffCustomViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *avatar;
 
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+
+@property (strong, nonatomic) IBOutlet UIImageView *starImage;
+
 
 @end

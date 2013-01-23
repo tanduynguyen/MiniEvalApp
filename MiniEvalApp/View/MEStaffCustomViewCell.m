@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 2359media. All rights reserved.
 //
 
-#import "MEStaffViewCell.h"
+#import "MEStaffCustomViewCell.h"
 
-@implementation MEStaffViewCell
+@implementation MEStaffCustomViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

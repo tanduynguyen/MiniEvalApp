@@ -18,7 +18,7 @@
 @property (nonatomic,strong) NSString *like;
 @property (nonatomic,strong) NSString *dislike;
 
-@property (nonatomic) int visitedCount;
+@property (nonatomic) NSUInteger visitedCount;
 
 - (id)initWithDictionary:(NSDictionary *)personDictionary;
 
