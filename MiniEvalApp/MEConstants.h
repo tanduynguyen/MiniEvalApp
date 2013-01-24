@@ -15,6 +15,10 @@
 
 #define UIColorFromRGB(rgbValue) UIColorFromRGBWithAlpha(rgbValue, 1.0);
 
+#define TAG_AVATAR_CELL 1
+#define TAG_EMAIL_CELL 2
+#define TAG_SMS_CELL 3
+
 @interface MEConstants : NSObject
 
 extern NSString * const kAppAPIBaseURLString;

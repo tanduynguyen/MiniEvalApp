@@ -63,6 +63,7 @@
     }];
     
     // setup infinite scrolling
+    
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         
         int64_t delayInSeconds = 0.2;
@@ -71,10 +72,9 @@
             if (self.results.count > 0) {
                 MEPerson *p = [[MEPerson alloc] init];
                 
-                p.name = @"TEST";
                 NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
                 [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-                p.userName = [DateFormatter stringFromDate:[NSDate date]];
+                p.name = [DateFormatter stringFromDate:[NSDate date]];
                 
                 [weakSelf.results addObject:p];
                 
@@ -233,13 +233,10 @@
         cell.person = obj;
         
         if (person.visitedCount == self.highestVisitedCount) {
-//            CGRect myFrame = cell.nameLabel.frame;
-//            myFrame.size.width -= cell.starImage.frame.size.width;
-//            cell.nameLabel.frame = myFrame;
             cell.starImage.hidden = NO;
         } else {
             cell.starImage.hidden = YES;
-        }        
+        }
     }
 
     return cell;
@@ -253,12 +250,14 @@
         
         MEPerson *person = [self.results objectAtIndex:indexPath.row];
         
-        if ([sender isKindOfClass:[UITableViewCell class]]){
-            UITableViewCell *currentCell = sender;
+        if ([sender isKindOfClass:[MEStaffCustomViewCell class]]){
+            MEStaffCustomViewCell *currentCell = sender;
             
             if ([currentCell.superview isEqual:self.searchDisplayController.searchResultsTableView]) {
                 person = (MEPerson *)[self.filteredArray objectAtIndex:indexPath.row];
             }
+            
+            person.avtar = currentCell.avatar.image;
         }
         
         MEStaffDetailsTableViewController *destinationVC = (MEStaffDetailsTableViewController *)segue.destinationViewController;

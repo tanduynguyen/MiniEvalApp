@@ -8,13 +8,19 @@
 
 #import "MEStaffDetailsTableViewController.h"
 #import "MEStaffDetailsCustomViewCell.h"
-#import "UIImageView+AFNetworking.h"
 
-@interface MEStaffDetailsTableViewController ()
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+#import <MessageUI/MFMessageComposeViewController.h>
+
+@interface MEStaffDetailsTableViewController () <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UINavigationControllerDelegate>
+
+@property (strong, nonatomic) NSMutableArray *items;
 
 @end
 
 @implementation MEStaffDetailsTableViewController
+
 
 - (MEPerson *)person
 {
@@ -74,6 +80,49 @@
     [self customizeBackButton];
     
     [self customAddContactButton];
+    
+    [self initStaffDetailsCustomViewCells];
+}
+
+- (void)initStaffDetailsCustomViewCells
+{
+    self.items = [[NSMutableArray alloc] init];
+    
+    NSString *imageCell;
+    NSString *textCell;
+    
+    imageCell = @"icon_profile.png";    
+    textCell = self.person.role;
+    NSMutableDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithUnsignedInt:TAG_AVATAR_CELL], @"tag",
+                                 textCell, @"textCell",
+                                 [NSNumber numberWithUnsignedInt:64], @"sizeAmount",
+                                 [NSNumber numberWithUnsignedInt:5], @"topleft",
+                                 nil];
+    [self.items addObject:dict];
+    
+    imageCell = @"icon_email.png";
+    textCell = self.person.userName;
+    [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell", [NSNumber numberWithUnsignedInt:TAG_EMAIL_CELL], @"tag", nil]];
+    
+    if (self.person.contact) {
+        imageCell = @"icon_sms.png";
+        textCell = self.person.contact;        
+        [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell", [NSNumber numberWithUnsignedInt:TAG_SMS_CELL], @"tag", nil]];
+    }
+    
+    if (self.person.like) {
+        imageCell = @"icon_like.png";
+        textCell = self.person.like;
+        [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell", nil]];
+    }
+    
+    if (self.person.dislike) {
+        imageCell = @"icon_dislike.png";
+        textCell = self.person.dislike;
+        [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell", nil]];
+    }
+    
 }
 
 - (void)customizeBackButton
@@ -89,7 +138,7 @@
     //set the frame of the button to the size of the image (see note below)
     button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
     
-    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     
     //create a UIBarButtonItem with the button as a custom view
     UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
@@ -106,16 +155,79 @@
     //    [self.addContact setCustomView:customButton];
     
     //    [self.addContact setBackgroundImage:[UIImage imageNamed:@"icon_add_contact.png"] forState:nil barMetrics:nil];
+    UIImage *addContactImage = [UIImage imageNamed:@"icon_add_contact.png"];
+    UIButton *addContactButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addContactButton setBackgroundImage:addContactImage forState:UIControlStateNormal];
+    [addContactButton setFrame:CGRectMake(0, 0, 44, 44)];
+    UIBarButtonItem *reloadBarButton = [[UIBarButtonItem alloc] initWithCustomView:addContactButton];
+    [addContactButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.navigationItem setRightBarButtonItem:reloadBarButton];
 }
 
-- (void)back {
+- (void)backAction {
 	// Tell the controller to go back
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
 
-- (IBAction)addContact:(id)sender {
-    NSLog(@"add Contact");
+- (void)addContactAction {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Address Book" message:[NSString stringWithFormat:@"Do you want to add %@ to your Address Book?", self.person.name] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    // optional - add more buttons:
+    [alert addButtonWithTitle:@"Yes"];
+    [alert setTag:12];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if ([alertView tag] == 12) {
+        if (buttonIndex == 1) {     // and they clicked OK.
+            ABUnknownPersonViewController *unknownPersonViewController = [[ABUnknownPersonViewController alloc] init];
+            unknownPersonViewController.displayedPerson = (ABRecordRef)[self buildContactDetails];
+            unknownPersonViewController.allowsAddingToAddressBook = YES;
+            [self.navigationController pushViewController:unknownPersonViewController animated:YES];
+        }
+    }
+}
+
+- (ABRecordRef)buildContactDetails {
+    ABRecordRef person = ABPersonCreate();
+    CFErrorRef  error = NULL;
+    
+    //name
+    ABRecordSetValue(person, kABPersonFirstNameProperty, CFBridgingRetain(self.person.name), NULL);
+    
+    // email
+    ABMutableMultiValueRef email = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    ABMultiValueAddValueAndLabel(email, CFBridgingRetain(self.person.userName), CFSTR("email"), NULL);
+    ABRecordSetValue(person, kABPersonEmailProperty, email, &error);
+    CFRelease(email);
+    
+    // mobile
+    ABMutableMultiValueRef mobile = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    ABMultiValueAddValueAndLabel(mobile, CFBridgingRetain(self.person.contact), CFSTR("mobile"), NULL);
+    ABRecordSetValue(person, kABPersonPhoneProperty, mobile, &error);
+    CFRelease(mobile);        
+  
+    NSData *dataRef = UIImagePNGRepresentation(self.person.avtar);    
+    ABPersonSetImageData(person, (CFDataRef)CFBridgingRetain(dataRef), nil);
+    
+    if (error != NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Can not add %@ to your Address Book?", self.person.name] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        NSLog(@"Error: %@", error);
+    }
+    
+    return person;
+}
+
+
+#pragma mark ABNewPersonViewControllerDelegate methods
+// Dismisses the new-person view controller.
+- (void)newPersonViewController:(ABNewPersonViewController *)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Address Book" message:[NSString stringWithFormat:@"%@ has to added to your Address Book?", self.person.name] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 
@@ -138,7 +250,7 @@
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 5;
+    return self.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -152,55 +264,11 @@
     }
     
     // Configure the cell...
-    
-    
-    switch (indexPath.row) {
-        case 0:            
-            [cell.imageCell setFrame:CGRectMake(4, 4, 64, 64)];
-            if (self.person.image) {
-#ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
-            [cell.imageCell setImage:self.person.profileImage];
-#else
-            [cell.imageCell setImageWithURL:[NSURL URLWithString:self.person.image] placeholderImage:[UIImage imageNamed:@"icon_profile.png"]];
-#endif
-            } else {
-                [cell.imageCell setImage:[UIImage imageNamed:@"icon_profile.png"]];
-            }
-            
-            cell.textCell.text = self.person.role;
-            break;
-            
-        case 1:
-            [cell.imageCell setImage:[UIImage imageNamed:@"icon_email.png"]];
-            cell.textCell.text = self.person.userName;
-            break;
-            
-        case 2:
-            if (!self.person.contact) {
-                [cell setHidden:YES];
-                [cell setFrame:CGRectZero];
-            } else {
-                [cell.imageCell setImage:[UIImage imageNamed:@"icon_sms.png"]];
-                cell.textCell.text = self.person.contact;
-            }
-            break;
-            
-        case 3:
-            [cell.imageCell setImage:[UIImage imageNamed:@"icon_like.png"]];
-            cell.textCell.text = self.person.like;
-            break;
-            
-        case 4:
-            [cell.imageCell setImage:[UIImage imageNamed:@"icon_dislike.png"]];
-            cell.textCell.text = self.person.dislike;
-            break;
-        default:
-            break;
+    NSDictionary *dict = [self.items objectAtIndex:indexPath.row];
+    [cell setContentData:dict];
+    if (cell.tag == TAG_AVATAR_CELL) {
+        [cell.imageCell setImage:self.person.avtar];
     }
-    
-    
-    [cell.textCell setNumberOfLines:0];
-    [cell.textCell setLineBreakMode:NSLineBreakByWordWrapping];
     
     return cell;
 }
@@ -215,32 +283,13 @@
 {
     CGFloat height = 0;
     
-    NSString *text = @"";
-    
     // Get the text so we can measure it
-    
-    switch (indexPath.row) {
-        case 0:
-            text = self.person.role;
-            break;
-            
-        case 1:
-            text = self.person.userName;
-            break;
-            
-        case 2:
-            text = self.person.contact;
-            break;
-            
-        case 3:
-            text = self.person.like;
-            break;
-            
-        case 4:
-            text = self.person.dislike;
-            break;
+    NSDictionary *dict = (NSDictionary *) [self.items objectAtIndex:indexPath.row];
+    NSString *text = [dict objectForKey:@"textCell"];
+    if ([dict objectForKey:@"sizeAmount"]) {
+        height = [(NSNumber *)[dict objectForKey:@"sizeAmount"] intValue];
     }
-    
+        
     //UILabel *content = (UILabel *)[[(UITableViewCell *)[(UITableView *)self cellForRowAtIndexPath:indexPath] contentView] viewWithTag:1];
     //text = [items objectAtIndex:indexPath.row];
     
@@ -251,68 +300,132 @@
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByCharWrapping];
     
     // Get the height of our measurement
-    if (indexPath.row == 0 && size.height < 64) {
-        size.height = 54;
-    }
-    height = size.height;    
-    
+    if (height < size.height) {
+        height = size.height;
+    }    
     
     // return the height, with a bit of extra padding in
     return height + (CELL_CONTENT_MARGIN * 2);
 }
 
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    if (cell.tag == TAG_EMAIL_CELL) {
+        [self showComposer:@"Hi,\n Just test!"];
+    } else if (cell.tag == TAG_SMS_CELL) {
+        [self sendInAppSMS];        
+    }
+}
+
+#pragma mark - Email composition
+
+// Displays an email composition interface inside the application. Populates all the Mail fields.
+- (void) displayComposerSheet:(NSString *)body {
+	
+	MFMailComposeViewController *tempMailCompose = [[MFMailComposeViewController alloc] init];
+	
+	tempMailCompose.mailComposeDelegate = self;
+	
+	[tempMailCompose setToRecipients:[NSArray arrayWithObject:self.person.userName]];
+	//[tempMailCompose setCcRecipients:[NSArray arrayWithObject:@"ipad@me.com"]];
+	[tempMailCompose setSubject:@"iPhone App recommendation"];
+	[tempMailCompose setMessageBody:body isHTML:NO];
+	
+    [self presentViewController:tempMailCompose animated:YES completion:^(void){}];
+}
+
+// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	// Notifies users about errors associated with the interface
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+			NSLog(@"Result: canceled");
+			break;
+		case MFMailComposeResultSaved:
+			NSLog(@"Result: saved");
+			break;
+		case MFMailComposeResultSent:
+			NSLog(@"Result: sent");
+			break;
+		case MFMailComposeResultFailed:
+			NSLog(@"Result: failed");
+			break;
+		default:
+			NSLog(@"Result: not sent");
+			break;
+	}
+    [self dismissViewControllerAnimated:YES completion:^(void){}];
+}
+
+// Launches the Mail application on the device. Workaround
+- (void)launchMailAppOnDevice:(NSString *)body{
+	NSString *recipients = [NSString stringWithFormat:@"mailto:%@?subject=%@", self.person.userName, @"iPhone App recommendation"];
+	NSString *mailBody = [NSString stringWithFormat:@"&body=%@", body];
+	
+	NSString *email = [NSString stringWithFormat:@"%@%@", recipients, mailBody];
+	email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
+}
+
+// Call this method and pass parameters
+- (void)showComposer:(id)sender{
+	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+	if (mailClass != nil){
+		// We must always check whether the current device is configured for sending emails
+		if ([mailClass canSendMail]){
+			[self displayComposerSheet:sender];
+		} else {
+			[self launchMailAppOnDevice:sender];
+		}
+	} else {
+		[self launchMailAppOnDevice:sender];
+	}
+}
+
+#pragma mark - SMS composition
+
+- (void)sendInAppSMS
+{
+	MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+    picker.messageComposeDelegate = self;
+    
+	if([MFMessageComposeViewController canSendText])
+	{
+		picker.body = @"Hello from Duy Nguyen";
+		picker.recipients = [NSArray arrayWithObjects:self.person.contact, nil];
+		picker.messageComposeDelegate = self;
+        [self presentViewController:picker animated:YES completion:^(void){}];
+	}
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    UIAlertView *alert;
+    
+	switch (result) {
+		case MessageComposeResultCancelled:
+			NSLog(@"Cancelled");
+			break;
+            
+		case MessageComposeResultFailed:            
+			alert = [[UIAlertView alloc] initWithTitle:@"MiniEvalApp" message:@"Unknown Error" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+			[alert show];
+			break;
+		case MessageComposeResultSent:
+            
+			break;
+            
+		default:
+			break;
+	}
+    
+    [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
 @end

@@ -47,6 +47,9 @@
 		8D93990116AFDFD70039AEF7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */; };
 		8D93990416AFE7500039AEF7 /* MEStaffDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D93990316AFE7500039AEF7 /* MEStaffDetailsTableViewController.m */; };
 		8D93990716AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D93990616AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.m */; };
+		8D994EA416B0F6330049E709 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA216B0F6330049E709 /* AddressBook.framework */; };
+		8D994EA516B0F6330049E709 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA316B0F6330049E709 /* AddressBookUI.framework */; };
+		8D994EA716B11E100049E709 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA616B11E100049E709 /* MessageUI.framework */; };
 		8D9C2C4F16AE8E32008D9101 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C2C4E16AE8E32008D9101 /* BaseViewController.m */; };
 		8D9C2C5116AE93C7008D9101 /* Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9C2C5016AE93C6008D9101 /* Window.xib */; };
 		8D9C2C5E16AEA227008D9101 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C2C5B16AEA227008D9101 /* UIScrollView+SVInfiniteScrolling.m */; };
@@ -121,11 +124,14 @@
 		8D9398E516AFA47A0039AEF7 /* icon_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@2x.png"; sourceTree = "<group>"; };
 		8D9398FD16AFD47F0039AEF7 /* MEPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEPerson.h; path = Model/MEPerson.h; sourceTree = "<group>"; };
 		8D9398FE16AFD4800039AEF7 /* MEPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEPerson.m; path = Model/MEPerson.m; sourceTree = "<group>"; };
-		8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		8D93990216AFE7500039AEF7 /* MEStaffDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffDetailsTableViewController.h; path = Controller/MEStaffDetailsTableViewController.h; sourceTree = "<group>"; };
 		8D93990316AFE7500039AEF7 /* MEStaffDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffDetailsTableViewController.m; path = Controller/MEStaffDetailsTableViewController.m; sourceTree = "<group>"; };
 		8D93990516AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffDetailsCustomViewCell.h; path = View/MEStaffDetailsCustomViewCell.h; sourceTree = "<group>"; };
 		8D93990616AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffDetailsCustomViewCell.m; path = View/MEStaffDetailsCustomViewCell.m; sourceTree = "<group>"; };
+		8D994EA216B0F6330049E709 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		8D994EA316B0F6330049E709 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		8D994EA616B11E100049E709 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8D9C2C4D16AE8E32008D9101 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Controller/BaseViewController.h; sourceTree = "<group>"; };
 		8D9C2C4E16AE8E32008D9101 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Controller/BaseViewController.m; sourceTree = "<group>"; };
 		8D9C2C5016AE93C6008D9101 /* Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Window.xib; sourceTree = "<group>"; };
@@ -177,6 +183,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D994EA716B11E100049E709 /* MessageUI.framework in Frameworks */,
+				8D994EA416B0F6330049E709 /* AddressBook.framework in Frameworks */,
+				8D994EA516B0F6330049E709 /* AddressBookUI.framework in Frameworks */,
 				8D9C2C6116AEA361008D9101 /* QuartzCore.framework in Frameworks */,
 				8DB5C38616ACE7FD008D5E02 /* UIKit.framework in Frameworks */,
 				8DB5C38816ACE7FD008D5E02 /* Foundation.framework in Frameworks */,
@@ -258,8 +267,6 @@
 		8DB5C37616ACE7FD008D5E02 = {
 			isa = PBXGroup;
 			children = (
-				8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */,
-				8D9C2C6016AEA361008D9101 /* QuartzCore.framework */,
 				8DB5C38B16ACE7FD008D5E02 /* MiniEvalApp */,
 				8DB5C38416ACE7FD008D5E02 /* Frameworks */,
 				8DB5C38216ACE7FD008D5E02 /* Products */,
@@ -277,6 +284,10 @@
 		8DB5C38416ACE7FD008D5E02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D994EA616B11E100049E709 /* MessageUI.framework */,
+				8D994EA216B0F6330049E709 /* AddressBook.framework */,
+				8D994EA316B0F6330049E709 /* AddressBookUI.framework */,
+				8D9C2C6016AEA361008D9101 /* QuartzCore.framework */,
 				8DB5C38516ACE7FD008D5E02 /* UIKit.framework */,
 				8DB5C38716ACE7FD008D5E02 /* Foundation.framework */,
 				8DB5C38916ACE7FD008D5E02 /* CoreGraphics.framework */,
@@ -319,6 +330,7 @@
 		8DB5C3AE16ACE8C0008D5E02 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */,
 				8D9398E416AFA47A0039AEF7 /* icon_back.png */,
 				8D9398E516AFA47A0039AEF7 /* icon_back@2x.png */,
 				8D9398AF16AF8F420039AEF7 /* icon_add_contact.png */,

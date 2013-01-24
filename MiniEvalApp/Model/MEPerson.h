@@ -23,6 +23,7 @@
 
 @property (nonatomic) NSUInteger visitedCount;
 @property (unsafe_unretained, readonly) NSURL *avatarImageURL;
+@property (nonatomic, strong) UIImage *avtar;
 
 - (id)initWithDictionary:(NSDictionary *)personDictionary;
 

@@ -35,6 +35,8 @@
     self.userNameLabel.text = person.userName;
     if (person.image) {
         [self.avatar setImageWithURL:[NSURL URLWithString:person.image] placeholderImage:[UIImage imageNamed:@"icon_profile.png"]];
+    } else {
+        [self.avatar setImage:[UIImage imageNamed:@"icon_profile.png"]];
     }
         
     UIColor *genderCellColor;

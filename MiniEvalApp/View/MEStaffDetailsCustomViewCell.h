@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface MEStaffDetailsCustomViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageCell;
 
 @property (strong, nonatomic) IBOutlet UILabel *textCell;
+
+- (void)setContentData :(NSDictionary *)dictionary;
 
 @end

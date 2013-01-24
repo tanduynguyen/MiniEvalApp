@@ -22,14 +22,14 @@
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="22U-S4-iz9">
                                             <rect key="frame" x="67" y="41" width="222" height="19"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="wordWrap" baselineAdjustment="none" adjustsFontSizeToFit="NO" id="CQb-UJ-UPv">
                                             <rect key="frame" x="67" y="11" width="233" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                             <color key="textColor" red="1" green="0.49552919031232567" blue="0.050653021105536822" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,7 +40,7 @@
                                         </imageView>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_star.png" id="PpC-in-eI5">
                                             <rect key="frame" x="274" y="8" width="24" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -84,13 +84,14 @@
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a9X-fm-Hnc">
                                             <rect key="frame" x="78" y="8" width="222" height="16"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="11"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="p09-3T-Cmy">
                                             <rect key="frame" x="46" y="4" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -434,61 +435,6 @@
         <image name="icon_sms.png" width="22" height="22"/>
         <image name="icon_star.png" width="25" height="25"/>
     </resources>
-    <classes>
-        <class className="MEExtendStaffTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEExtendStaffTableViewController.h"/>
-        </class>
-        <class className="MEInfoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="MENewsDetailsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MENewsDetailsTableViewController.h"/>
-        </class>
-        <class className="MENewsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MENewsTableViewController.h"/>
-        </class>
-        <class className="MEStaffCustomViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffCustomViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="avatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="starImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MEStaffDetailsCustomViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsCustomViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageCell" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="textCell" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MEStaffDetailsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addContact:"/>
-            </relationships>
-        </class>
-        <class className="MEStaffDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addContact:"/>
-                <relationship kind="outlet" name="addContact" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="avatar" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="contactLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="roleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MEStaffTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

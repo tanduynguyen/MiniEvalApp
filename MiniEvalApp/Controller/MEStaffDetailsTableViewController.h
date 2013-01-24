@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MEPerson.h"
 
-@interface MEStaffDetailsTableViewController : UITableViewController
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+
+@interface MEStaffDetailsTableViewController : UITableViewController <ABNewPersonViewControllerDelegate>
 
 @property (strong, nonatomic) MEPerson *person;
-
 
 @end
