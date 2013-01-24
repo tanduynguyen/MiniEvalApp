@@ -28,7 +28,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    NSURL *url = [NSURL URLWithString:@"http://google.com/"];
+    NSURL *url = [NSURL URLWithString:@"http://2359media.com/"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
     

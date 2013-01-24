@@ -335,7 +335,12 @@
 	[tempMailCompose setSubject:@"iPhone App recommendation"];
 	[tempMailCompose setMessageBody:body isHTML:NO];
 	
-    [self presentViewController:tempMailCompose animated:YES completion:^(void){}];
+    tempMailCompose.view.alpha = 0.5;
+    [self presentViewController:tempMailCompose animated:YES completion:^(void){
+        [UIView animateWithDuration:0.3 animations:^{
+            tempMailCompose.view.alpha = 1;
+        }];
+    }];
 }
 
 // Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
@@ -359,7 +364,13 @@
 			NSLog(@"Result: not sent");
 			break;
 	}
-    [self dismissViewControllerAnimated:YES completion:^(void){}];
+    
+    self.view.alpha = 0.5;    
+    [self dismissViewControllerAnimated:YES completion:^(void){
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.alpha = 1;
+        }];
+    }];
 }
 
 // Launches the Mail application on the device. Workaround
