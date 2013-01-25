@@ -13,7 +13,7 @@
 #import "MEStaffCustomViewCell.h"
 #import "SVPullToRefresh.h"
 
-@interface MEStaffTableViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate>
+@interface MEStaffTableViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *results;
 @property (strong, nonatomic) NSMutableArray *filteredArray;
@@ -118,51 +118,11 @@
     
     [self reload:nil];
         
-//    UIImage *imgInfo = [UIImage imageNamed:@"icon_info.png"];
-//    UIImage *imgInfoHighlight = [UIImage imageNamed:@"icon_info_selected.png"];
-//    
-//    UIImage *imgContacts = [UIImage imageNamed:@"icon_contacts.png"];
-//    UIImage *imgContactsHighlight = [UIImage imageNamed:@"icon_contacts_selected.png"];
-//    
-//    UIImage *imgSettings = [UIImage imageNamed:@"middle_button.png"];
-//    
-//    
-//    UITabBar *tabBar = self.tabBarController.tabBar;
-//    
-//    UITabBarItem *firstTabItem = [tabBar.items objectAtIndex:0];
-//    UITabBarItem *secondTabItem = [tabBar.items objectAtIndex:1];
-//    UITabBarItem *thirdTabItem = [tabBar.items objectAtIndex:2];
-//    
-//    [thirdTabItem setFinishedSelectedImage:imgInfoHighlight withFinishedUnselectedImage:imgInfo];
-//    [firstTabItem setFinishedSelectedImage:imgContactsHighlight withFinishedUnselectedImage:imgContacts];
-//    [secondTabItem setFinishedSelectedImage:imgSettings withFinishedUnselectedImage:imgSettings];
+    UINavigationBar *bar = [self.navigationController navigationBar];
+    [bar setNeedsDisplay];
     
-    [self.tabBarController setDelegate:self];
 }
 
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-
-    NSArray *tabViewControllers = tabBarController.viewControllers;
-    UIView * fromView = tabBarController.selectedViewController.view;
-    UIView * toView = viewController.view;
-    
-    if (fromView == toView)
-        return false;
-    
-    NSUInteger fromIndex = [tabViewControllers indexOfObject:tabBarController.selectedViewController];
-    NSUInteger toIndex = [tabViewControllers indexOfObject:viewController];
-    
-    [UIView transitionFromView:fromView
-                        toView:toView
-                      duration:0.5
-                       options: toIndex > fromIndex ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight
-                    completion:^(BOOL finished) {
-                        if (finished) {
-                            tabBarController.selectedIndex = toIndex;
-                        }
-                    }];
-    return true;
-}
 
 - (void)viewDidUnload {
     _activityIndicatorView = nil;

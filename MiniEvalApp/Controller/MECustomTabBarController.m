@@ -47,11 +47,27 @@
 	}
 }
 
-#pragma mark ALTabBarDelegate
 
--(void)tabWasSelected:(NSInteger)index {
+-(void)tabWasSelected:(NSInteger)index
+{
+    UIViewController *viewController = [self.viewControllers objectAtIndex:index];
     
-    self.selectedIndex = index;
+    UIView * fromView = self.selectedViewController.view;
+    UIView * toView = viewController.view;
+    
+    if (fromView != toView) {    
+        NSUInteger fromIndex = [self.viewControllers indexOfObject:self.selectedViewController];
+        
+        [UIView transitionFromView:fromView
+                            toView:toView
+                          duration:0.5
+                           options: index > fromIndex ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight
+                        completion:^(BOOL finished) {
+                            if (finished) {
+                                self.selectedIndex = index;
+                            }
+                        }];
+    }
 }
 
 @end

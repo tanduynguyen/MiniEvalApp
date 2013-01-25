@@ -13,9 +13,10 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MFMessageComposeViewController.h>
 
-@interface MEStaffDetailsTableViewController () <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UINavigationControllerDelegate>
+@interface MEStaffDetailsTableViewController () <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *items;
+@property (nonatomic) BOOL fistLoadTableView;
 
 @end
 
@@ -43,8 +44,80 @@
 {
     [super viewDidLoad];
 
-    self.title = self.person.name;
+    self.title = self.person.name;    
+
+    [self saveVistedCount];
     
+    [self customizeBackButton];
+    
+    [self customAddContactButton];
+    
+    self.fistLoadTableView = YES;    
+    [self initStaffDetailsCustomViewCells];
+}
+
+
+- (void) viewWillLayoutSubviews
+{
+    if (self.fistLoadTableView == YES) {
+        //  [self.tableView setHidden:YES];
+        
+        UIColor *LightOrganColor = UIColorFromRGB(kLightOrganColor);
+        
+        UIView *animationView = [[UIView alloc] initWithFrame:self.tableView.frame];
+        [animationView setBackgroundColor:[UIColor whiteColor]];
+        
+        
+        [self.view addSubview:animationView];
+        
+        for (int i = 0; i < self.items.count; i++) {
+            MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            UIView *rowView = [[UIView alloc] initWithFrame:cell.frame];
+            
+            [rowView setBackgroundColor:LightOrganColor];
+                        
+            [rowView addSubview:cell.imageCell];
+            [rowView addSubview:cell.textCell];
+            
+            [animationView addSubview:rowView];
+            
+            rowView.alpha = 0;
+        }
+        
+        [self checkSubviews:animationView atIndex:0];
+    }
+}
+
+- (void)checkSubviews:(UIView *)myView
+              atIndex:(int)idx
+{
+    if (idx == [myView.subviews count]) {
+        self.fistLoadTableView = NO;
+        for (int i = 0; i < self.items.count; i++) {
+            MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+          //  [cell addSubview:[[(UIView *)[myView.subviews objectAtIndex:i] subviews]  objectAtIndex:0]];
+         //   [cell addSubview:[[(UIView *)[myView.subviews objectAtIndex:i] subviews]  objectAtIndex:1]];
+        }
+        
+        //[myView removeFromSuperview];
+      //  [self.tableView reloadData];
+        return;
+    } 
+    
+    UIView *mySubview = [myView.subviews objectAtIndex:idx];
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options: UIViewAnimationCurveLinear
+                     animations:^{
+                         mySubview.alpha = 1;
+                     }
+                     completion:^(BOOL finished){ 
+                         [self checkSubviews:myView atIndex:idx + 1];
+                     }];
+}
+
+- (void)saveVistedCount
+{
     // Use NSUserDefault to store the visit count for each person.
     // When a user is selected, increase visit count
     
@@ -75,13 +148,6 @@
     
     [defaults setObject:staffs forKey:STAFFS_KEY];
     [defaults synchronize];
-    
-    
-    [self customizeBackButton];
-    
-    [self customAddContactButton];
-    
-    [self initStaffDetailsCustomViewCells];
 }
 
 - (void)initStaffDetailsCustomViewCells
@@ -114,19 +180,19 @@
     if (self.person.like) {
         imageCell = @"icon_like.png";
         textCell = self.person.like;
-        [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell", nil]];
+        [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
     }
     
     if (self.person.dislike) {
         imageCell = @"icon_dislike.png";
         textCell = self.person.dislike;
-        [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell", nil]];
+        [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
     }
     
     if (self.person.visitedCount) {
         imageCell = @"icon_star.png";
         textCell = [NSString stringWithFormat:@"%d visitors", self.person.visitedCount];
-        [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell", nil]];
+        [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
     }
 }
 
@@ -278,11 +344,10 @@
     return cell;
 }
 
-
-
 #define FONT_SIZE 11.0f
 #define CELL_CONTENT_WIDTH 222.0f
 #define CELL_CONTENT_MARGIN 10.0f
+#define CELL_HEIGHT_FIRST_LOAD 70.0f
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
@@ -308,6 +373,10 @@
     if (height < size.height) {
         height = size.height;
     }    
+        
+    if (self.fistLoadTableView && height > CELL_HEIGHT_FIRST_LOAD) {
+        height = CELL_HEIGHT_FIRST_LOAD;
+    }
     
     // return the height, with a bit of extra padding in
     return height + (CELL_CONTENT_MARGIN * 2);

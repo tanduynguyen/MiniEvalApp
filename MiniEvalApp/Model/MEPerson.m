@@ -49,12 +49,14 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
     
     if (self) {
         self.userId = [[personDictionary objectForKey:@"_id"] objectForKey:@"$oid"];
-        self.name = [personDictionary objectForKey:@"name"];
+        self.name = [NSString stringWithUTF8String:[(NSString *)[personDictionary objectForKey:@"name"] UTF8String]];
         self.userName = [personDictionary objectForKey:@"userName"];
         self.role = [personDictionary objectForKey:@"role"];
         self.like = [personDictionary objectForKey:@"like"];
         self.dislike = [personDictionary objectForKey:@"dislike"];
-        self.timeStamp = [personDictionary objectForKey:@"timeStamp"];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"M/d/yy HH:mm";
+        self.timeStamp = [dateFormatter dateFromString:[personDictionary objectForKey:@"timeStamp"]];
         self.gender = [personDictionary objectForKey:@"gender"];
         self.image = [personDictionary objectForKey:@"image"];
         self.contact = [personDictionary objectForKey:@"contact"];

@@ -10,6 +10,7 @@
 		8D07C1D016B21A1800690C0C /* MECustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07C1CF16B21A1800690C0C /* MECustomTabBarController.m */; };
 		8D07C1D916B223B900690C0C /* MECustomTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D07C1D816B223B900690C0C /* MECustomTabBar.xib */; };
 		8D07C1F016B22F8A00690C0C /* MECustomTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07C1EF16B22F8A00690C0C /* MECustomTabBarView.m */; };
+		8D07C1FC16B264EF00690C0C /* KTNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07C1F916B264EF00690C0C /* KTNavigationBar.m */; };
 		8D4C512116AD330C008F6922 /* MEStaffCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C512016AD330C008F6922 /* MEStaffCustomViewCell.m */; };
 		8D4CC9BF16ACEE5300DCB309 /* MEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CC9BE16ACEE5300DCB309 /* MEViewController.m */; };
 		8D4CC9CA16ACEF9E00DCB309 /* MEConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CC9C916ACEF9E00DCB309 /* MEConstants.m */; };
@@ -84,6 +85,8 @@
 		8D07C1D816B223B900690C0C /* MECustomTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MECustomTabBar.xib; sourceTree = "<group>"; };
 		8D07C1EE16B22F8A00690C0C /* MECustomTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MECustomTabBarView.h; path = View/MECustomTabBarView.h; sourceTree = "<group>"; };
 		8D07C1EF16B22F8A00690C0C /* MECustomTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MECustomTabBarView.m; path = View/MECustomTabBarView.m; sourceTree = "<group>"; };
+		8D07C1F816B264EF00690C0C /* KTNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTNavigationBar.h; sourceTree = "<group>"; };
+		8D07C1F916B264EF00690C0C /* KTNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTNavigationBar.m; sourceTree = "<group>"; };
 		8D4C511F16AD330C008F6922 /* MEStaffCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffCustomViewCell.h; path = View/MEStaffCustomViewCell.h; sourceTree = "<group>"; };
 		8D4C512016AD330C008F6922 /* MEStaffCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffCustomViewCell.m; path = View/MEStaffCustomViewCell.m; sourceTree = "<group>"; };
 		8D4CC9BD16ACEE5300DCB309 /* MEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEViewController.h; path = Controller/MEViewController.h; sourceTree = "<group>"; };
@@ -373,6 +376,8 @@
 		8DB5C3B816ACE8C0008D5E02 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				8D07C1F816B264EF00690C0C /* KTNavigationBar.h */,
+				8D07C1F916B264EF00690C0C /* KTNavigationBar.m */,
 				8D994EB416B147520049E709 /* ZHCustomSegue.h */,
 				8D994EB516B147520049E709 /* ZHCustomSegue.m */,
 				8D9C2C5816AEA20B008D9101 /* SVPullToRefresh */,
@@ -531,6 +536,7 @@
 				8D994EB616B147520049E709 /* ZHCustomSegue.m in Sources */,
 				8D07C1D016B21A1800690C0C /* MECustomTabBarController.m in Sources */,
 				8D07C1F016B22F8A00690C0C /* MECustomTabBarView.m in Sources */,
+				8D07C1FC16B264EF00690C0C /* KTNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
