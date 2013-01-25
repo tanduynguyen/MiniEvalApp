@@ -118,24 +118,24 @@
     
     [self reload:nil];
         
-    UIImage *imgInfo = [UIImage imageNamed:@"icon_info.png"];
-    UIImage *imgInfoHighlight = [UIImage imageNamed:@"icon_info_selected.png"];
-    
-    UIImage *imgContacts = [UIImage imageNamed:@"icon_contacts.png"];
-    UIImage *imgContactsHighlight = [UIImage imageNamed:@"icon_contacts_selected.png"];
-    
-    UIImage *imgSettings = [UIImage imageNamed:@"middle_button.png"];
-    
-    
-    UITabBar *tabBar = self.tabBarController.tabBar;
-    
-    UITabBarItem *firstTabItem = [tabBar.items objectAtIndex:0];
-    UITabBarItem *secondTabItem = [tabBar.items objectAtIndex:1];
-    UITabBarItem *thirdTabItem = [tabBar.items objectAtIndex:2];
-    
-    [thirdTabItem setFinishedSelectedImage:imgInfoHighlight withFinishedUnselectedImage:imgInfo];
-    [firstTabItem setFinishedSelectedImage:imgContactsHighlight withFinishedUnselectedImage:imgContacts];
-    [secondTabItem setFinishedSelectedImage:imgSettings withFinishedUnselectedImage:imgSettings];
+//    UIImage *imgInfo = [UIImage imageNamed:@"icon_info.png"];
+//    UIImage *imgInfoHighlight = [UIImage imageNamed:@"icon_info_selected.png"];
+//    
+//    UIImage *imgContacts = [UIImage imageNamed:@"icon_contacts.png"];
+//    UIImage *imgContactsHighlight = [UIImage imageNamed:@"icon_contacts_selected.png"];
+//    
+//    UIImage *imgSettings = [UIImage imageNamed:@"middle_button.png"];
+//    
+//    
+//    UITabBar *tabBar = self.tabBarController.tabBar;
+//    
+//    UITabBarItem *firstTabItem = [tabBar.items objectAtIndex:0];
+//    UITabBarItem *secondTabItem = [tabBar.items objectAtIndex:1];
+//    UITabBarItem *thirdTabItem = [tabBar.items objectAtIndex:2];
+//    
+//    [thirdTabItem setFinishedSelectedImage:imgInfoHighlight withFinishedUnselectedImage:imgInfo];
+//    [firstTabItem setFinishedSelectedImage:imgContactsHighlight withFinishedUnselectedImage:imgContacts];
+//    [secondTabItem setFinishedSelectedImage:imgSettings withFinishedUnselectedImage:imgSettings];
     
     [self.tabBarController setDelegate:self];
 }
@@ -286,7 +286,8 @@
         }
         
         MEStaffDetailsTableViewController *destinationVC = (MEStaffDetailsTableViewController *)segue.destinationViewController;
-        destinationVC.person = person;
+        destinationVC.person = person;      
+        
     }
 }
 

@@ -123,6 +123,11 @@
         [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell", nil]];
     }
     
+    if (self.person.visitedCount) {
+        imageCell = @"icon_star.png";
+        textCell = [NSString stringWithFormat:@"%d visitors", self.person.visitedCount];
+        [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell", nil]];
+    }
 }
 
 - (void)customizeBackButton
