@@ -149,7 +149,6 @@
 						<int key="NSID">2</int>
 					</object>
 				</object>
-				<float key="IBUIAlpha">0.0</float>
 				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>
 					<string key="IBUIDisplayName">Freeform</string>

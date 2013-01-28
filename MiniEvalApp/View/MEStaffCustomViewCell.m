@@ -23,6 +23,16 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        
+        NSString *fontPath = [[NSBundle mainBundle] pathForResource:@"MyriadPro-Regular" ofType:@"otf"];
+        
+        CGDataProviderRef fontDataProvider = CGDataProviderCreateWithFilename([fontPath UTF8String]);
+        
+        // Create the font with the data provider, then release the data provider. customFont =
+        
+        CGFontCreateWithDataProvider(fontDataProvider);
+        CGDataProviderRelease(fontDataProvider);
+        //[self.userNameLabel setFont:fontDataProvider];
     }
     return self;
 }
@@ -62,5 +72,7 @@
 
     // Configure the view for the selected state
 }
+
+
 
 @end

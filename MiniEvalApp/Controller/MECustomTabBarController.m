@@ -31,6 +31,8 @@
     
     self.customTabBarView.delegate = self;
     
+    self.customTabBarView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    
     [self.view addSubview:self.customTabBarView];
 }
 

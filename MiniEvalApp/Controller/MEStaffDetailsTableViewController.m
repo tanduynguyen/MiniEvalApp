@@ -59,11 +59,11 @@
     self.fistLoadTableView = YES;    
     [self initStaffDetailsCustomViewCells];    
     
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     
 //    ADLivelyTableView * livelyTableView = (ADLivelyTableView *)self.tableView;
 //    livelyTableView.initialCellTransformBlock = ADLivelyTransformWave;
 }
-
 
 - (void) viewWillLayoutSubviews
 {
@@ -78,7 +78,8 @@
         [self.tableView addSubview:animationView];
         
         for (int i = 0; i < self.items.count; i++) {
-            MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];            
+            
             UIView *rowView = [[UIView alloc] initWithFrame:cell.frame];
             
             [rowView.layer setCornerRadius:2.0f];
@@ -142,38 +143,26 @@
     [self.tableView reloadData];
 }
 
+
 - (void)saveVistedCount
 {
     // Use NSUserDefault to store the visit count for each person.
     // When a user is selected, increase visit count
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSMutableDictionary *staffs = [[NSMutableDictionary alloc] init];
-    
-    staffs = [[defaults objectForKey:STAFFS_KEY] mutableCopy];
-    
-    if ([staffs objectForKey:self.person.userId]) {
-        id obj = [staffs objectForKey:self.person.userId];
-        if ([obj isKindOfClass:[NSMutableDictionary class]]) {
-            NSMutableDictionary *staff = [obj mutableCopy];
-            self.person.visitedCount = [(NSNumber  *)[staff valueForKey:@"visitedCount"] unsignedIntegerValue]  + 1;
-            [staff setObject:[NSNumber numberWithUnsignedInt:self.person.visitedCount] forKey:@"visitedCount"];
-            
-            [staffs setObject:staff forKey:self.person.userId];
-        }
-    }
-    else {
-        self.person.visitedCount = 1;
-        NSMutableDictionary *staff = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      [NSNumber numberWithUnsignedInt:self.person.visitedCount], @"visitedCount",
-                                      nil];
-        
-        [staffs setObject:staff forKey:self.person.userId];
-    }
-    
-    [defaults setObject:staffs forKey:STAFFS_KEY];
-    [defaults synchronize];
+//    
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    
+//    NSMutableDictionary *staffs = [[NSMutableDictionary alloc] init];
+//    
+//    staffs = [[defaults objectForKey:STAFFS_KEY] mutableCopy];
+//    
+    self.person.visitedCount = [[NSNumber alloc] initWithUnsignedInt:[self.person.visitedCount intValue] + 1];
+//    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self.person];
+//    //NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:encodedObject];
+//    [staffs setObject:[encodedObject mutableCopy] forKey:self.person.userId];
+//   // [unarchiver finishDecoding];
+//    
+//    [defaults setObject:staffs forKey:STAFFS_KEY];
+//    [defaults synchronize];
 }
 
 - (void)initStaffDetailsCustomViewCells
@@ -217,7 +206,7 @@
     
     if (self.person.visitedCount) {
         imageCell = @"icon_star.png";
-        textCell = [NSString stringWithFormat:@"%d visitors", self.person.visitedCount];
+        textCell = [NSString stringWithFormat:@"%@ visitors", self.person.visitedCount];
         [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
     }
 }
@@ -247,11 +236,6 @@
 
 - (void)customAddContactButton
 {
-    //    UIImageView *customButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_add_contact.png"]];
-    //    [customButton setFrame:CGRectMake(0, 0, 44, 44)];
-    //    [self.addContact setCustomView:customButton];
-    
-    //    [self.addContact setBackgroundImage:[UIImage imageNamed:@"icon_add_contact.png"] forState:nil barMetrics:nil];
     UIImage *addContactImage = [UIImage imageNamed:@"icon_add_contact.png"];
     UIButton *addContactButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addContactButton setBackgroundImage:addContactImage forState:UIControlStateNormal];
@@ -423,7 +407,9 @@
     } else if (cell.tag == TAG_SMS_CELL) {
         [self sendInAppSMS];        
     }
+    
 }
+
 
 #pragma mark - Email composition
 

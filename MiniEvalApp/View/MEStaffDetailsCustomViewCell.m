@@ -14,6 +14,7 @@
 - (void)setContentData :(NSDictionary *)dictionary
 {    
     if (self) {
+        self.alpha = 0;
         if ([dictionary objectForKey:@"imageCell"]) {
             [self.imageCell setImage:[UIImage imageNamed:[dictionary objectForKey:@"imageCell"]]];
         }
@@ -32,7 +33,8 @@
         }
         
         [self.textCell setNumberOfLines:0];
-        [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];
+        [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];       
+
     }    
 }
 
@@ -47,7 +49,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
+    [super setSelected:selected animated:TRUE];
 
     // Configure the view for the selected state
 }

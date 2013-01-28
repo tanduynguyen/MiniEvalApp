@@ -53,25 +53,25 @@
     
     staffs = [[defaults objectForKey:STAFFS_KEY] mutableCopy];
     
-    if ([staffs objectForKey:self.person.userId]) {
-        id obj = [staffs objectForKey:self.person.userId];
-        if ([obj isKindOfClass:[NSMutableDictionary class]]) {
-            NSMutableDictionary *staff = [obj mutableCopy];
-            self.person.visitedCount = [(NSNumber  *)[staff valueForKey:@"visitedCount"] unsignedIntegerValue]  + 1;
-            [staff setObject:[NSNumber numberWithUnsignedInt:self.person.visitedCount] forKey:@"visitedCount"];
-            
-            [staffs setObject:staff forKey:self.person.userId];
-        }
-    }
-    else {
-        self.person.visitedCount = 1;
-        NSMutableDictionary *staff = [NSDictionary dictionaryWithObjectsAndKeys:
-                [NSNumber numberWithUnsignedInt:self.person.visitedCount], @"visitedCount",
-                nil];
-        
-        [staffs setObject:staff forKey:self.person.userId];
-    }
-    
+//    if ([staffs objectForKey:self.person.userId]) {
+//        id obj = [staffs objectForKey:self.person.userId];
+//        if ([obj isKindOfClass:[NSMutableDictionary class]]) {
+//            NSMutableDictionary *staff = [obj mutableCopy];
+//            self.person.visitedCount = [(NSNumber  *)[staff valueForKey:@"visitedCount"] unsignedIntegerValue]  + 1;
+//            [staff setObject:[NSNumber numberWithUnsignedInt:self.person.visitedCount] forKey:@"visitedCount"];
+//            
+//            [staffs setObject:staff forKey:self.person.userId];
+//        }
+//    }
+//    else {
+//        self.person.visitedCount = 1;
+//        NSMutableDictionary *staff = [NSDictionary dictionaryWithObjectsAndKeys:
+//                [NSNumber numberWithUnsignedInt:self.person.visitedCount], @"visitedCount",
+//                nil];
+//        
+//        [staffs setObject:staff forKey:self.person.userId];
+//    }
+//    
     [defaults setObject:staffs forKey:STAFFS_KEY];
     [defaults synchronize];
 }
@@ -113,7 +113,7 @@
     switch (indexPath.row) {
         case 0:
             cell.textLabel.text = @"Visit Count";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.person.visitedCount];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.person.visitedCount];
             break;
             
         case 1:

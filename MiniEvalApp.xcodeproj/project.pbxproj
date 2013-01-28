@@ -58,6 +58,7 @@
 		8D9C2C5E16AEA227008D9101 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C2C5B16AEA227008D9101 /* UIScrollView+SVInfiniteScrolling.m */; };
 		8D9C2C5F16AEA227008D9101 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C2C5D16AEA227008D9101 /* UIScrollView+SVPullToRefresh.m */; };
 		8D9C2C6116AEA361008D9101 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9C2C6016AEA361008D9101 /* QuartzCore.framework */; };
+		8DA81DC216B6923D00A04062 /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA81DC116B6923D00A04062 /* MyriadPro-Regular.otf */; };
 		8DA9890F16AD986500172D5D /* MEAppAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9890A16AD986500172D5D /* MEAppAPIClient.m */; };
 		8DA9891016AD986500172D5D /* MENews.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9890C16AD986500172D5D /* MENews.m */; };
 		8DB5C38616ACE7FD008D5E02 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB5C38516ACE7FD008D5E02 /* UIKit.framework */; };
@@ -151,6 +152,7 @@
 		8D9C2C5C16AEA227008D9101 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+SVPullToRefresh.h"; path = "SVPullToRefresh/UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		8D9C2C5D16AEA227008D9101 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SVPullToRefresh.m"; path = "SVPullToRefresh/UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		8D9C2C6016AEA361008D9101 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8DA81DC116B6923D00A04062 /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Regular.otf"; sourceTree = "<group>"; };
 		8DA9890916AD986500172D5D /* MEAppAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEAppAPIClient.h; path = Model/MEAppAPIClient.h; sourceTree = "<group>"; };
 		8DA9890A16AD986500172D5D /* MEAppAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEAppAPIClient.m; path = Model/MEAppAPIClient.m; sourceTree = "<group>"; };
 		8DA9890B16AD986500172D5D /* MENews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MENews.h; path = Model/MENews.h; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 		8DB5C3AE16ACE8C0008D5E02 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8DA81DC116B6923D00A04062 /* MyriadPro-Regular.otf */,
 				8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */,
 				8D9398E416AFA47A0039AEF7 /* icon_back.png */,
 				8D9398E516AFA47A0039AEF7 /* icon_back@2x.png */,
@@ -501,6 +504,7 @@
 				8D9398E716AFA47A0039AEF7 /* icon_back@2x.png in Resources */,
 				8D93990116AFDFD70039AEF7 /* Default-568h@2x.png in Resources */,
 				8D07C1D916B223B900690C0C /* MECustomTabBar.xib in Resources */,
+				8DA81DC216B6923D00A04062 /* MyriadPro-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

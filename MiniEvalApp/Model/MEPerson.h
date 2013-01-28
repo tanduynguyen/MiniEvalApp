@@ -21,11 +21,18 @@
 @property (nonatomic, strong) NSString *image;
 @property (nonatomic, strong) NSString *contact;
 
-@property (nonatomic) NSUInteger visitedCount;
+@property (nonatomic, strong) NSNumber *visitedCount;
+@property (nonatomic) BOOL highestVisitedCount;
 @property (unsafe_unretained, readonly) NSURL *avatarImageURL;
 @property (nonatomic, strong) UIImage *avatar;
 
 - (id)initWithDictionary:(NSDictionary *)personDictionary;
+
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+
+- (id)initWithCoder:(NSCoder *)aDecoder;
+
++ (void)findHighestVisitedCount:(NSArray *)persons;
 
 + (void)globalTimelineContactsWithBlock:(void (^)(NSMutableArray *results, NSError *error))block;
 

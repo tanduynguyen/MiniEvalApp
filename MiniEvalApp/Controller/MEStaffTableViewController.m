@@ -17,7 +17,6 @@
 
 @property (strong, nonatomic) NSMutableArray *results;
 @property (strong, nonatomic) NSMutableArray *filteredArray;
-@property (nonatomic) NSUInteger highestVisitedCount;
 
 - (void)reload:(id)sender;
 
@@ -116,43 +115,42 @@
     
     self.tableView.rowHeight = 72.0f;
     
-    [self reload:nil];
-    
-    
+    [self reload:nil];   
 }
 
 
-- (void)viewDidUnload {
-    _activityIndicatorView = nil;
+- (void)viewDidUnload
+{
+    _activityIndicatorView = nil;    
     
     [super viewDidUnload];
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.results];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:STAFFS_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)reloadInformation
 {
-    // To have an indicator which people has the highest visit count (eg. put a star next to person’s name)
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // To have an indicator which people has the highest visit count (eg. put a star next to person’s name)    
     
-    NSMutableDictionary *staffs = [[NSMutableDictionary alloc] init];
+    NSData *personsData = [[NSUserDefaults standardUserDefaults] objectForKey:STAFFS_KEY];
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    results = [NSKeyedUnarchiver unarchiveObjectWithData:personsData];    
     
-    staffs = [[defaults objectForKey:STAFFS_KEY] mutableCopy];
     
-    self.highestVisitedCount = 0;
-    
-    for (id obj in self.results) {
-        MEPerson *person = (MEPerson *) obj;
-        if ([staffs objectForKey:person.userId]) {
-            id obj = [staffs objectForKey:person.userId];
-            if ([obj isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *staff = obj;
-                person.visitedCount = [(NSNumber  *)[staff valueForKey:@"visitedCount"] unsignedIntegerValue];
-                
-                if (self.highestVisitedCount < person.visitedCount) {
-                    self.highestVisitedCount = person.visitedCount;
-                }
-            }
-        }
+    for (int i = 0; i < self.results.count; i++) {
+        MEPerson *person = [self.results objectAtIndex:i];
+        MEPerson *tmp = [results objectAtIndex:i];
+        person.visitedCount = tmp.visitedCount;
     }
+    
+    [MEPerson findHighestVisitedCount:self.results];
     
     [self.tableView reloadData];
 }
@@ -205,22 +203,14 @@
     }
 
     // Configure the cell...
-    id obj = [self.results objectAtIndex:indexPath.row];
+    MEPerson *person = [self.results objectAtIndex:indexPath.row];
     
     if(tableView == self.searchDisplayController.searchResultsTableView){
-        obj = [self.filteredArray objectAtIndex:indexPath.row];
+        person = [self.filteredArray objectAtIndex:indexPath.row];
     }
     
-    if ([obj isKindOfClass:[MEPerson class]]) {
-        MEPerson *person = obj;
-        cell.person = obj;
-        
-        if (person.visitedCount == self.highestVisitedCount) {
-            cell.starImage.hidden = NO;
-        } else {
-            cell.starImage.hidden = YES;
-        }
-    }
+    cell.person = person;
+    cell.starImage.hidden = !person.highestVisitedCount;  
 
     return cell;
 }

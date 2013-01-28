@@ -65,7 +65,8 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
     return self;
 }
 
-+ (void)globalTimelineContactsWithBlock:(void (^)(NSMutableArray *results, NSError *error))block {
++ (void)globalTimelineContactsWithBlock:(void (^)(NSMutableArray *results, NSError *error))block
+{
     [[MEAppAPIClient sharedInstance] getPath:kAppAPIPath parameters:nil
                                      success:^(AFHTTPRequestOperation *operation, id response) {
                                          
@@ -91,8 +92,36 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
 }
 
 
-- (NSURL *)avatarImageURL {
+- (NSURL *)avatarImageURL
+{
     return [NSURL URLWithString:_avatarImageURLString];
+}
+
+- (void)encodeWithCoder:(NSCoder *)Coder
+{
+    [Coder encodeObject:self.userName forKey:@"userName"];
+    [Coder encodeObject:self.visitedCount forKey:@"visitedCount"];
+}
+
+- (id)initWithCoder:(NSCoder *)Decoder
+{
+    self = [super init];
+    if (self) {
+        _userName = [Decoder decodeObjectForKey:@"userName"];
+        _visitedCount = [Decoder decodeObjectForKey:@"visitedCount"];
+    }
+    return self;
+}
+
++ (void)findHighestVisitedCount:(NSArray *)persons
+{
+    MEPerson *p = [[MEPerson alloc] init];
+    for (MEPerson *person in persons) {
+        if ([p.visitedCount unsignedIntValue] < [person.visitedCount unsignedIntValue]) {
+            p = person;
+        }
+    }
+    p.highestVisitedCount = YES;
 }
 
 #ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
