@@ -9,9 +9,13 @@
 #import "MEStaffDetailsTableViewController.h"
 #import "MEStaffDetailsCustomViewCell.h"
 
+#import "ADLivelyTableView.h"
+#import <QuartzCore/QuartzCore.h>
+
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MFMessageComposeViewController.h>
+
 
 @interface MEStaffDetailsTableViewController () <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
@@ -53,7 +57,11 @@
     [self customAddContactButton];
     
     self.fistLoadTableView = YES;    
-    [self initStaffDetailsCustomViewCells];
+    [self initStaffDetailsCustomViewCells];    
+    
+    
+//    ADLivelyTableView * livelyTableView = (ADLivelyTableView *)self.tableView;
+//    livelyTableView.initialCellTransformBlock = ADLivelyTransformWave;
 }
 
 
@@ -62,58 +70,76 @@
     if (self.fistLoadTableView == YES) {
         //  [self.tableView setHidden:YES];
         
-        UIColor *LightOrganColor = UIColorFromRGB(kLightOrganColor);
+        UIColor *DarkOrganColor = UIColorFromRGB(kDarkOrganColor);
         
         UIView *animationView = [[UIView alloc] initWithFrame:self.tableView.frame];
-        [animationView setBackgroundColor:[UIColor whiteColor]];
+        [animationView setBackgroundColor:[UIColor whiteColor]];        
         
-        
-        [self.view addSubview:animationView];
+        [self.tableView addSubview:animationView];
         
         for (int i = 0; i < self.items.count; i++) {
             MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             UIView *rowView = [[UIView alloc] initWithFrame:cell.frame];
             
-            [rowView setBackgroundColor:LightOrganColor];
-                        
+            [rowView.layer setCornerRadius:2.0f];
+            [rowView.layer setBorderColor:DarkOrganColor.CGColor];
+            [rowView.layer setBorderWidth:0.2f];
+            [rowView.layer setShadowColor:[UIColor grayColor].CGColor];
+            [rowView.layer setShadowOpacity:0.6];
+            [rowView.layer setShadowRadius:3.0];
+            [rowView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+                                    
             [rowView addSubview:cell.imageCell];
             [rowView addSubview:cell.textCell];
+            rowView.alpha = 0;
             
             [animationView addSubview:rowView];
-            
-            rowView.alpha = 0;
         }
+        
+        //[animationView addSubview:[[UIImageView alloc] initWithImage:self.person.avatar]];
         
         [self checkSubviews:animationView atIndex:0];
     }
 }
 
-- (void)checkSubviews:(UIView *)myView
+- (void)checkSubviews:(UIView *)animationView
               atIndex:(int)idx
 {
-    if (idx == [myView.subviews count]) {
-        self.fistLoadTableView = NO;
-        for (int i = 0; i < self.items.count; i++) {
-            MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-          //  [cell addSubview:[[(UIView *)[myView.subviews objectAtIndex:i] subviews]  objectAtIndex:0]];
-         //   [cell addSubview:[[(UIView *)[myView.subviews objectAtIndex:i] subviews]  objectAtIndex:1]];
-        }
-        
-        //[myView removeFromSuperview];
-      //  [self.tableView reloadData];
+    if (idx >= [animationView.subviews count]) {
+       
+        [self removeAnimationView:animationView];        
         return;
     } 
     
-    UIView *mySubview = [myView.subviews objectAtIndex:idx];
+    UIView *mySubview = [animationView.subviews objectAtIndex:idx];
     [UIView animateWithDuration:0.3
                           delay:0
-                        options: UIViewAnimationCurveLinear
+                        options: UIViewAnimationOptionTransitionFlipFromRight
                      animations:^{
                          mySubview.alpha = 1;
                      }
                      completion:^(BOOL finished){ 
-                         [self checkSubviews:myView atIndex:idx + 1];
+                         [self checkSubviews:animationView atIndex:idx + 1];
                      }];
+}
+
+- (void)removeAnimationView:(UIView *)animationView
+{
+    self.fistLoadTableView = NO;
+    
+    for (int i = 0; i < animationView.subviews.count; i++) {
+        MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        UIView *rowView = [animationView.subviews objectAtIndex:i];
+        if (rowView.subviews.count > 1) {
+            [cell addSubview:[rowView.subviews objectAtIndex:0]];
+            [cell addSubview:[rowView.subviews objectAtIndex:0]];           
+        }
+       }
+    
+    [animationView removeFromSuperview];
+    [animationView setFrame:CGRectZero];
+    
+    [self.tableView reloadData];
 }
 
 - (void)saveVistedCount
@@ -229,7 +255,7 @@
     UIImage *addContactImage = [UIImage imageNamed:@"icon_add_contact.png"];
     UIButton *addContactButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addContactButton setBackgroundImage:addContactImage forState:UIControlStateNormal];
-    [addContactButton setFrame:CGRectMake(0, 0, 44, 44)];
+    [addContactButton setFrame:CGRectMake(0, 0, addContactImage.size.width, addContactImage.size.height)];
     UIBarButtonItem *reloadBarButton = [[UIBarButtonItem alloc] initWithCustomView:addContactButton];
     [addContactButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
 
@@ -278,9 +304,13 @@
     ABMutableMultiValueRef mobile = ABMultiValueCreateMutable(kABMultiStringPropertyType);
     ABMultiValueAddValueAndLabel(mobile, CFBridgingRetain(self.person.contact), CFSTR("mobile"), NULL);
     ABRecordSetValue(person, kABPersonPhoneProperty, mobile, &error);
-    CFRelease(mobile);        
-  
-    NSData *dataRef = UIImagePNGRepresentation(self.person.avtar);    
+    CFRelease(mobile);
+    
+    
+//    ABRecordSetValue(person, kABPersonOrganizationProperty, @"2359 Media", &error);
+    ABRecordSetValue(person, kABPersonNoteProperty, CFBridgingRetain(self.person.role), &error);
+    
+    NSData *dataRef = UIImagePNGRepresentation(self.person.avatar);    
     ABPersonSetImageData(person, (CFDataRef)CFBridgingRetain(dataRef), nil);
     
     if (error != NULL) {
@@ -338,7 +368,7 @@
     NSDictionary *dict = [self.items objectAtIndex:indexPath.row];
     [cell setContentData:dict];
     if (cell.tag == TAG_AVATAR_CELL) {
-        [cell.imageCell setImage:self.person.avtar];
+        [cell.imageCell setImage:self.person.avatar];
     }
     
     return cell;

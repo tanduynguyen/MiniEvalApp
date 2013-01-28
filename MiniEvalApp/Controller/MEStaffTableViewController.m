@@ -109,7 +109,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_activityIndicatorView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reload:)];
@@ -117,9 +117,7 @@
     self.tableView.rowHeight = 72.0f;
     
     [self reload:nil];
-        
-    UINavigationBar *bar = [self.navigationController navigationBar];
-    [bar setNeedsDisplay];
+    
     
 }
 
@@ -242,7 +240,7 @@
                 person = (MEPerson *)[self.filteredArray objectAtIndex:indexPath.row];
             }
             
-            person.avtar = currentCell.avatar.image;
+            person.avatar = currentCell.avatar.image;
         }
         
         MEStaffDetailsTableViewController *destinationVC = (MEStaffDetailsTableViewController *)segue.destinationViewController;

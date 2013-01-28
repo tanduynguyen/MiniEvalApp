@@ -35,12 +35,12 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
     _timeStamp = timeStamp;
 }
 
-- (void) setAvtar:(UIImage *)avtar
+- (void) setAvatar:(UIImage *)avatar
 {
-    if (!_avtar) {
-        _avtar = [[UIImage alloc] init];
+    if (!_avatar) {
+        _avatar = [[UIImage alloc] init];
     }
-    _avtar = avtar;
+    _avatar = avatar;
 }
 
 - (id)initWithDictionary:(NSDictionary *)personDictionary
