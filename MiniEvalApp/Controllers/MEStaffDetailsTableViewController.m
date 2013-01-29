@@ -327,7 +327,7 @@
 }
 
 #define FONT_SIZE 11.0f
-#define CELL_CONTENT_WIDTH 222.0f
+#define CELL_CONTENT_WIDTH_PERCENT 0.75
 #define CELL_CONTENT_MARGIN 10.0f
 #define CELL_HEIGHT_FIRST_LOAD 70.0f
 
@@ -352,7 +352,7 @@
     //text = [items objectAtIndex:indexPath.row];
     
     // Get a CGSize for the width and, effectively, unlimited height
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    CGSize constraint = CGSizeMake((CELL_CONTENT_WIDTH_PERCENT * self.view.frame.size.width) - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     
     // Get the size of the text given the CGSize we just made as a constraint
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByCharWrapping];
