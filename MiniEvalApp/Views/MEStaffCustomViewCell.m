@@ -7,7 +7,6 @@
 //
 
 #import "MEStaffCustomViewCell.h"
-#import "MEPerson.h"
 
 #import "UIImageView+AFNetworking.h"
 
@@ -18,21 +17,31 @@
 
 @synthesize person = _person;
 
+- (UIFont *)myCustomFont:(CGFloat)fontSize {
+    UIFont *myFont = [UIFont fontWithName:@"MyriadPro-Regular" size:fontSize];
+    
+//    if (!myFont) {
+//        NSString *fontPath = [[NSBundle mainBundle] pathForResource:@"MyriadPro-Regular" ofType:@"otf"];
+//        CGDataProviderRef fontDataProvider = CGDataProviderCreateWithFilename([fontPath UTF8String]);
+//        CGFontCreateWithDataProvider(fontDataProvider);
+//    }
+    
+    if (!myFont) {
+        myFont = [UIFont fontWithName:@"Arial" size:fontSize];
+    }
+    return myFont;
+}
+
+- (void)awakeFromNib
+{    
+    [self.userNameLabel setFont:[self myCustomFont:11]];
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
-        NSString *fontPath = [[NSBundle mainBundle] pathForResource:@"MyriadPro-Regular" ofType:@"otf"];
-        
-        CGDataProviderRef fontDataProvider = CGDataProviderCreateWithFilename([fontPath UTF8String]);
-        
-        // Create the font with the data provider, then release the data provider. customFont =
-        
-        CGFontCreateWithDataProvider(fontDataProvider);
-        CGDataProviderRelease(fontDataProvider);
-        //[self.userNameLabel setFont:fontDataProvider];
     }
     return self;
 }
@@ -57,14 +66,24 @@
         genderCellColor = UIColorFromRGB(kDarkBlueColor);
     }
     
-    [self.nameLabel setTextColor:genderCellColor];
+    [self.nameLabel setTextColor:genderCellColor];    
+    
+    self.starImage.hidden = !person.highestVisitedCount;
     
     [self.nameLabel setNumberOfLines:0];
     [self.userNameLabel setNumberOfLines:0];
     
+    self.backgroundColor = UIColorFromRGB(kLightOrganColor);
+    
     [self setNeedsLayout];
 }
 
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row % 2) {
+        cell.backgroundColor = UIColorFromRGB(kLightOrganColor);
+   }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

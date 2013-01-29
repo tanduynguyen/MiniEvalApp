@@ -8,7 +8,7 @@
         <scene sceneID="djH-MI-UU6">
             <objects>
                 <tableViewController modalTransitionStyle="crossDissolve" id="6S9-oA-yE3" customClass="MEStaffTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="iPl-L2-hBI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="iPl-L2-hBI" customClass="ADLivelyTableView">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -435,6 +435,78 @@
         <image name="icon_sms.png" width="22" height="22"/>
         <image name="icon_star.png" width="25" height="25"/>
     </resources>
+    <classes>
+        <class className="ADLivelyTableView" superclassName="UITableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ADLivelyTableView.h"/>
+        </class>
+        <class className="KTNavigationBar" superclassName="UINavigationBar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KTNavigationBar.h"/>
+        </class>
+        <class className="MECustomTabBarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MECustomTabBarController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="customTabBarView" candidateClass="MECustomTabBarView"/>
+            </relationships>
+        </class>
+        <class className="MECustomTabBarView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MECustomTabBarView.h"/>
+            <relationships>
+                <relationship kind="action" name="touchContactsButton:"/>
+                <relationship kind="action" name="touchInfoButton:"/>
+                <relationship kind="outlet" name="contactsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="infoButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="MEExtendStaffTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEExtendStaffTableViewController.h"/>
+        </class>
+        <class className="MEInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="MENewsDetailsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MENewsDetailsTableViewController.h"/>
+        </class>
+        <class className="MENewsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MENewsTableViewController.h"/>
+        </class>
+        <class className="MEStaffCustomViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffCustomViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="avatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="starImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MEStaffDetailsCustomViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsCustomViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageCell" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="textCell" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MEStaffDetailsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsTableViewController.h"/>
+        </class>
+        <class className="MEStaffDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addContact" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="avatar" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="contactLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="roleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MEStaffTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MEStaffTableViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

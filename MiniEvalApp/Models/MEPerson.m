@@ -97,18 +97,18 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
     return [NSURL URLWithString:_avatarImageURLString];
 }
 
-- (void)encodeWithCoder:(NSCoder *)Coder
+- (void)encodeWithCoder:(NSCoder *)coder
 {
-    [Coder encodeObject:self.userName forKey:@"userName"];
-    [Coder encodeObject:self.visitedCount forKey:@"visitedCount"];
+    [coder encodeObject:self.userId forKey:@"userId"];
+    [coder encodeObject:self.visitedCount forKey:@"visitedCount"];
 }
 
-- (id)initWithCoder:(NSCoder *)Decoder
+- (id)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     if (self) {
-        _userName = [Decoder decodeObjectForKey:@"userName"];
-        _visitedCount = [Decoder decodeObjectForKey:@"visitedCount"];
+        _userId = [decoder decodeObjectForKey:@"userId"];
+        _visitedCount = [decoder decodeObjectForKey:@"visitedCount"];
     }
     return self;
 }

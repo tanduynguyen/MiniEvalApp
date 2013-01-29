@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class MEPerson;
+#import "MEPerson.h"
 
 @interface MEStaffCustomViewCell : UITableViewCell
 

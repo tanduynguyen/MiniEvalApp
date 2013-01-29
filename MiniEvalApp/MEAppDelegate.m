@@ -12,8 +12,7 @@
 
 @implementation MEAppDelegate
 
-- (BOOL)application:(UIApplication *)application
-didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
     [NSURLCache setSharedURLCache:URLCache];
@@ -23,6 +22,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     
     UIColor *DarkOrganColor = UIColorFromRGB(kDarkOrganColor);
     UIColor *MainColor = UIColorFromRGB(kMainColor);
+    
+    self.window.backgroundColor = [UIColor lightGrayColor];
     
 //    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bk.png"] forBarMetrics:UIBarStyleDefault];
     [[UINavigationBar appearance] setTintColor:MainColor];
@@ -48,7 +49,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 //    [[UIBarButtonItem appearance]
 //        setBackButtonBackgroundImage:[UIImage imageNamed:@"icon_back.png"]
 //     forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    // Override point for customization after application launch.
 
+    
     return YES;
 }
 

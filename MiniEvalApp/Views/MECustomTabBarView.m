@@ -10,11 +10,14 @@
 
 @implementation MECustomTabBarView
 
+- (void)awakeFromNib
+{    
+   // self.backgroundColor = [UIColor clearColor];
+}
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
-        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

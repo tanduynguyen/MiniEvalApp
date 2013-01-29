@@ -79,7 +79,7 @@ ADLivelyTransform ADLivelyTransformWave = ^(CALayer * layer, float speed){
 @implementation ADLivelyTableView
 #pragma mark - NSObject
 - (void)dealloc {
-//    Block_release(_transformBlock);
+     Block_release(CFBridgingRetain(_transformBlock));
 //    [super dealloc];
 }
 
@@ -125,11 +125,12 @@ ADLivelyTransform ADLivelyTransformWave = ^(CALayer * layer, float speed){
     }
     self.layer.transform = transform;
 
-//    if (block != _transformBlock) {
-//        Block_release(_transformBlock);
-//        _transformBlock = Block_copy(block);
-//    }
+    if (block != _transformBlock) {
+        Block_release(CFBridgingRetain(_transformBlock));
+       _transformBlock = (__bridge ADLivelyTransform)Block_copy(CFBridgingRetain(block));
+   }
 }
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

@@ -7,18 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D07C1D016B21A1800690C0C /* MECustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07C1CF16B21A1800690C0C /* MECustomTabBarController.m */; };
 		8D07C1D916B223B900690C0C /* MECustomTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D07C1D816B223B900690C0C /* MECustomTabBar.xib */; };
-		8D07C1F016B22F8A00690C0C /* MECustomTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07C1EF16B22F8A00690C0C /* MECustomTabBarView.m */; };
 		8D07C1FC16B264EF00690C0C /* KTNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07C1F916B264EF00690C0C /* KTNavigationBar.m */; };
-		8D4C512116AD330C008F6922 /* MEStaffCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C512016AD330C008F6922 /* MEStaffCustomViewCell.m */; };
-		8D4CC9BF16ACEE5300DCB309 /* MEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CC9BE16ACEE5300DCB309 /* MEViewController.m */; };
 		8D4CC9CA16ACEF9E00DCB309 /* MEConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CC9C916ACEF9E00DCB309 /* MEConstants.m */; };
-		8D4CC9CD16ACF50900DCB309 /* MENewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CC9CC16ACF50900DCB309 /* MENewsTableViewController.m */; };
-		8D4CC9D316ACF8B000DCB309 /* MEStaffTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CC9D216ACF8B000DCB309 /* MEStaffTableViewController.m */; };
-		8D4CC9D916AD01EA00DCB309 /* MEExtendStaffTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CC9D816AD01EA00DCB309 /* MEExtendStaffTableViewController.m */; };
-		8D4CCA1216AD1CB300DCB309 /* MENewsDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CCA1116AD1CB300DCB309 /* MENewsDetailsTableViewController.m */; };
-		8D4CCA1D16AD2D0000DCB309 /* MEInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CCA1C16AD2D0000DCB309 /* MEInfoViewController.m */; };
 		8D9398C816AF8F420039AEF7 /* icon_add_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398AF16AF8F420039AEF7 /* icon_add_contact.png */; };
 		8D9398C916AF8F420039AEF7 /* icon_add_contact@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398B016AF8F420039AEF7 /* icon_add_contact@2x.png */; };
 		8D9398CA16AF8F420039AEF7 /* icon_contacts_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398B116AF8F420039AEF7 /* icon_contacts_selected.png */; };
@@ -44,13 +35,24 @@
 		8D9398DE16AF8F420039AEF7 /* middle_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398C516AF8F420039AEF7 /* middle_button.png */; };
 		8D9398DF16AF8F420039AEF7 /* middle_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398C616AF8F420039AEF7 /* middle_button@2x.png */; };
 		8D9398E016AF8F420039AEF7 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398C716AF8F420039AEF7 /* star.png */; };
-		8D9398E316AF96FC0039AEF7 /* MEStaffDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9398E216AF96FC0039AEF7 /* MEStaffDetailsViewController.m */; };
 		8D9398E616AFA47A0039AEF7 /* icon_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398E416AFA47A0039AEF7 /* icon_back.png */; };
 		8D9398E716AFA47A0039AEF7 /* icon_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398E516AFA47A0039AEF7 /* icon_back@2x.png */; };
-		8D9398FF16AFD4800039AEF7 /* MEPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9398FE16AFD4800039AEF7 /* MEPerson.m */; };
 		8D93990116AFDFD70039AEF7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */; };
-		8D93990416AFE7500039AEF7 /* MEStaffDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D93990316AFE7500039AEF7 /* MEStaffDetailsTableViewController.m */; };
-		8D93990716AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D93990616AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.m */; };
+		8D97C38916B7628100FC6A9D /* MEExtendStaffTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C38216B7628000FC6A9D /* MEExtendStaffTableViewController.m */; };
+		8D97C38A16B7628100FC6A9D /* MENewsDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C38416B7628000FC6A9D /* MENewsDetailsTableViewController.m */; };
+		8D97C38B16B7628100FC6A9D /* MENewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C38616B7628000FC6A9D /* MENewsTableViewController.m */; };
+		8D97C38C16B7628100FC6A9D /* MEStaffDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C38816B7628100FC6A9D /* MEStaffDetailsViewController.m */; };
+		8D97C39716B7629B00FC6A9D /* MECustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C38E16B7629A00FC6A9D /* MECustomTabBarController.m */; };
+		8D97C39816B7629B00FC6A9D /* MEInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C39016B7629B00FC6A9D /* MEInfoViewController.m */; };
+		8D97C39916B7629B00FC6A9D /* MEStaffDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C39216B7629B00FC6A9D /* MEStaffDetailsTableViewController.m */; };
+		8D97C39A16B7629B00FC6A9D /* MEStaffTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C39416B7629B00FC6A9D /* MEStaffTableViewController.m */; };
+		8D97C39B16B7629B00FC6A9D /* MEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C39616B7629B00FC6A9D /* MEViewController.m */; };
+		8D97C3A216B762B100FC6A9D /* MEAppAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C39D16B762B100FC6A9D /* MEAppAPIClient.m */; };
+		8D97C3A316B762B100FC6A9D /* MENews.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C39F16B762B100FC6A9D /* MENews.m */; };
+		8D97C3A416B762B100FC6A9D /* MEPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C3A116B762B100FC6A9D /* MEPerson.m */; };
+		8D97C3AB16B762CB00FC6A9D /* MECustomTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C3A616B762CB00FC6A9D /* MECustomTabBarView.m */; };
+		8D97C3AC16B762CB00FC6A9D /* MEStaffCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C3A816B762CB00FC6A9D /* MEStaffCustomViewCell.m */; };
+		8D97C3AD16B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C3AA16B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.m */; };
 		8D994EA416B0F6330049E709 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA216B0F6330049E709 /* AddressBook.framework */; };
 		8D994EA516B0F6330049E709 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA316B0F6330049E709 /* AddressBookUI.framework */; };
 		8D994EA716B11E100049E709 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA616B11E100049E709 /* MessageUI.framework */; };
@@ -59,8 +61,6 @@
 		8D9C2C5F16AEA227008D9101 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C2C5D16AEA227008D9101 /* UIScrollView+SVPullToRefresh.m */; };
 		8D9C2C6116AEA361008D9101 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9C2C6016AEA361008D9101 /* QuartzCore.framework */; };
 		8DA81DC216B6923D00A04062 /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA81DC116B6923D00A04062 /* MyriadPro-Regular.otf */; };
-		8DA9890F16AD986500172D5D /* MEAppAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9890A16AD986500172D5D /* MEAppAPIClient.m */; };
-		8DA9891016AD986500172D5D /* MENews.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9890C16AD986500172D5D /* MENews.m */; };
 		8DB5C38616ACE7FD008D5E02 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB5C38516ACE7FD008D5E02 /* UIKit.framework */; };
 		8DB5C38816ACE7FD008D5E02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB5C38716ACE7FD008D5E02 /* Foundation.framework */; };
 		8DB5C38A16ACE7FD008D5E02 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB5C38916ACE7FD008D5E02 /* CoreGraphics.framework */; };
@@ -82,29 +82,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8D07C1CE16B21A1800690C0C /* MECustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MECustomTabBarController.h; path = Controller/MECustomTabBarController.h; sourceTree = "<group>"; };
-		8D07C1CF16B21A1800690C0C /* MECustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MECustomTabBarController.m; path = Controller/MECustomTabBarController.m; sourceTree = "<group>"; };
 		8D07C1D816B223B900690C0C /* MECustomTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MECustomTabBar.xib; sourceTree = "<group>"; };
-		8D07C1EE16B22F8A00690C0C /* MECustomTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MECustomTabBarView.h; path = View/MECustomTabBarView.h; sourceTree = "<group>"; };
-		8D07C1EF16B22F8A00690C0C /* MECustomTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MECustomTabBarView.m; path = View/MECustomTabBarView.m; sourceTree = "<group>"; };
 		8D07C1F816B264EF00690C0C /* KTNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTNavigationBar.h; sourceTree = "<group>"; };
 		8D07C1F916B264EF00690C0C /* KTNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTNavigationBar.m; sourceTree = "<group>"; };
-		8D4C511F16AD330C008F6922 /* MEStaffCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffCustomViewCell.h; path = View/MEStaffCustomViewCell.h; sourceTree = "<group>"; };
-		8D4C512016AD330C008F6922 /* MEStaffCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffCustomViewCell.m; path = View/MEStaffCustomViewCell.m; sourceTree = "<group>"; };
-		8D4CC9BD16ACEE5300DCB309 /* MEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEViewController.h; path = Controller/MEViewController.h; sourceTree = "<group>"; };
-		8D4CC9BE16ACEE5300DCB309 /* MEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEViewController.m; path = Controller/MEViewController.m; sourceTree = "<group>"; };
 		8D4CC9C816ACEF9E00DCB309 /* MEConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEConstants.h; sourceTree = "<group>"; };
 		8D4CC9C916ACEF9E00DCB309 /* MEConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEConstants.m; sourceTree = "<group>"; };
-		8D4CC9CB16ACF50900DCB309 /* MENewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MENewsTableViewController.h; path = Controller/MENewsTableViewController.h; sourceTree = "<group>"; };
-		8D4CC9CC16ACF50900DCB309 /* MENewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MENewsTableViewController.m; path = Controller/MENewsTableViewController.m; sourceTree = "<group>"; };
-		8D4CC9D116ACF8B000DCB309 /* MEStaffTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffTableViewController.h; path = Controller/MEStaffTableViewController.h; sourceTree = "<group>"; };
-		8D4CC9D216ACF8B000DCB309 /* MEStaffTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffTableViewController.m; path = Controller/MEStaffTableViewController.m; sourceTree = "<group>"; };
-		8D4CC9D716AD01EA00DCB309 /* MEExtendStaffTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEExtendStaffTableViewController.h; path = Controller/MEExtendStaffTableViewController.h; sourceTree = "<group>"; };
-		8D4CC9D816AD01EA00DCB309 /* MEExtendStaffTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEExtendStaffTableViewController.m; path = Controller/MEExtendStaffTableViewController.m; sourceTree = "<group>"; };
-		8D4CCA1016AD1CB300DCB309 /* MENewsDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MENewsDetailsTableViewController.h; path = Controller/MENewsDetailsTableViewController.h; sourceTree = "<group>"; };
-		8D4CCA1116AD1CB300DCB309 /* MENewsDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MENewsDetailsTableViewController.m; path = Controller/MENewsDetailsTableViewController.m; sourceTree = "<group>"; };
-		8D4CCA1B16AD2D0000DCB309 /* MEInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEInfoViewController.h; path = Controller/MEInfoViewController.h; sourceTree = "<group>"; };
-		8D4CCA1C16AD2D0000DCB309 /* MEInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEInfoViewController.m; path = Controller/MEInfoViewController.m; sourceTree = "<group>"; };
 		8D9398AF16AF8F420039AEF7 /* icon_add_contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_add_contact.png; sourceTree = "<group>"; };
 		8D9398B016AF8F420039AEF7 /* icon_add_contact@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_add_contact@2x.png"; sourceTree = "<group>"; };
 		8D9398B116AF8F420039AEF7 /* icon_contacts_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_contacts_selected.png; sourceTree = "<group>"; };
@@ -130,17 +112,39 @@
 		8D9398C516AF8F420039AEF7 /* middle_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = middle_button.png; sourceTree = "<group>"; };
 		8D9398C616AF8F420039AEF7 /* middle_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "middle_button@2x.png"; sourceTree = "<group>"; };
 		8D9398C716AF8F420039AEF7 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
-		8D9398E116AF96FC0039AEF7 /* MEStaffDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffDetailsViewController.h; path = Controller/MEStaffDetailsViewController.h; sourceTree = "<group>"; };
-		8D9398E216AF96FC0039AEF7 /* MEStaffDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffDetailsViewController.m; path = Controller/MEStaffDetailsViewController.m; sourceTree = "<group>"; };
 		8D9398E416AFA47A0039AEF7 /* icon_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_back.png; sourceTree = "<group>"; };
 		8D9398E516AFA47A0039AEF7 /* icon_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@2x.png"; sourceTree = "<group>"; };
-		8D9398FD16AFD47F0039AEF7 /* MEPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEPerson.h; path = Model/MEPerson.h; sourceTree = "<group>"; };
-		8D9398FE16AFD4800039AEF7 /* MEPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEPerson.m; path = Model/MEPerson.m; sourceTree = "<group>"; };
 		8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
-		8D93990216AFE7500039AEF7 /* MEStaffDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffDetailsTableViewController.h; path = Controller/MEStaffDetailsTableViewController.h; sourceTree = "<group>"; };
-		8D93990316AFE7500039AEF7 /* MEStaffDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffDetailsTableViewController.m; path = Controller/MEStaffDetailsTableViewController.m; sourceTree = "<group>"; };
-		8D93990516AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffDetailsCustomViewCell.h; path = View/MEStaffDetailsCustomViewCell.h; sourceTree = "<group>"; };
-		8D93990616AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffDetailsCustomViewCell.m; path = View/MEStaffDetailsCustomViewCell.m; sourceTree = "<group>"; };
+		8D97C38116B7628000FC6A9D /* MEExtendStaffTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEExtendStaffTableViewController.h; path = Archives/MEExtendStaffTableViewController.h; sourceTree = "<group>"; };
+		8D97C38216B7628000FC6A9D /* MEExtendStaffTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEExtendStaffTableViewController.m; path = Archives/MEExtendStaffTableViewController.m; sourceTree = "<group>"; };
+		8D97C38316B7628000FC6A9D /* MENewsDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MENewsDetailsTableViewController.h; path = Archives/MENewsDetailsTableViewController.h; sourceTree = "<group>"; };
+		8D97C38416B7628000FC6A9D /* MENewsDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MENewsDetailsTableViewController.m; path = Archives/MENewsDetailsTableViewController.m; sourceTree = "<group>"; };
+		8D97C38516B7628000FC6A9D /* MENewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MENewsTableViewController.h; path = Archives/MENewsTableViewController.h; sourceTree = "<group>"; };
+		8D97C38616B7628000FC6A9D /* MENewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MENewsTableViewController.m; path = Archives/MENewsTableViewController.m; sourceTree = "<group>"; };
+		8D97C38716B7628000FC6A9D /* MEStaffDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffDetailsViewController.h; path = Archives/MEStaffDetailsViewController.h; sourceTree = "<group>"; };
+		8D97C38816B7628100FC6A9D /* MEStaffDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffDetailsViewController.m; path = Archives/MEStaffDetailsViewController.m; sourceTree = "<group>"; };
+		8D97C38D16B7629A00FC6A9D /* MECustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MECustomTabBarController.h; path = Controllers/MECustomTabBarController.h; sourceTree = "<group>"; };
+		8D97C38E16B7629A00FC6A9D /* MECustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MECustomTabBarController.m; path = Controllers/MECustomTabBarController.m; sourceTree = "<group>"; };
+		8D97C38F16B7629A00FC6A9D /* MEInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEInfoViewController.h; path = Controllers/MEInfoViewController.h; sourceTree = "<group>"; };
+		8D97C39016B7629B00FC6A9D /* MEInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEInfoViewController.m; path = Controllers/MEInfoViewController.m; sourceTree = "<group>"; };
+		8D97C39116B7629B00FC6A9D /* MEStaffDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffDetailsTableViewController.h; path = Controllers/MEStaffDetailsTableViewController.h; sourceTree = "<group>"; };
+		8D97C39216B7629B00FC6A9D /* MEStaffDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffDetailsTableViewController.m; path = Controllers/MEStaffDetailsTableViewController.m; sourceTree = "<group>"; };
+		8D97C39316B7629B00FC6A9D /* MEStaffTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffTableViewController.h; path = Controllers/MEStaffTableViewController.h; sourceTree = "<group>"; };
+		8D97C39416B7629B00FC6A9D /* MEStaffTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffTableViewController.m; path = Controllers/MEStaffTableViewController.m; sourceTree = "<group>"; };
+		8D97C39516B7629B00FC6A9D /* MEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEViewController.h; path = Controllers/MEViewController.h; sourceTree = "<group>"; };
+		8D97C39616B7629B00FC6A9D /* MEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEViewController.m; path = Controllers/MEViewController.m; sourceTree = "<group>"; };
+		8D97C39C16B762B100FC6A9D /* MEAppAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEAppAPIClient.h; path = Models/MEAppAPIClient.h; sourceTree = "<group>"; };
+		8D97C39D16B762B100FC6A9D /* MEAppAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEAppAPIClient.m; path = Models/MEAppAPIClient.m; sourceTree = "<group>"; };
+		8D97C39E16B762B100FC6A9D /* MENews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MENews.h; path = Models/MENews.h; sourceTree = "<group>"; };
+		8D97C39F16B762B100FC6A9D /* MENews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MENews.m; path = Models/MENews.m; sourceTree = "<group>"; };
+		8D97C3A016B762B100FC6A9D /* MEPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEPerson.h; path = Models/MEPerson.h; sourceTree = "<group>"; };
+		8D97C3A116B762B100FC6A9D /* MEPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEPerson.m; path = Models/MEPerson.m; sourceTree = "<group>"; };
+		8D97C3A516B762CB00FC6A9D /* MECustomTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MECustomTabBarView.h; path = Views/MECustomTabBarView.h; sourceTree = "<group>"; };
+		8D97C3A616B762CB00FC6A9D /* MECustomTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MECustomTabBarView.m; path = Views/MECustomTabBarView.m; sourceTree = "<group>"; };
+		8D97C3A716B762CB00FC6A9D /* MEStaffCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffCustomViewCell.h; path = Views/MEStaffCustomViewCell.h; sourceTree = "<group>"; };
+		8D97C3A816B762CB00FC6A9D /* MEStaffCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffCustomViewCell.m; path = Views/MEStaffCustomViewCell.m; sourceTree = "<group>"; };
+		8D97C3A916B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEStaffDetailsCustomViewCell.h; path = Views/MEStaffDetailsCustomViewCell.h; sourceTree = "<group>"; };
+		8D97C3AA16B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEStaffDetailsCustomViewCell.m; path = Views/MEStaffDetailsCustomViewCell.m; sourceTree = "<group>"; };
 		8D994EA216B0F6330049E709 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		8D994EA316B0F6330049E709 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		8D994EA616B11E100049E709 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -153,10 +157,6 @@
 		8D9C2C5D16AEA227008D9101 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SVPullToRefresh.m"; path = "SVPullToRefresh/UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		8D9C2C6016AEA361008D9101 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8DA81DC116B6923D00A04062 /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Regular.otf"; sourceTree = "<group>"; };
-		8DA9890916AD986500172D5D /* MEAppAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MEAppAPIClient.h; path = Model/MEAppAPIClient.h; sourceTree = "<group>"; };
-		8DA9890A16AD986500172D5D /* MEAppAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MEAppAPIClient.m; path = Model/MEAppAPIClient.m; sourceTree = "<group>"; };
-		8DA9890B16AD986500172D5D /* MENews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MENews.h; path = Model/MENews.h; sourceTree = "<group>"; };
-		8DA9890C16AD986500172D5D /* MENews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MENews.m; path = Model/MENews.m; sourceTree = "<group>"; };
 		8DB5C38116ACE7FD008D5E02 /* MiniEvalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniEvalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB5C38516ACE7FD008D5E02 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8DB5C38716ACE7FD008D5E02 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -197,10 +197,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D9C2C6116AEA361008D9101 /* QuartzCore.framework in Frameworks */,
 				8D994EA716B11E100049E709 /* MessageUI.framework in Frameworks */,
 				8D994EA416B0F6330049E709 /* AddressBook.framework in Frameworks */,
 				8D994EA516B0F6330049E709 /* AddressBookUI.framework in Frameworks */,
-				8D9C2C6116AEA361008D9101 /* QuartzCore.framework in Frameworks */,
 				8DB5C38616ACE7FD008D5E02 /* UIKit.framework in Frameworks */,
 				8DB5C38816ACE7FD008D5E02 /* Foundation.framework in Frameworks */,
 				8DB5C38A16ACE7FD008D5E02 /* CoreGraphics.framework in Frameworks */,
@@ -210,60 +210,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8D4CC9BB16ACEDFE00DCB309 /* Controller */ = {
+		8D4CC9BB16ACEDFE00DCB309 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8D4CC9D116ACF8B000DCB309 /* MEStaffTableViewController.h */,
-				8D4CC9D216ACF8B000DCB309 /* MEStaffTableViewController.m */,
-				8D93990216AFE7500039AEF7 /* MEStaffDetailsTableViewController.h */,
-				8D93990316AFE7500039AEF7 /* MEStaffDetailsTableViewController.m */,
-				8D4CCA1B16AD2D0000DCB309 /* MEInfoViewController.h */,
-				8D4CCA1C16AD2D0000DCB309 /* MEInfoViewController.m */,
-				8D4CC9BD16ACEE5300DCB309 /* MEViewController.h */,
-				8D4CC9BE16ACEE5300DCB309 /* MEViewController.m */,
-				8D07C1CE16B21A1800690C0C /* MECustomTabBarController.h */,
-				8D07C1CF16B21A1800690C0C /* MECustomTabBarController.m */,
+				8D97C38D16B7629A00FC6A9D /* MECustomTabBarController.h */,
+				8D97C38E16B7629A00FC6A9D /* MECustomTabBarController.m */,
+				8D97C38F16B7629A00FC6A9D /* MEInfoViewController.h */,
+				8D97C39016B7629B00FC6A9D /* MEInfoViewController.m */,
+				8D97C39116B7629B00FC6A9D /* MEStaffDetailsTableViewController.h */,
+				8D97C39216B7629B00FC6A9D /* MEStaffDetailsTableViewController.m */,
+				8D97C39316B7629B00FC6A9D /* MEStaffTableViewController.h */,
+				8D97C39416B7629B00FC6A9D /* MEStaffTableViewController.m */,
+				8D97C39516B7629B00FC6A9D /* MEViewController.h */,
+				8D97C39616B7629B00FC6A9D /* MEViewController.m */,
 			);
-			name = Controller;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		8D4CC9C016ACEE6A00DCB309 /* Model */ = {
+		8D4CC9C016ACEE6A00DCB309 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8D9398FD16AFD47F0039AEF7 /* MEPerson.h */,
-				8D9398FE16AFD4800039AEF7 /* MEPerson.m */,
-				8DA9890916AD986500172D5D /* MEAppAPIClient.h */,
-				8DA9890A16AD986500172D5D /* MEAppAPIClient.m */,
-				8DA9890B16AD986500172D5D /* MENews.h */,
-				8DA9890C16AD986500172D5D /* MENews.m */,
+				8D97C39C16B762B100FC6A9D /* MEAppAPIClient.h */,
+				8D97C39D16B762B100FC6A9D /* MEAppAPIClient.m */,
+				8D97C39E16B762B100FC6A9D /* MENews.h */,
+				8D97C39F16B762B100FC6A9D /* MENews.m */,
+				8D97C3A016B762B100FC6A9D /* MEPerson.h */,
+				8D97C3A116B762B100FC6A9D /* MEPerson.m */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
-		8D4CC9C116ACEE7100DCB309 /* View */ = {
+		8D4CC9C116ACEE7100DCB309 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8D07C1EE16B22F8A00690C0C /* MECustomTabBarView.h */,
-				8D07C1EF16B22F8A00690C0C /* MECustomTabBarView.m */,
-				8D4C511F16AD330C008F6922 /* MEStaffCustomViewCell.h */,
-				8D4C512016AD330C008F6922 /* MEStaffCustomViewCell.m */,
-				8D93990516AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.h */,
-				8D93990616AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.m */,
+				8D97C3A516B762CB00FC6A9D /* MECustomTabBarView.h */,
+				8D97C3A616B762CB00FC6A9D /* MECustomTabBarView.m */,
+				8D97C3A716B762CB00FC6A9D /* MEStaffCustomViewCell.h */,
+				8D97C3A816B762CB00FC6A9D /* MEStaffCustomViewCell.m */,
+				8D97C3A916B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.h */,
+				8D97C3AA16B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.m */,
 			);
-			name = View;
+			name = Views;
+			sourceTree = "<group>";
+		};
+		8D97C37E16B75CEA00FC6A9D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8DA81DC116B6923D00A04062 /* MyriadPro-Regular.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		8D97C38016B75D0700FC6A9D /* NIBs */ = {
+			isa = PBXGroup;
+			children = (
+				8D07C1D816B223B900690C0C /* MECustomTabBar.xib */,
+			);
+			name = NIBs;
 			sourceTree = "<group>";
 		};
 		8D9C2C4516AE82FF008D9101 /* Archive */ = {
 			isa = PBXGroup;
 			children = (
-				8D4CC9D716AD01EA00DCB309 /* MEExtendStaffTableViewController.h */,
-				8D4CC9D816AD01EA00DCB309 /* MEExtendStaffTableViewController.m */,
-				8D9398E116AF96FC0039AEF7 /* MEStaffDetailsViewController.h */,
-				8D9398E216AF96FC0039AEF7 /* MEStaffDetailsViewController.m */,
-				8D4CCA1016AD1CB300DCB309 /* MENewsDetailsTableViewController.h */,
-				8D4CCA1116AD1CB300DCB309 /* MENewsDetailsTableViewController.m */,
-				8D4CC9CB16ACF50900DCB309 /* MENewsTableViewController.h */,
-				8D4CC9CC16ACF50900DCB309 /* MENewsTableViewController.m */,
+				8D97C38116B7628000FC6A9D /* MEExtendStaffTableViewController.h */,
+				8D97C38216B7628000FC6A9D /* MEExtendStaffTableViewController.m */,
+				8D97C38316B7628000FC6A9D /* MENewsDetailsTableViewController.h */,
+				8D97C38416B7628000FC6A9D /* MENewsDetailsTableViewController.m */,
+				8D97C38516B7628000FC6A9D /* MENewsTableViewController.h */,
+				8D97C38616B7628000FC6A9D /* MENewsTableViewController.m */,
+				8D97C38716B7628000FC6A9D /* MEStaffDetailsViewController.h */,
+				8D97C38816B7628100FC6A9D /* MEStaffDetailsViewController.m */,
 			);
 			name = Archive;
 			sourceTree = "<group>";
@@ -314,15 +330,15 @@
 		8DB5C38B16ACE7FD008D5E02 /* MiniEvalApp */ = {
 			isa = PBXGroup;
 			children = (
-				8D4CC9BB16ACEDFE00DCB309 /* Controller */,
-				8D4CC9C016ACEE6A00DCB309 /* Model */,
-				8D4CC9C116ACEE7100DCB309 /* View */,
+				8D4CC9BB16ACEDFE00DCB309 /* Controllers */,
+				8D4CC9C016ACEE6A00DCB309 /* Models */,
+				8D4CC9C116ACEE7100DCB309 /* Views */,
 				8DB5C3B816ACE8C0008D5E02 /* Vendors */,
 				8DB5C39D16ACE7FD008D5E02 /* MainStoryboard_iPhone.storyboard */,
 				8DB5C3A016ACE7FD008D5E02 /* MainStoryboard_iPad.storyboard */,
+				8D97C38016B75D0700FC6A9D /* NIBs */,
 				8DB5C38C16ACE7FD008D5E02 /* Supporting Files */,
 				8D9C2C4516AE82FF008D9101 /* Archive */,
-				8D07C1D816B223B900690C0C /* MECustomTabBar.xib */,
 			);
 			path = MiniEvalApp;
 			sourceTree = "<group>";
@@ -346,7 +362,7 @@
 		8DB5C3AE16ACE8C0008D5E02 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8DA81DC116B6923D00A04062 /* MyriadPro-Regular.otf */,
+				8D97C37E16B75CEA00FC6A9D /* Fonts */,
 				8D93990016AFDFD70039AEF7 /* Default-568h@2x.png */,
 				8D9398E416AFA47A0039AEF7 /* icon_back.png */,
 				8D9398E516AFA47A0039AEF7 /* icon_back@2x.png */,
@@ -526,27 +542,27 @@
 				8DB5C3DE16ACE8C0008D5E02 /* AFURLConnectionOperation.m in Sources */,
 				8DB5C3DF16ACE8C0008D5E02 /* AFXMLRequestOperation.m in Sources */,
 				8DB5C3E016ACE8C0008D5E02 /* UIImageView+AFNetworking.m in Sources */,
-				8D4CC9BF16ACEE5300DCB309 /* MEViewController.m in Sources */,
 				8D4CC9CA16ACEF9E00DCB309 /* MEConstants.m in Sources */,
-				8D4CC9CD16ACF50900DCB309 /* MENewsTableViewController.m in Sources */,
-				8D4CC9D316ACF8B000DCB309 /* MEStaffTableViewController.m in Sources */,
-				8D4CC9D916AD01EA00DCB309 /* MEExtendStaffTableViewController.m in Sources */,
-				8D4CCA1216AD1CB300DCB309 /* MENewsDetailsTableViewController.m in Sources */,
-				8D4CCA1D16AD2D0000DCB309 /* MEInfoViewController.m in Sources */,
-				8D4C512116AD330C008F6922 /* MEStaffCustomViewCell.m in Sources */,
-				8DA9890F16AD986500172D5D /* MEAppAPIClient.m in Sources */,
-				8DA9891016AD986500172D5D /* MENews.m in Sources */,
 				8D9C2C5E16AEA227008D9101 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				8D9C2C5F16AEA227008D9101 /* UIScrollView+SVPullToRefresh.m in Sources */,
-				8D9398E316AF96FC0039AEF7 /* MEStaffDetailsViewController.m in Sources */,
-				8D9398FF16AFD4800039AEF7 /* MEPerson.m in Sources */,
-				8D93990416AFE7500039AEF7 /* MEStaffDetailsTableViewController.m in Sources */,
-				8D93990716AFEA950039AEF7 /* MEStaffDetailsCustomViewCell.m in Sources */,
 				8D994EB616B147520049E709 /* ZHCustomSegue.m in Sources */,
-				8D07C1D016B21A1800690C0C /* MECustomTabBarController.m in Sources */,
-				8D07C1F016B22F8A00690C0C /* MECustomTabBarView.m in Sources */,
 				8D07C1FC16B264EF00690C0C /* KTNavigationBar.m in Sources */,
 				8DCF7B0816B62E2800CAB040 /* ADLivelyTableView.m in Sources */,
+				8D97C38916B7628100FC6A9D /* MEExtendStaffTableViewController.m in Sources */,
+				8D97C38A16B7628100FC6A9D /* MENewsDetailsTableViewController.m in Sources */,
+				8D97C38B16B7628100FC6A9D /* MENewsTableViewController.m in Sources */,
+				8D97C38C16B7628100FC6A9D /* MEStaffDetailsViewController.m in Sources */,
+				8D97C39716B7629B00FC6A9D /* MECustomTabBarController.m in Sources */,
+				8D97C39816B7629B00FC6A9D /* MEInfoViewController.m in Sources */,
+				8D97C39916B7629B00FC6A9D /* MEStaffDetailsTableViewController.m in Sources */,
+				8D97C39A16B7629B00FC6A9D /* MEStaffTableViewController.m in Sources */,
+				8D97C39B16B7629B00FC6A9D /* MEViewController.m in Sources */,
+				8D97C3A216B762B100FC6A9D /* MEAppAPIClient.m in Sources */,
+				8D97C3A316B762B100FC6A9D /* MENews.m in Sources */,
+				8D97C3A416B762B100FC6A9D /* MEPerson.m in Sources */,
+				8D97C3AB16B762CB00FC6A9D /* MECustomTabBarView.m in Sources */,
+				8D97C3AC16B762CB00FC6A9D /* MEStaffCustomViewCell.m in Sources */,
+				8D97C3AD16B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

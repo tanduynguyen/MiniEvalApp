@@ -59,10 +59,7 @@
     self.fistLoadTableView = YES;    
     [self initStaffDetailsCustomViewCells];    
     
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    
-//    ADLivelyTableView * livelyTableView = (ADLivelyTableView *)self.tableView;
-//    livelyTableView.initialCellTransformBlock = ADLivelyTransformWave;
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];    
 }
 
 - (void) viewWillLayoutSubviews

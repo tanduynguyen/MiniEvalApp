@@ -12,6 +12,7 @@
 #import "MEStaffDetailsTableViewController.h"
 #import "MEStaffCustomViewCell.h"
 #import "SVPullToRefresh.h"
+#import "ADLivelyTableView.h"
 
 @interface MEStaffTableViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -114,6 +115,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reload:)];
     
     self.tableView.rowHeight = 72.0f;
+    self.tableView.backgroundColor = [UIColor whiteColor];
     
     [self reload:nil];   
 }
@@ -146,13 +148,21 @@
     
     for (int i = 0; i < self.results.count; i++) {
         MEPerson *person = [self.results objectAtIndex:i];
-        MEPerson *tmp = [results objectAtIndex:i];
-        person.visitedCount = tmp.visitedCount;
+        NSPredicate *pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"SELF.userId = '%@'", person.userId]];
+        NSArray *filtered = [results filteredArrayUsingPredicate:pred];
+        if (filtered.count > 0) {
+            MEPerson *tmp = [filtered objectAtIndex:0];
+            person.visitedCount = tmp.visitedCount;
+        }
     }
     
     [MEPerson findHighestVisitedCount:self.results];
     
-    [self.tableView reloadData];
+    NSArray * transforms = [NSArray arrayWithObjects:ADLivelyTransformFan, ADLivelyTransformCurl, ADLivelyTransformFade, ADLivelyTransformHelix, ADLivelyTransformWave, nil];
+    ADLivelyTableView * livelyTableView = (ADLivelyTableView *)self.tableView;
+    livelyTableView.initialCellTransformBlock = nil;
+    [livelyTableView reloadData];
+    livelyTableView.initialCellTransformBlock = [transforms objectAtIndex:random() % [transforms count]];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -210,7 +220,8 @@
     }
     
     cell.person = person;
-    cell.starImage.hidden = !person.highestVisitedCount;  
+    
+    
 
     return cell;
 }
@@ -239,11 +250,7 @@
     }
 }
 
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row % 2) {
-        cell.backgroundColor = UIColorFromRGB(kLightOrganColor);
-    }
-}
+
 
 
 
