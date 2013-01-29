@@ -7,11 +7,11 @@
 //
 
 #import "MEStaffDetailsCustomViewCell.h"
-#import <QuartzCore/QuartzCore.h>
+#import "MECustomAnimation.h"
 
 @implementation MEStaffDetailsCustomViewCell
 
-- (void)setContentData :(NSDictionary *)dictionary
+- (void)setContentData:(NSDictionary *)dictionary
 {    
     if (self) {
         self.alpha = 0;
@@ -35,14 +35,7 @@
         [self.textCell setNumberOfLines:0];
         [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];       
 
-        CABasicAnimation *hover = [CABasicAnimation animationWithKeyPath:@"position"];
-        hover.additive = YES; // fromValue and toValue will be relative instead of absolute values
-        hover.fromValue = [NSValue valueWithCGPoint:CGPointZero];
-        hover.toValue = [NSValue valueWithCGPoint:CGPointMake(0.0, -5.0)]; // y increases downwards on iOS
-        hover.autoreverses = YES; // Animate back to normal afterwards
-        hover.duration = 0.2; // The duration for one part of the animation (0.2 up and 0.2 down)
-        hover.repeatCount = 5; // The number of times the animation should repeat
-        [self.imageCell.layer addAnimation:hover forKey:@"myHoverAnimation"];
+        [self.imageCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
     }    
 }
 

@@ -116,6 +116,7 @@
     
     self.tableView.rowHeight = 72.0f;
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.separatorColor = [UIColor clearColor];
     
     [self reload:nil];   
 }
@@ -219,9 +220,7 @@
         person = [self.filteredArray objectAtIndex:indexPath.row];
     }
     
-    cell.person = person;
-    
-    
+    [cell configureWithData:person atIndex:indexPath];    
 
     return cell;
 }

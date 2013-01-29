@@ -21,5 +21,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *starImage;
 
+- (void)configureWithData:(MEPerson *)person
+                  atIndex:(NSIndexPath *)indexPath;
 
 @end

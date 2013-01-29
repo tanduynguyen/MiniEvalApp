@@ -47,7 +47,9 @@
 }
 
 
-- (void)setPerson:(MEPerson *)person {
+- (void)configureWithData:(MEPerson *)person
+                  atIndex:(NSIndexPath *)indexPath
+{
     _person = person;
     
     self.nameLabel.text = person.name;
@@ -73,17 +75,17 @@
     [self.nameLabel setNumberOfLines:0];
     [self.userNameLabel setNumberOfLines:0];
     
-    self.backgroundColor = UIColorFromRGB(kLightOrganColor);
+    UIView *backView = [[UIView alloc] initWithFrame:self.frame];
+    if (indexPath.row % 2) {
+        backView.backgroundColor = UIColorFromRGB(kLightOrganColor);
+    } else {
+        backView.backgroundColor = [UIColor whiteColor];
+    }
+    self.backgroundView = backView;
     
     [self setNeedsLayout];
 }
 
-
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row % 2) {
-        cell.backgroundColor = UIColorFromRGB(kLightOrganColor);
-   }
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

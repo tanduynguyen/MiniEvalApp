@@ -95,6 +95,7 @@
             customFrame.origin.x -= customFrame.size.width;
             [rowView setFrame:customFrame];
             
+            
             [animationView addSubview:rowView];
         }
         
@@ -369,7 +370,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     CGFloat height = 0;
-    
+        
     // Get the text so we can measure it
     NSDictionary *dict = (NSDictionary *) [self.items objectAtIndex:indexPath.row];
     NSString *text = [dict objectForKey:@"textCell"];
@@ -385,7 +386,7 @@
     
     // Get the size of the text given the CGSize we just made as a constraint
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByCharWrapping];
-    
+        
     // Get the height of our measurement
     if (height < size.height) {
         height = size.height;

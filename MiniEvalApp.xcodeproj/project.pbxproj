@@ -55,6 +55,7 @@
 		8D97C3E716B7802700FC6A9D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D97C3E416B7802700FC6A9D /* Default-568h@2x.png */; };
 		8D97C3E816B7802700FC6A9D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D97C3E516B7802700FC6A9D /* Default.png */; };
 		8D97C3E916B7802700FC6A9D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D97C3E616B7802700FC6A9D /* Default@2x.png */; };
+		8D97C3F016B7A19500FC6A9D /* MECustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97C3EF16B7A19500FC6A9D /* MECustomAnimation.m */; };
 		8D994EA416B0F6330049E709 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA216B0F6330049E709 /* AddressBook.framework */; };
 		8D994EA516B0F6330049E709 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA316B0F6330049E709 /* AddressBookUI.framework */; };
 		8D994EA716B11E100049E709 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D994EA616B11E100049E709 /* MessageUI.framework */; };
@@ -149,6 +150,8 @@
 		8D97C3E416B7802700FC6A9D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8D97C3E516B7802700FC6A9D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D97C3E616B7802700FC6A9D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		8D97C3EE16B7A19500FC6A9D /* MECustomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MECustomAnimation.h; sourceTree = "<group>"; };
+		8D97C3EF16B7A19500FC6A9D /* MECustomAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MECustomAnimation.m; sourceTree = "<group>"; };
 		8D994EA216B0F6330049E709 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		8D994EA316B0F6330049E709 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		8D994EA616B11E100049E709 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -412,6 +415,8 @@
 				8D994EB516B147520049E709 /* ZHCustomSegue.m */,
 				8D9C2C5816AEA20B008D9101 /* SVPullToRefresh */,
 				8DB5C3B916ACE8C0008D5E02 /* AFNetworking */,
+				8D97C3EE16B7A19500FC6A9D /* MECustomAnimation.h */,
+				8D97C3EF16B7A19500FC6A9D /* MECustomAnimation.m */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -571,6 +576,7 @@
 				8D97C3AB16B762CB00FC6A9D /* MECustomTabBarView.m in Sources */,
 				8D97C3AC16B762CB00FC6A9D /* MEStaffCustomViewCell.m in Sources */,
 				8D97C3AD16B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.m in Sources */,
+				8D97C3F016B7A19500FC6A9D /* MECustomAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
