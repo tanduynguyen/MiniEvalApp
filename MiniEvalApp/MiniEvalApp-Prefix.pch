@@ -8,10 +8,36 @@
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
 
+
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
+    #define UIColorFromRGBWithAlpha(rgbValue, alphaValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:alphaValue];
+
+    #define UIColorFromRGB(rgbValue) UIColorFromRGBWithAlpha(rgbValue, 1.0);
+
+    #define STAFFS_KEY @"MEExtendStaffTableViewController.2359Staffs"
+
+    #define TAG_AVATAR_CELL 1
+    #define TAG_EMAIL_CELL 2
+    #define TAG_SMS_CELL 3
+
     #import "MEConstants.h"
+
+//NSString * const kAppAPIBaseURLString = @"https://dl.dropbox.com/";
+
+//    NSString * const kAppAPIBaseURLString = @"https://dl.dropbox.com/";
+//    NSString * const kAppAPIPath = @"/u/11295402/MiniEval/data.json";
+//    NSString * const kAppAPIToken = @"";
+//    NSString * const kAppJSONPath = @"https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http%3A%2F%2Fwww.digg.com%2Frss%2Findex.xml";
+//    int const kLightOrganColor = 0xfff0db;
+//    int const kDarkOrganColor = 0xEA6D26;
+//    int const kMainColor = 0xEB773F;
+//    int const kLightBlueColor = 0x199CB1;
+//    int const kDarkBlueColor = 0x199CB1;
+
+
+
 
 #endif

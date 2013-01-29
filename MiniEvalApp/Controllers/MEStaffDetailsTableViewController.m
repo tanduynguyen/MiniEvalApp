@@ -8,9 +8,8 @@
 
 #import "MEStaffDetailsTableViewController.h"
 #import "MEStaffDetailsCustomViewCell.h"
-
+#import "MECustomAnimation.h"
 #import "ADLivelyTableView.h"
-#import <QuartzCore/QuartzCore.h>
 
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
@@ -26,7 +25,6 @@
 
 @implementation MEStaffDetailsTableViewController
 
-
 - (MEPerson *)person
 {
     if (!_person) {
@@ -35,22 +33,14 @@
     return _person;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.title = self.person.name;    
-
-    [self saveVistedCount];
+    self.title = self.person.name;
+    
+    //increase the visited Count
+    self.person.visitedCount = [[NSNumber alloc] initWithUnsignedInt:[self.person.visitedCount intValue] + 1];
     
     [self customizeBackButton];
     
@@ -64,10 +54,7 @@
 
 - (void) viewWillLayoutSubviews
 {
-    if (self.fistLoadTableView == YES) {
-        //  [self.tableView setHidden:YES];
-        
-        UIColor *DarkOrganColor = UIColorFromRGB(kDarkOrganColor);
+    if (self.fistLoadTableView == YES) {        
         
         UIView *animationView = [[UIView alloc] initWithFrame:self.tableView.frame];
         [animationView setBackgroundColor:[UIColor whiteColor]];        
@@ -79,13 +66,7 @@
             
             UIView *rowView = [[UIView alloc] initWithFrame:cell.frame];
             
-            [rowView.layer setCornerRadius:2.0f];
-            [rowView.layer setBorderColor:DarkOrganColor.CGColor];
-            [rowView.layer setBorderWidth:0.2f];
-            [rowView.layer setShadowColor:[UIColor grayColor].CGColor];
-            [rowView.layer setShadowOpacity:0.6];
-            [rowView.layer setShadowRadius:3.0];
-            [rowView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+            [MECustomAnimation setCustomShadow:rowView.layer];
                                     
             [rowView addSubview:cell.imageCell];
             [rowView addSubview:cell.textCell];
@@ -97,9 +78,7 @@
             
             
             [animationView addSubview:rowView];
-        }
-        
-        //[animationView addSubview:[[UIImageView alloc] initWithImage:self.person.avatar]];
+        }        
         
         [self checkSubviews:animationView atIndex:0];
     }
@@ -123,6 +102,8 @@
                          CGRect customFrame = mySubview.frame;
                          customFrame.origin.x += customFrame.size.width;
                          [mySubview setFrame:customFrame];
+                         
+                         [mySubview.layer  addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
                      }
                      completion:^(BOOL finished){ 
                          [self checkSubviews:animationView atIndex:idx + 1];
@@ -147,26 +128,9 @@
     [self.tableView reloadData];
 }
 
-
-- (void)saveVistedCount
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    // Use NSUserDefault to store the visit count for each person.
-    // When a user is selected, increase visit count
-//    
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    
-//    NSMutableDictionary *staffs = [[NSMutableDictionary alloc] init];
-//    
-//    staffs = [[defaults objectForKey:STAFFS_KEY] mutableCopy];
-//    
-    self.person.visitedCount = [[NSNumber alloc] initWithUnsignedInt:[self.person.visitedCount intValue] + 1];
-//    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self.person];
-//    //NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:encodedObject];
-//    [staffs setObject:[encodedObject mutableCopy] forKey:self.person.userId];
-//   // [unarchiver finishDecoding];
-//    
-//    [defaults setObject:staffs forKey:STAFFS_KEY];
-//    [defaults synchronize];
+    [self.tableView reloadData];
 }
 
 - (void)initStaffDetailsCustomViewCells
@@ -370,7 +334,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     CGFloat height = 0;
-        
+    
+    
+//    CGSize labelSize = [myLabel.text sizeWithFont:myLabel.font
+//                                constrainedToSize:myLabel.frame.size
+//                                    lineBreakMode:UILineBreakModeWordWrap];
+//    CGFloat labelHeight = labelSize.height;
+    
     // Get the text so we can measure it
     NSDictionary *dict = (NSDictionary *) [self.items objectAtIndex:indexPath.row];
     NSString *text = [dict objectForKey:@"textCell"];

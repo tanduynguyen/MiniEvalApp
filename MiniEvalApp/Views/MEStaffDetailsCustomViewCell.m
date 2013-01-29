@@ -33,9 +33,7 @@
         }
         
         [self.textCell setNumberOfLines:0];
-        [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];       
-
-        [self.imageCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
+        [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];
     }    
 }
 

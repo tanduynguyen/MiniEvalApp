@@ -22,4 +22,16 @@
     
     return hover;
 }
+
++ (void)setCustomShadow:(CALayer *)layer
+{
+    [layer setCornerRadius:2.0f];
+    [layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [layer setBorderWidth:0.1f];
+    [layer setShadowColor:[UIColor grayColor].CGColor];
+    [layer setShadowOpacity:0.6];
+    [layer setShadowRadius:3.0];
+    [layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+}
+
 @end

@@ -10,13 +10,7 @@
 
 #import "UIImageView+AFNetworking.h"
 
-@implementation MEStaffCustomViewCell {    
-@private
-    __strong MEPerson *_person;
-}
-
-@synthesize person = _person;
-
+@implementation MEStaffCustomViewCell
 - (UIFont *)myCustomFont:(CGFloat)fontSize {
     UIFont *myFont = [UIFont fontWithName:@"MyriadPro-Regular" size:fontSize];
     
@@ -49,9 +43,7 @@
 
 - (void)configureWithData:(MEPerson *)person
                   atIndex:(NSIndexPath *)indexPath
-{
-    _person = person;
-    
+{    
     self.nameLabel.text = person.name;
     self.userNameLabel.text = person.userName;
     if (person.image) {
