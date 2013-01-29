@@ -91,6 +91,10 @@
             [rowView addSubview:cell.textCell];
             rowView.alpha = 0;
             
+            CGRect customFrame = rowView.frame;
+            customFrame.origin.x -= customFrame.size.width;
+            [rowView setFrame:customFrame];
+            
             [animationView addSubview:rowView];
         }
         
@@ -110,11 +114,14 @@
     } 
     
     UIView *mySubview = [animationView.subviews objectAtIndex:idx];
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:0.5
                           delay:0
-                        options: UIViewAnimationOptionTransitionFlipFromRight
+                        options: UIViewAnimationOptionTransitionCurlDown
                      animations:^{
-                         mySubview.alpha = 1;
+                         mySubview.alpha = 1;                         
+                         CGRect customFrame = mySubview.frame;
+                         customFrame.origin.x += customFrame.size.width;
+                         [mySubview setFrame:customFrame];
                      }
                      completion:^(BOOL finished){ 
                          [self checkSubviews:animationView atIndex:idx + 1];
@@ -128,9 +135,8 @@
     for (int i = 0; i < animationView.subviews.count; i++) {
         MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         UIView *rowView = [animationView.subviews objectAtIndex:i];
-        if (rowView.subviews.count > 1) {
-            [cell addSubview:[rowView.subviews objectAtIndex:0]];
-            [cell addSubview:[rowView.subviews objectAtIndex:0]];           
+        for (UIView *subView in rowView.subviews) {
+            [cell addSubview:subView];
         }
        }
     
