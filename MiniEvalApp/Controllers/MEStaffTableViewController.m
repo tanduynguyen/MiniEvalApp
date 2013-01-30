@@ -115,7 +115,6 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reload:)];
     
     self.tableView.rowHeight = 72.0f;
-    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorColor = [UIColor clearColor];
     
     [self reload:nil];   

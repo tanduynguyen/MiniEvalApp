@@ -48,8 +48,9 @@
     
     self.fistLoadTableView = YES;    
     [self initStaffDetailsCustomViewCells];    
+    self.tableView.separatorColor = [UIColor clearColor];
     
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];    
+    //[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void) viewWillLayoutSubviews

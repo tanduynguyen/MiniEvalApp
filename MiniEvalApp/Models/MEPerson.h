@@ -36,9 +36,4 @@
 
 + (void)globalTimelineContactsWithBlock:(void (^)(NSMutableArray *results, NSError *error))block;
 
-
-#ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
-@property (nonatomic, strong) NSImage *profileImage;
-#endif
-
 @end

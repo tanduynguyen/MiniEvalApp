@@ -26,7 +26,6 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
     AFImageRequestOperation *_avatarImageRequestOperation;
 }
 
-
 - (void) setTimeStamp:(NSDate *)timeStamp
 {
     if (!_timeStamp) {
@@ -123,42 +122,5 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
     }
     p.highestVisitedCount = YES;
 }
-
-#ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
-
-@synthesize profileImage = _profileImage;
-
-+ (NSOperationQueue *)sharedProfileImageRequestOperationQueue {
-    static NSOperationQueue *_sharedProfileImageRequestOperationQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedProfileImageRequestOperationQueue = [[NSOperationQueue alloc] init];
-        [_sharedProfileImageRequestOperationQueue setMaxConcurrentOperationCount:8];
-    });
-    
-    return _sharedProfileImageRequestOperationQueue;
-}
-
-- (NSImage *)profileImage {
-	if (!_profileImage && !_avatarImageRequestOperation) {
-		_avatarImageRequestOperation = [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:self.avatarImageURL] success:^(NSImage *image) {
-			self.profileImage = image;
-            
-			_avatarImageRequestOperation = nil;
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileImageDidLoadNotification object:self userInfo:nil];
-		}];
-        
-		[_avatarImageRequestOperation setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
-			return [[NSCachedURLResponse alloc] initWithResponse:cachedResponse.response data:cachedResponse.data userInfo:cachedResponse.userInfo storagePolicy:NSURLCacheStorageAllowed];
-		}];
-		
-        [[[self class] sharedProfileImageRequestOperationQueue] addOperation:_avatarImageRequestOperation];
-	}
-	
-	return _profileImage;
-}
-
-#endif
 
 @end
