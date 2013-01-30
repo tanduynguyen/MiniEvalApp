@@ -230,7 +230,9 @@
         
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         
-        MEPerson *person = [self.results objectAtIndex:indexPath.row];
+        MEPerson *person = [self.results objectAtIndex:indexPath.row];      
+        //increase the visited Count
+        person.visitedCount = [[NSNumber alloc] initWithUnsignedInt:[person.visitedCount intValue] + 1];
         
         if ([sender isKindOfClass:[MEStaffCustomViewCell class]]){
             MEStaffCustomViewCell *currentCell = sender;

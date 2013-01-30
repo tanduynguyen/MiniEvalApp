@@ -9,6 +9,13 @@
 #import "MEStaffDetailsCustomViewCell.h"
 #import "MECustomAnimation.h"
 
+@interface MEStaffDetailsCustomViewCell()
+
+@property CGRect textFrame;
+@property CGRect imageFrame;
+
+@end
+
 @implementation MEStaffDetailsCustomViewCell
 
 - (void)setContentData:(NSDictionary *)dictionary
@@ -34,7 +41,20 @@
         
         [self.textCell setNumberOfLines:0];
         [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];
+        
     }    
+}
+
+- (void) didMoveToWindow
+{    
+    _textFrame = self.textCell.frame;
+    _imageFrame = self.imageCell.frame;
+}
+
+- (void)resetDefaultSize
+{
+    [self.textCell setFrame:_textFrame];
+    [self.imageCell setFrame:_imageFrame];
 }
 
 @end

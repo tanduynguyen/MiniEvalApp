@@ -116,6 +116,7 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
 {
     MEPerson *p = [[MEPerson alloc] init];
     for (MEPerson *person in persons) {
+        person.highestVisitedCount = NO;
         if ([p.visitedCount unsignedIntValue] < [person.visitedCount unsignedIntValue]) {
             p = person;
         }

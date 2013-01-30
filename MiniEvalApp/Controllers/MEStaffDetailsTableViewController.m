@@ -38,10 +38,7 @@
     [super viewDidLoad];
 
     self.title = self.person.name;
-    
-    //increase the visited Count
-    self.person.visitedCount = [[NSNumber alloc] initWithUnsignedInt:[self.person.visitedCount intValue] + 1];
-    
+        
     [self customizeBackButton];
     
     [self customAddContactButton];
@@ -57,78 +54,46 @@
 {
     if (self.fistLoadTableView == YES) {        
         
-        UIView *animationView = [[UIView alloc] initWithFrame:self.tableView.frame];
-        [animationView setBackgroundColor:[UIColor whiteColor]];
-        
-        [self.tableView addSubview:animationView];
-        
         for (int i = 0; i < self.items.count; i++) {
-            MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];            
+            MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                        
+            CGRect textFrame = cell.textCell.frame;
+            textFrame.origin.x -= 2 * cell.frame.size.width;
+            [cell.textCell setFrame:textFrame];
             
-            UIView *rowView = [[UIView alloc] initWithFrame:cell.frame];
-            rowView.autoresizingMask = cell.autoresizingMask;
-            
-            [MECustomAnimation setCustomShadow:rowView.layer];
-                                    
-            [rowView addSubview:cell.imageCell];
-            [rowView addSubview:cell.textCell];
-            rowView.alpha = 0;
-            
-            CGRect customFrame = rowView.frame;
-            customFrame.origin.x -= customFrame.size.width;
-            [rowView setFrame:customFrame];
-            
-            
-            [animationView addSubview:rowView];
-        }        
+            CGRect imageFrame = cell.imageCell.frame;
+            imageFrame.origin.x -= 2 * cell.frame.size.width;
+            [cell.imageCell setFrame:imageFrame];
+        }
         
-        [self checkSubviews:animationView atIndex:0];
+        [self checkTableViewCellAtIndex:0];
     }
 }
 
-- (void)checkSubviews:(UIView *)animationView
-              atIndex:(int)idx
+- (void)checkTableViewCellAtIndex:(int)idx
 {
-    if (idx >= [animationView.subviews count]) {
-       
-        [self removeAnimationView:animationView];        
+    if (idx >= self.items.count) {       
+        self.fistLoadTableView = NO;
+        [self.tableView reloadData];
         return;
-    } 
+    }
     
-    UIView *mySubview = [animationView.subviews objectAtIndex:idx];
+    MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+    
     [UIView animateWithDuration:0.2
                           delay:0
                         options: UIViewAnimationOptionTransitionCurlDown
                      animations:^{
-                         mySubview.alpha = 1;                         
-                         CGRect customFrame = mySubview.frame;
-                         customFrame.origin.x += customFrame.size.width;
-                         [mySubview setFrame:customFrame];
+                         [cell resetDefaultSize];                         
                          
-                         [mySubview.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
+                         [cell.textCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
+                         [cell.imageCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
                      }
                      completion:^(BOOL finished){ 
-                         [self checkSubviews:animationView atIndex:idx + 1];
+                         [self checkTableViewCellAtIndex:idx + 1];
                      }];
 }
 
-- (void)removeAnimationView:(UIView *)animationView
-{
-    self.fistLoadTableView = NO;
-    
-    for (int i = 0; i < animationView.subviews.count; i++) {
-        MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        UIView *rowView = [animationView.subviews objectAtIndex:i];
-        for (UIView *subView in rowView.subviews) {
-            [cell addSubview:subView];
-        }
-       }
-    
-    [animationView removeFromSuperview];
-    [animationView setFrame:CGRectZero];
-    
-    [self.tableView reloadData];
-}
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {

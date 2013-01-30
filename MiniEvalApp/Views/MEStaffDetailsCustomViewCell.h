@@ -16,4 +16,7 @@
 
 - (void)setContentData :(NSDictionary *)dictionary;
 
+- (void)resetDefaultSize;
+
+
 @end
