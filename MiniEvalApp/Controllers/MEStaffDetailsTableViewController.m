@@ -58,7 +58,7 @@
     if (self.fistLoadTableView == YES) {        
         
         UIView *animationView = [[UIView alloc] initWithFrame:self.tableView.frame];
-        [animationView setBackgroundColor:[UIColor whiteColor]];        
+        [animationView setBackgroundColor:[UIColor whiteColor]];
         
         [self.tableView addSubview:animationView];
         
@@ -66,6 +66,7 @@
             MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];            
             
             UIView *rowView = [[UIView alloc] initWithFrame:cell.frame];
+            rowView.autoresizingMask = cell.autoresizingMask;
             
             [MECustomAnimation setCustomShadow:rowView.layer];
                                     
@@ -95,7 +96,7 @@
     } 
     
     UIView *mySubview = [animationView.subviews objectAtIndex:idx];
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:0.2
                           delay:0
                         options: UIViewAnimationOptionTransitionCurlDown
                      animations:^{
@@ -104,7 +105,7 @@
                          customFrame.origin.x += customFrame.size.width;
                          [mySubview setFrame:customFrame];
                          
-                         [mySubview.layer  addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
+                         [mySubview.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
                      }
                      completion:^(BOOL finished){ 
                          [self checkSubviews:animationView atIndex:idx + 1];
@@ -235,7 +236,7 @@
             ABUnknownPersonViewController *unknownPersonViewController = [[ABUnknownPersonViewController alloc] init];
             unknownPersonViewController.displayedPerson = (ABRecordRef)[self buildContactDetails];
             unknownPersonViewController.allowsAddingToAddressBook = YES;
-            [self.navigationController pushViewController:unknownPersonViewController animated:YES];
+            [self.navigationController pushViewController:unknownPersonViewController animated:YES];            
         }
     }
 }
@@ -260,17 +261,21 @@
     CFRelease(mobile);
     
     
-//    ABRecordSetValue(person, kABPersonOrganizationProperty, @"2359 Media", &error);
+    ABRecordSetValue(person, kABPersonOrganizationProperty, @"2359Media", &error);
     ABRecordSetValue(person, kABPersonNoteProperty, CFBridgingRetain(self.person.role), &error);
     
     NSData *dataRef = UIImagePNGRepresentation(self.person.avatar);    
     ABPersonSetImageData(person, (CFDataRef)CFBridgingRetain(dataRef), nil);
     
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(nil, nil);
+    ABAddressBookAddRecord(addressBook, person, &error);
+    ABAddressBookSave(addressBook, &error);
+    
     if (error != NULL) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Can not add %@ to your Address Book?", self.person.name] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         NSLog(@"Error: %@", error);
-    }
+    }    
     
     return person;
 }

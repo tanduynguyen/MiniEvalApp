@@ -10,18 +10,6 @@
 
 @implementation MECustomTabBarView
 
-- (void)awakeFromNib
-{    
-   // self.backgroundColor = [UIColor clearColor];
-}
-
-- (id)initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
-        // Initialization code
-    }
-    return self;
-}
-
 //Let the delegate know that a tab has been touched
 - (IBAction)touchContactsButton:(id)sender {
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(tabWasSelected:)]) {
@@ -40,7 +28,5 @@
         [self.delegate tabWasSelected:self.infoButton.tag];
     }
 }
-
-
 
 @end

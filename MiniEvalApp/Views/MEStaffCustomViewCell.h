@@ -11,7 +11,6 @@
 
 @interface MEStaffCustomViewCell : UITableViewCell
 
-
 @property (strong, nonatomic) IBOutlet UIImageView *avatar;
 
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;

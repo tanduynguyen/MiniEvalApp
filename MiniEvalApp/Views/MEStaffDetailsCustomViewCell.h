@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @interface MEStaffDetailsCustomViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageCell;
