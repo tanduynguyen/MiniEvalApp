@@ -13,13 +13,7 @@
 @implementation MEStaffCustomViewCell
 - (UIFont *)myCustomFont:(CGFloat)fontSize {
     UIFont *myFont = [UIFont fontWithName:@"MyriadPro-Regular" size:fontSize];
-    
-//    if (!myFont) {
-//        NSString *fontPath = [[NSBundle mainBundle] pathForResource:@"MyriadPro-Regular" ofType:@"otf"];
-//        CGDataProviderRef fontDataProvider = CGDataProviderCreateWithFilename([fontPath UTF8String]);
-//        CGFontCreateWithDataProvider(fontDataProvider);
-//    }
-    
+        
     if (!myFont) {
         myFont = [UIFont fontWithName:@"Arial" size:fontSize];
     }

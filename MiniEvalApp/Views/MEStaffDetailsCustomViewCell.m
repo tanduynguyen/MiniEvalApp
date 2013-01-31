@@ -48,13 +48,11 @@
 - (void) didMoveToWindow
 {    
     _textFrame = self.textCell.frame;
-    _imageFrame = self.imageCell.frame;
 }
 
 - (void)resetDefaultSize
 {
     [self.textCell setFrame:_textFrame];
-    [self.imageCell setFrame:_imageFrame];
 }
 
 @end

@@ -142,17 +142,18 @@
     // To have an indicator which people has the highest visit count (eg. put a star next to person’s name)    
     
     NSData *personsData = [[NSUserDefaults standardUserDefaults] objectForKey:STAFFS_KEY];
+    if (personsData) {
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    results = [NSKeyedUnarchiver unarchiveObjectWithData:personsData];    
-    
-    
-    for (int i = 0; i < self.results.count; i++) {
-        MEPerson *person = [self.results objectAtIndex:i];
-        NSPredicate *pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"SELF.userId = '%@'", person.userId]];
-        NSArray *filtered = [results filteredArrayUsingPredicate:pred];
-        if (filtered.count > 0) {
-            MEPerson *tmp = [filtered objectAtIndex:0];
-            person.visitedCount = tmp.visitedCount;
+        results = [NSKeyedUnarchiver unarchiveObjectWithData:personsData];        
+        
+        for (int i = 0; i < self.results.count; i++) {
+            MEPerson *person = [self.results objectAtIndex:i];
+            NSPredicate *pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"SELF.userId = '%@'", person.userId]];
+            NSArray *filtered = [results filteredArrayUsingPredicate:pred];
+            if (filtered.count > 0) {
+                MEPerson *tmp = [filtered objectAtIndex:0];
+                person.visitedCount = tmp.visitedCount;
+            }
         }
     }
     

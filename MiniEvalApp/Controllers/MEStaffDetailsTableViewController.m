@@ -58,12 +58,9 @@
             MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
                         
             CGRect textFrame = cell.textCell.frame;
-            textFrame.origin.x -= 2 * cell.frame.size.width;
+            textFrame.origin.x += 2 * cell.frame.size.width;
             [cell.textCell setFrame:textFrame];
-            
-            CGRect imageFrame = cell.imageCell.frame;
-            imageFrame.origin.x -= 2 * cell.frame.size.width;
-            [cell.imageCell setFrame:imageFrame];
+            cell.imageCell.alpha = 0;
         }
         
         [self checkTableViewCellAtIndex:0];
@@ -74,17 +71,27 @@
 {
     if (idx >= self.items.count) {       
         self.fistLoadTableView = NO;
-        [self.tableView reloadData];
+        self.tableView.alpha = 0.3;
+        [UIView animateWithDuration:0.4
+                              delay:0
+                            options: UIViewAnimationOptionTransitionFlipFromLeft
+                         animations:^{
+                             self.tableView.alpha = 1;
+                             [self.tableView reloadData];
+                         }
+                         completion:^(BOOL finished){
+                         }];
         return;
     }
     
     MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
     
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.4
                           delay:0
                         options: UIViewAnimationOptionTransitionCurlDown
                      animations:^{
-                         [cell resetDefaultSize];                         
+                         [cell resetDefaultSize];
+                         cell.imageCell.alpha = 1;
                          
                          [cell.textCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
                          [cell.imageCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
