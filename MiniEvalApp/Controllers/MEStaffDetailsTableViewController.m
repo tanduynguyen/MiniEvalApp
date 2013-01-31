@@ -9,7 +9,6 @@
 #import "MEStaffDetailsTableViewController.h"
 #import "MEStaffDetailsCustomViewCell.h"
 #import "MECustomAnimation.h"
-#import "ADLivelyTableView.h"
 
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
@@ -60,7 +59,7 @@
             CGRect textFrame = cell.textCell.frame;
             textFrame.origin.x += 2 * cell.frame.size.width;
             [cell.textCell setFrame:textFrame];
-            cell.imageCell.alpha = 0;
+            cell.imageCell.alpha = 0.3;
         }
         
         [self checkTableViewCellAtIndex:0];
@@ -69,28 +68,23 @@
 
 - (void)checkTableViewCellAtIndex:(int)idx
 {
-    if (idx >= self.items.count) {       
+    if (idx == self.items.count && self.fistLoadTableView == YES) {
         self.fistLoadTableView = NO;
-        self.tableView.alpha = 0.3;
-        [UIView animateWithDuration:0.4
-                              delay:0
-                            options: UIViewAnimationOptionTransitionFlipFromLeft
-                         animations:^{
-                             self.tableView.alpha = 1;
-                             [self.tableView reloadData];
-                         }
-                         completion:^(BOOL finished){
-                         }];
+
+        [self.tableView beginUpdates];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];        
+        
         return;
     }
     
     MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
     
-    [UIView animateWithDuration:0.4
+    [UIView animateWithDuration:0.3
                           delay:0
                         options: UIViewAnimationOptionTransitionCurlDown
                      animations:^{
-                         [cell resetDefaultSize];
+                         [cell resetDefaultFrame];
                          cell.imageCell.alpha = 1;
                          
                          [cell.textCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
@@ -103,8 +97,10 @@
 
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.tableView reloadData];
+{  
+    [self.tableView beginUpdates];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
 }
 
 - (void)initStaffDetailsCustomViewCells
@@ -204,12 +200,16 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if ([alertView tag] == 12) {
-        if (buttonIndex == 1) {     // and they clicked OK.
-            ABUnknownPersonViewController *unknownPersonViewController = [[ABUnknownPersonViewController alloc] init];
-            unknownPersonViewController.displayedPerson = (ABRecordRef)[self buildContactDetails];
-            unknownPersonViewController.allowsAddingToAddressBook = YES;
-            [self.navigationController pushViewController:unknownPersonViewController animated:YES];            
-        }
+        // If Cancel button is pressed
+        NSString *buttonTitle = [[alertView buttonTitleAtIndex:buttonIndex] lowercaseString];
+        if ([buttonTitle isEqualToString:@"cancel"])
+            return;
+        
+        // and they clicked OK.
+        ABUnknownPersonViewController *unknownPersonViewController = [[ABUnknownPersonViewController alloc] init];
+        unknownPersonViewController.displayedPerson = (ABRecordRef)[self buildContactDetails];
+        unknownPersonViewController.allowsAddingToAddressBook = YES;
+        [self.navigationController pushViewController:unknownPersonViewController animated:YES];
     }
 }
 
@@ -296,11 +296,11 @@
     
     // Configure the cell...
     NSDictionary *dict = [self.items objectAtIndex:indexPath.row];
-    [cell setContentData:dict];
+    [cell setContentData:dict atIndex:indexPath];
     if (cell.tag == TAG_AVATAR_CELL) {
         [cell.imageCell setImage:self.person.avatar];
     }
-    
+        
     return cell;
 }
 

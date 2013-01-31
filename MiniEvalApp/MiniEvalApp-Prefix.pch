@@ -19,9 +19,9 @@
 
     #define STAFFS_KEY @"MEStaffDetailsTableViewController.2359Staffs"
 
-    #define TAG_AVATAR_CELL 1
-    #define TAG_EMAIL_CELL 2
-    #define TAG_SMS_CELL 3
+    #define TAG_AVATAR_CELL 2
+    #define TAG_EMAIL_CELL 3
+    #define TAG_SMS_CELL 4
 
     #import "MEConstants.h"
 

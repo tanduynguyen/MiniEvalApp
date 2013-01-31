@@ -19,38 +19,39 @@
 @implementation MEStaffDetailsCustomViewCell
 
 - (void)setContentData:(NSDictionary *)dictionary
-{    
-    if (self) {
-        self.alpha = 0;
+               atIndex:(NSIndexPath *)indexPath
+{
+    if (self) {        
+        [self setTag:[(NSNumber *)[dictionary objectForKey:@"tag"] intValue]];
+        
+        if ([dictionary objectForKey:@"sizeAmount"]) {
+            CGRect customframe;
+            customframe.origin.x = customframe.origin.y = [(NSNumber *)[dictionary objectForKey:@"topleft"] intValue];            
+            customframe.size.height = customframe.size.width = [(NSNumber *)[dictionary objectForKey:@"sizeAmount"] intValue];
+            [self.imageCell setFrame:customframe];
+        } else {            
+            [self.imageCell setFrame:_imageFrame];
+        }
+
+        
         if ([dictionary objectForKey:@"imageCell"]) {
             [self.imageCell setImage:[UIImage imageNamed:[dictionary objectForKey:@"imageCell"]]];
         }
         
-        self.textCell.text = [dictionary objectForKey:@"textCell"];
-        
-        if ([dictionary objectForKey:@"sizeAmount"]) {
-            CGRect customframe = self.imageCell.frame;
-            customframe.origin.x = customframe.origin.y = [(NSNumber *)[dictionary objectForKey:@"topleft"] intValue];            
-            customframe.size.height = customframe.size.width = [(NSNumber *)[dictionary objectForKey:@"sizeAmount"] intValue];            
-            [self.imageCell setFrame:customframe];
-        }
-       
-        if ([dictionary objectForKey:@"tag"]) {
-            [self setTag:[(NSNumber *)[dictionary objectForKey:@"tag"] intValue]];
-        }
-        
+        self.textCell.text = [dictionary objectForKey:@"textCell"];     
         [self.textCell setNumberOfLines:0];
         [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];
         
     }    
 }
 
-- (void) didMoveToWindow
+- (void)didMoveToSuperview
 {    
     _textFrame = self.textCell.frame;
+    _imageFrame = self.imageCell.frame;
 }
 
-- (void)resetDefaultSize
+- (void)resetDefaultFrame
 {
     [self.textCell setFrame:_textFrame];
 }

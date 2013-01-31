@@ -62,27 +62,6 @@
         });
     }];
     
-    // setup infinite scrolling
-    
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        
-        int64_t delayInSeconds = 0.2;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            if (weakSelf.results.count > 0) {
-                MEPerson *p = [[MEPerson alloc] init];
-                
-                NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-                [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-                p.name = [DateFormatter stringFromDate:[NSDate date]];
-                
-                [weakSelf.results addObject:p];
-                
-                [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.results.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-            }
-            [weakSelf.tableView.infiniteScrollingView stopAnimating];
-        });
-    }];
     
     // trigger the refresh manually at the end of viewDidLoad
     [self.tableView triggerPullToRefresh];

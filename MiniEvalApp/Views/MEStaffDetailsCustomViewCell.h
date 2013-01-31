@@ -14,9 +14,10 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *textCell;
 
-- (void)setContentData :(NSDictionary *)dictionary;
+- (void)setContentData :(NSDictionary *)dictionary
+                atIndex:(NSIndexPath *)indexPath;
 
-- (void)resetDefaultSize;
+- (void)resetDefaultFrame;
 
 
 @end
