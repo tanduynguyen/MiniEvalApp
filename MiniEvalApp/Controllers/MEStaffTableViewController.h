@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MEStaffTableViewController : UITableViewController <UITabBarControllerDelegate>
+@interface MEStaffTableViewController : UITableViewController
 
 @end

@@ -14,7 +14,7 @@
 #import "SVPullToRefresh.h"
 #import "ADLivelyTableView.h"
 
-@interface MEStaffTableViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MEStaffTableViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *results;
 @property (strong, nonatomic) NSMutableArray *filteredArray;
@@ -25,8 +25,6 @@
 
 @implementation MEStaffTableViewController{
 @private
-    NSMutableArray *persons;
-    
     __strong UIActivityIndicatorView *_activityIndicatorView;
 }
 

@@ -12,13 +12,13 @@
 @implementation ZHCustomSegue
 
 
--(void)perform {
+- (void)perform {
     
     UIViewController *sourceViewController = (UIViewController*)[self sourceViewController];
     UIViewController *destinationController = (UIViewController*)[self destinationViewController];                    
     
     CATransition* transition = [CATransition animation];
-    transition.duration = .3;
+    transition.duration = 0.3;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
     NSArray *arrayCATransition = [NSArray arrayWithObjects: kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, kCATransitionFade, nil];    

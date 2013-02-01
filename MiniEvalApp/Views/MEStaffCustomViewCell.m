@@ -11,27 +11,15 @@
 #import "UIImageView+AFNetworking.h"
 
 @implementation MEStaffCustomViewCell
-- (UIFont *)myCustomFont:(CGFloat)fontSize {
+
+- (UIFont *)myCustomFont:(CGFloat)fontSize
+{
     UIFont *myFont = [UIFont fontWithName:@"MyriadPro-Regular" size:fontSize];
         
     if (!myFont) {
         myFont = [UIFont fontWithName:@"Arial" size:fontSize];
     }
     return myFont;
-}
-
-- (void)awakeFromNib
-{    
-    [self.userNameLabel setFont:[self myCustomFont:11]];
-}
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
 }
 
 
@@ -59,7 +47,8 @@
     self.starImage.hidden = !person.highestVisitedCount;
     
     [self.nameLabel setNumberOfLines:0];
-    [self.userNameLabel setNumberOfLines:0];
+    [self.userNameLabel setNumberOfLines:0];    
+    [self.userNameLabel setFont:[self myCustomFont:11]];
     
     UIView *backView = [[UIView alloc] initWithFrame:self.frame];
     if (indexPath.row % 2) {
@@ -67,7 +56,7 @@
     } else {
         backView.backgroundColor = [UIColor whiteColor];
     }
-    self.backgroundView = backView;
+    self.backgroundView = backView;    
     
     [self setNeedsLayout];
 }

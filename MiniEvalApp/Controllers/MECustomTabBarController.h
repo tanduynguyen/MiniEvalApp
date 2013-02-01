@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MECustomTabBarView.h"
 
-@interface MECustomTabBarController : UITabBarController <MECustomTabBarDelegate>
+@interface MECustomTabBarController : UITabBarController
 
 @property (nonatomic, retain) IBOutlet MECustomTabBarView *customTabBarView;
-
--(void) hideExistingTabBar;
 
 @end

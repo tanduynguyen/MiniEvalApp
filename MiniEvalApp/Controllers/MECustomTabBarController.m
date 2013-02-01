@@ -8,7 +8,7 @@
 
 #import "MECustomTabBarController.h"
 
-@interface MECustomTabBarController ()
+@interface MECustomTabBarController () <MECustomTabBarDelegate>
 
 @end
 
@@ -19,7 +19,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self hideExistingTabBar];
+    self.tabBar.hidden = YES;
     
     NSArray *nibObjects = [[NSBundle mainBundle] loadNibNamed:@"MECustomTabBar" owner:self options:nil];
     self.customTabBarView = [nibObjects objectAtIndex:0];
@@ -34,19 +34,6 @@
     self.customTabBarView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     
     [self.view addSubview:self.customTabBarView];
-}
-
-- (void)hideExistingTabBar
-{
-	for(UIView *view in self.view.subviews)
-	{
-		if([view isKindOfClass:[UITabBar class]])
-		{
-            self.customTabBarView.frame = view.frame;
-			view.hidden = YES;
-			break;
-		}
-	}
 }
 
 

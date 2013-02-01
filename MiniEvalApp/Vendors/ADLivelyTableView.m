@@ -80,7 +80,6 @@ ADLivelyTransform ADLivelyTransformWave = ^(CALayer * layer, float speed){
 #pragma mark - NSObject
 - (void)dealloc {
      Block_release(CFBridgingRetain(_transformBlock));
-//    [super dealloc];
 }
 
 #pragma mark - UIView

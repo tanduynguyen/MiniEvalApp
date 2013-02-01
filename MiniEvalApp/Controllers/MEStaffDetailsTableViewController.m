@@ -14,8 +14,15 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MFMessageComposeViewController.h>
 
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
-@interface MEStaffDetailsTableViewController () <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
+@interface MEStaffDetailsTableViewController ()
+<
+MFMailComposeViewControllerDelegate,
+MFMessageComposeViewControllerDelegate,
+ABNewPersonViewControllerDelegate
+>
 
 @property (strong, nonatomic) NSMutableArray *items;
 @property (nonatomic) BOOL fistLoadTableView;
@@ -116,7 +123,7 @@
                                  [NSNumber numberWithUnsignedInt:TAG_AVATAR_CELL], @"tag",
                                  textCell, @"textCell",
                                  [NSNumber numberWithUnsignedInt:64], @"sizeAmount",
-                                 [NSNumber numberWithUnsignedInt:5], @"topleft",
+                                 [NSNumber numberWithUnsignedInt:8], @"topleft",
                                  nil];
     [self.items addObject:dict];
     
