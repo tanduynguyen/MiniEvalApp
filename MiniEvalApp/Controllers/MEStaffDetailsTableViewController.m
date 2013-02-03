@@ -117,7 +117,7 @@ ABNewPersonViewControllerDelegate
     NSString *imageCell;
     NSString *textCell;
     
-    imageCell = @"icon_profile.png";    
+    imageCell = @"icon_profile";    
     textCell = self.person.role;
     NSMutableDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithUnsignedInt:TAG_AVATAR_CELL], @"tag",
@@ -127,30 +127,30 @@ ABNewPersonViewControllerDelegate
                                  nil];
     [self.items addObject:dict];
     
-    imageCell = @"icon_email.png";
+    imageCell = @"icon_email";
     textCell = self.person.userName;
     [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell", [NSNumber numberWithUnsignedInt:TAG_EMAIL_CELL], @"tag", nil]];
     
     if (self.person.contact) {
-        imageCell = @"icon_sms.png";
+        imageCell = @"icon_sms";
         textCell = self.person.contact;        
         [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell", [NSNumber numberWithUnsignedInt:TAG_SMS_CELL], @"tag", nil]];
     }
     
     if (self.person.like) {
-        imageCell = @"icon_like.png";
+        imageCell = @"icon_like";
         textCell = self.person.like;
         [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
     }
     
     if (self.person.dislike) {
-        imageCell = @"icon_dislike.png";
+        imageCell = @"icon_dislike";
         textCell = self.person.dislike;
         [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
     }
     
     if (self.person.visitedCount) {
-        imageCell = @"icon_star.png";
+        imageCell = @"icon_star";
         textCell = [NSString stringWithFormat:@"%@ visitors", self.person.visitedCount];
         [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
     }
@@ -160,7 +160,7 @@ ABNewPersonViewControllerDelegate
 {
     //if (self.navigationItem.backBarButtonItem) {
     // Set the custom back button
-    UIImage *buttonImage = [UIImage imageNamed:@"icon_back.png"];
+    UIImage *buttonImage = [UIImage imageNamed:@"icon_back"];
     
     //create the button and assign the image
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -181,7 +181,7 @@ ABNewPersonViewControllerDelegate
 
 - (void)customAddContactButton
 {
-    UIImage *addContactImage = [UIImage imageNamed:@"icon_add_contact.png"];
+    UIImage *addContactImage = [UIImage imageNamed:@"icon_add_contact"];
     UIButton *addContactButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addContactButton setBackgroundImage:addContactImage forState:UIControlStateNormal];
     [addContactButton setFrame:CGRectMake(0, 0, addContactImage.size.width, addContactImage.size.height)];
