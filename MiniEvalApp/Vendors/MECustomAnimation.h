@@ -12,6 +12,8 @@
 @interface MECustomAnimation : NSObject
 
 + (CABasicAnimation *)bouncedAnimation;
-+ (void)setCustomShadow:(CALayer *)layer;
++ (void)addCustomShadow:(CALayer *)layer;
++ (void)removeCustomShadow:(CALayer *)layer;
++ (NSTimeInterval) animationDurationOfLayer:(CALayer *)layer;
 
 @end

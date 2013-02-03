@@ -23,7 +23,7 @@
     return hover;
 }
 
-+ (void)setCustomShadow:(CALayer *)layer
++ (void)addCustomShadow:(CALayer *)layer
 {
     [layer setCornerRadius:2.0f];
     [layer setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -32,6 +32,42 @@
     [layer setShadowOpacity:0.6];
     [layer setShadowRadius:3.0];
     [layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+}
+
++ (void)removeCustomShadow:(CALayer *)layer
+{
+    [layer setCornerRadius:0];
+    [layer setBorderColor:nil];
+    [layer setBorderWidth:0];
+    [layer setShadowColor:nil];
+    [layer setShadowOpacity:0];
+    [layer setShadowRadius:0];
+    [layer setShadowOffset:CGSizeZero];
+}
+
+typedef NSTimeInterval (^MyLayerTransform)(CALayer * layer, float speed);
+
+extern MyLayerTransform MyLayerTransformHelix;
+
+MyLayerTransform MyLayerTransformHelix = ^(CALayer * layer, float speed){
+    CATransform3D transform = CATransform3DIdentity;
+    transform = CATransform3DTranslate(transform, 0.0f, speed * layer.bounds.size.height/2.0f, 0.0f);
+    transform = CATransform3DRotate(transform, M_PI, 0.0f, 1.0f, 0.0f);
+    layer.transform = CATransform3DTranslate(transform, 0.0f, -speed * layer.bounds.size.height/2.0f, 0.0f);
+    layer.opacity = 1.0f - 0.2*fabs(speed);
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.2];
+    
+    layer.transform = CATransform3DIdentity;
+    layer.opacity = 1.0f;
+    [UIView commitAnimations];
+    
+    return 0.3;
+};
+
++ (NSTimeInterval) animationDurationOfLayer:(CALayer *)layer {
+    return MyLayerTransformHelix(layer, 0.8);
 }
 
 @end

@@ -51,31 +51,41 @@ ABNewPersonViewControllerDelegate
     
     self.fistLoadTableView = YES;    
     [self initStaffDetailsCustomViewCells];    
-    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor clearColor];    
     
-    //[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    if (self.person.image) {
+        UIImageView *largeAvatar = [[UIImageView alloc] initWithImage:self.person.avatar];
+        [largeAvatar setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        largeAvatar.alpha = 1.0;
+        [self.tableView setBackgroundView:largeAvatar];
+    }
 }
 
 - (void) viewWillLayoutSubviews
 {
     if (self.fistLoadTableView == YES) {        
-        
         for (int i = 0; i < self.items.count; i++) {
             MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-                        
+            
             CGRect textFrame = cell.textCell.frame;
             textFrame.origin.x += 2 * cell.frame.size.width;
             [cell.textCell setFrame:textFrame];
-            cell.imageCell.alpha = 0.3;
-        }
+            cell.textCell.alpha = 0.5;
+            cell.imageCell.alpha = 0.1;
+            
+            [MECustomAnimation addCustomShadow:cell.textCell.layer];
+            [MECustomAnimation addCustomShadow:cell.imageCell.layer];
+        }        
         
+        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         [self checkTableViewCellAtIndex:0];
     }
+    
 }
 
 - (void)checkTableViewCellAtIndex:(int)idx
 {
-    if (idx == self.items.count && self.fistLoadTableView == YES) {
+    if (idx >= self.items.count && self.fistLoadTableView == YES) {
         self.fistLoadTableView = NO;
 
         [self.tableView beginUpdates];
@@ -87,27 +97,29 @@ ABNewPersonViewControllerDelegate
     
     MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
     
-    [UIView animateWithDuration:0.3
-                          delay:0
+    [UIView beginAnimations:nil context:NULL];
+    [UIView animateWithDuration:0.5
+                          delay:0.2
                         options: UIViewAnimationOptionTransitionCurlDown
                      animations:^{
                          [cell resetDefaultFrame];
                          cell.imageCell.alpha = 1;
+                         cell.textCell.alpha = 1;
                          
                          [cell.textCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
                          [cell.imageCell.layer addAnimation:[MECustomAnimation bouncedAnimation] forKey:@"myHoverAnimation"];
+                         
+                         [MECustomAnimation removeCustomShadow:cell.textCell.layer];
+                         [MECustomAnimation removeCustomShadow:cell.imageCell.layer];
+                         
+                         if (self.tableView.backgroundView.alpha > 0.2) {
+                             self.tableView.backgroundView.alpha -= 0.1;
+                         }
                      }
                      completion:^(BOOL finished){ 
                          [self checkTableViewCellAtIndex:idx + 1];
                      }];
-}
-
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{  
-    [self.tableView beginUpdates];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+    [UIView commitAnimations];
 }
 
 - (void)initStaffDetailsCustomViewCells
@@ -122,8 +134,7 @@ ABNewPersonViewControllerDelegate
     NSMutableDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithUnsignedInt:TAG_AVATAR_CELL], @"tag",
                                  textCell, @"textCell",
-                                 [NSNumber numberWithUnsignedInt:64], @"sizeAmount",
-                                 [NSNumber numberWithUnsignedInt:8], @"topleft",
+                                 [NSNumber numberWithUnsignedInt:64], @"minHeight",
                                  nil];
     [self.items addObject:dict];
     
@@ -293,8 +304,8 @@ ABNewPersonViewControllerDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"StaffDetails";
-    MEStaffDetailsCustomViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    NSString *CellIdentifier = (indexPath.row == 0 ? @"InfoDetails" : @"StaffDetails");
+    MEStaffDetailsCustomViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
         cell = [[MEStaffDetailsCustomViewCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -307,8 +318,15 @@ ABNewPersonViewControllerDelegate
     if (cell.tag == TAG_AVATAR_CELL) {
         [cell.imageCell setImage:self.person.avatar];
     }
+    
         
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    //    dispatch_async(dispatch_get_main_queue(), ^{S)
+    //        [MECustomAnimation animationDurationOfLayer:cell.layer];
+  //      } }
 }
 
 #define FONT_SIZE 11.0f
@@ -318,8 +336,7 @@ ABNewPersonViewControllerDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    CGFloat height = 0;
-    
+    CGFloat height = 0;    
     
 //    CGSize labelSize = [myLabel.text sizeWithFont:myLabel.font
 //                                constrainedToSize:myLabel.frame.size
@@ -329,8 +346,8 @@ ABNewPersonViewControllerDelegate
     // Get the text so we can measure it
     NSDictionary *dict = (NSDictionary *) [self.items objectAtIndex:indexPath.row];
     NSString *text = [dict objectForKey:@"textCell"];
-    if ([dict objectForKey:@"sizeAmount"]) {
-        height = [(NSNumber *)[dict objectForKey:@"sizeAmount"] intValue];
+    if ([dict objectForKey:@"minHeight"]) {
+      height = [(NSNumber *)[dict objectForKey:@"minHeight"] intValue];
     }
         
     //UILabel *content = (UILabel *)[[(UITableViewCell *)[(UITableView *)self cellForRowAtIndexPath:indexPath] contentView] viewWithTag:1];
@@ -353,6 +370,14 @@ ABNewPersonViewControllerDelegate
     
     // return the height, with a bit of extra padding in
     return height + (CELL_CONTENT_MARGIN * 2);
+}
+
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.tableView beginUpdates];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
 }
 
 #pragma mark - Table view delegate

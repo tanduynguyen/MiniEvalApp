@@ -38,7 +38,7 @@
     
     [[UIBarButtonItem appearance] setTintColor:DarkOrganColor];
     
-
+    [[UISearchBar appearance] setTintColor:DarkOrganColor];
     
     return YES;
 }
