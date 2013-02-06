@@ -39,24 +39,25 @@
 
 -(void)tabWasSelected:(NSInteger)index
 {
+    if (self.selectedIndex == index)
+        return;
+    
     UIViewController *viewController = [self.viewControllers objectAtIndex:index];
     
     UIView * fromView = self.selectedViewController.view;
     UIView * toView = viewController.view;
     
-    if (fromView != toView) {    
-        NSUInteger fromIndex = [self.viewControllers indexOfObject:self.selectedViewController];
-        
-        [UIView transitionFromView:fromView
-                            toView:toView
-                          duration:0.5
-                           options: index > fromIndex ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight
-                        completion:^(BOOL finished) {
-                            if (finished) {
-                                self.selectedIndex = index;
-                            }
-                        }];
-    }
+    NSUInteger fromIndex = [self.viewControllers indexOfObject:self.selectedViewController];
+    
+    [UIView transitionFromView:fromView
+                        toView:toView
+                      duration:0.5
+                       options: index > fromIndex ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            self.selectedIndex = index;
+                        }
+                    }];
 }
 
 @end

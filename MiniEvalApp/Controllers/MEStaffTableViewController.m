@@ -49,7 +49,7 @@ UITabBarControllerDelegate
             [MEPerson globalTimelineContactsWithBlock:^(NSMutableArray *results, NSError *error) {
                 if (error) {
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-                } else {                
+                } else {
                     weakSelf.results = results;
                     weakSelf.filteredArray = [NSMutableArray arrayWithCapacity:[weakSelf.results count]];
                     
@@ -59,7 +59,7 @@ UITabBarControllerDelegate
                     [weakSelf.tableView.pullToRefreshView stopAnimating];
                 }
                 
-               [spinner stopAnimating];
+                [spinner stopAnimating];
                 weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
             }];
             
@@ -110,20 +110,20 @@ UITabBarControllerDelegate
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchStuff:)];
     
     self.navigationItem.rightBarButtonItems = [[NSArray alloc] initWithObjects:refeshButton, searchButton, nil
-    ];
+                                               ];
     
     [self.tableView setTableHeaderView:nil];
     
     self.tableView.rowHeight = 72.0f;
     self.tableView.separatorColor = [UIColor clearColor];
     
-    [self reload:nil];   
+    [self reload:nil];
 }
 
 
 - (void)viewDidUnload
 {
-    _activityIndicatorView = nil;    
+    _activityIndicatorView = nil;
     
     [super viewDidUnload];
 }
@@ -139,12 +139,12 @@ UITabBarControllerDelegate
 
 - (void)reloadInformation
 {
-    // To have an indicator which people has the highest visit count (eg. put a star next to person’s name)    
+    // To have an indicator which people has the highest visit count (eg. put a star next to person’s name)
     
     NSData *personsData = [[NSUserDefaults standardUserDefaults] objectForKey:STAFFS_KEY];
     if (personsData) {
-    NSMutableArray *results = [[NSMutableArray alloc] init];
-        results = [NSKeyedUnarchiver unarchiveObjectWithData:personsData];        
+        NSMutableArray *results = [[NSMutableArray alloc] init];
+        results = [NSKeyedUnarchiver unarchiveObjectWithData:personsData];
         
         for (int i = 0; i < self.results.count; i++) {
             MEPerson *person = [self.results objectAtIndex:i];
@@ -170,7 +170,7 @@ UITabBarControllerDelegate
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-        
+    
     [self reloadInformation];
 }
 
@@ -184,14 +184,14 @@ UITabBarControllerDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Potentially incomplete method implementation.
+    //#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
+    //#warning Incomplete method implementation.
     // Return the number of rows in the section.
     int rows = 0;
     
@@ -208,12 +208,12 @@ UITabBarControllerDelegate
 {
     static NSString *CellIdentifier = @"Person Item";
     MEStaffCustomViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
- 
+    
     if (!cell) {
         cell = [[MEStaffCustomViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier];
+                                            reuseIdentifier:CellIdentifier];
     }
-
+    
     MEPerson *person = [self.results objectAtIndex:indexPath.row];
     
     if(tableView == self.searchDisplayController.searchResultsTableView){
@@ -224,35 +224,34 @@ UITabBarControllerDelegate
         [cell.avatar setFrame:customFrame];
     }
     
-    [cell configureWithData:person atIndex:indexPath];    
-
+    [cell configureWithData:person atIndex:indexPath];
+    
     return cell;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(MEStaffCustomViewCell *)sender
 {
-    if ([segue.destinationViewController isKindOfClass:[MEStaffDetailsTableViewController class]]) {
-        
-        NSIndexPath *indexPath = [[self.tableView indexPathsForSelectedRows] lastObject];        
-        MEPerson *person = [self.results objectAtIndex:indexPath.row];
-        
-        if ([sender.superview isEqual:self.searchDisplayController.searchResultsTableView]) {
-            indexPath = [[self.searchDisplayController.searchResultsTableView indexPathsForSelectedRows] lastObject];
-            person = [self.filteredArray objectAtIndex:indexPath.row];
-        }
-        
-        //increase the visited Count
-        person.visitedCount = [[NSNumber alloc] initWithUnsignedInt:[person.visitedCount intValue] + 1];
-        person.avatar = sender.avatar.image;
-              
-        MEStaffDetailsTableViewController *destinationVC = (MEStaffDetailsTableViewController *)segue.destinationViewController;
-        destinationVC.person = person;      
-        
+    if (![segue.destinationViewController isKindOfClass:[MEStaffDetailsTableViewController class]])
+        return;
+    
+    NSIndexPath *indexPath = [[self.tableView indexPathsForSelectedRows] lastObject];
+    MEPerson *person = [self.results objectAtIndex:indexPath.row];
+    
+    if ([sender.superview isEqual:self.searchDisplayController.searchResultsTableView]) {
+        indexPath = [[self.searchDisplayController.searchResultsTableView indexPathsForSelectedRows] lastObject];
+        person = [self.filteredArray objectAtIndex:indexPath.row];
     }
+    
+    //increase the visited Count
+    person.visitedCount = [[NSNumber alloc] initWithUnsignedInt:[person.visitedCount intValue] + 1];
+    person.avatar = sender.avatar.image;
+    
+    MEStaffDetailsTableViewController *destinationVC = (MEStaffDetailsTableViewController *)segue.destinationViewController;
+    destinationVC.person = person;
 }
 
 #pragma mark Content Filtering
--(void)filterContentForSearchText:(NSString*)searchText
+- (void)filterContentForSearchText:(NSString*)searchText
                             scope:(NSString*)scope {
     // Update the filtered array based on the search text and scope.
     // Remove all objects from the filtered search array
@@ -268,16 +267,16 @@ UITabBarControllerDelegate
 
 
 #pragma mark - UISearchDisplayController Delegate Methods
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
 shouldReloadTableForSearchString:(NSString *)searchString {
     // Tells the table data source to reload when text changes
     [self filterContentForSearchText:searchString scope:
-    [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     // Return YES to cause the search result table view to be reloaded.
     return YES;
 }
 
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
 shouldReloadTableForSearchScope:(NSInteger)searchOption {
     // Tells the table data source to reload when scope bar selection changes
     [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:

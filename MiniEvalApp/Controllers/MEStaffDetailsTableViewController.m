@@ -42,16 +42,16 @@ ABNewPersonViewControllerDelegate
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.title = self.person.name;
-        
+    
     [self customizeBackButton];
     
     [self customAddContactButton];
     
-    self.fistLoadTableView = YES;    
-    [self initStaffDetailsCustomViewCells];    
-    self.tableView.separatorColor = [UIColor clearColor];    
+    self.fistLoadTableView = YES;
+    [self initStaffDetailsCustomViewCells];
+    self.tableView.separatorColor = [UIColor clearColor];
     
     if (self.person.image) {
         UIImageView *largeAvatar = [[UIImageView alloc] initWithImage:self.person.avatar];
@@ -63,7 +63,7 @@ ABNewPersonViewControllerDelegate
 
 - (void) viewWillLayoutSubviews
 {
-    if (self.fistLoadTableView == YES) {        
+    if (self.fistLoadTableView == YES) {
         for (int i = 0; i < self.items.count; i++) {
             MEStaffDetailsCustomViewCell *cell = (MEStaffDetailsCustomViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             
@@ -75,7 +75,7 @@ ABNewPersonViewControllerDelegate
             
             [MECustomAnimation addCustomShadow:cell.textCell.layer];
             [MECustomAnimation addCustomShadow:cell.imageCell.layer];
-        }        
+        }
         
         [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         [self checkTableViewCellAtIndex:0];
@@ -87,10 +87,10 @@ ABNewPersonViewControllerDelegate
 {
     if (idx >= self.items.count && self.fistLoadTableView == YES) {
         self.fistLoadTableView = NO;
-
+        
         [self.tableView beginUpdates];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView endUpdates];        
+        [self.tableView endUpdates];
         
         return;
     }
@@ -116,7 +116,7 @@ ABNewPersonViewControllerDelegate
                              self.tableView.backgroundView.alpha -= 0.1;
                          }
                      }
-                     completion:^(BOOL finished){ 
+                     completion:^(BOOL finished){
                          [self checkTableViewCellAtIndex:idx + 1];
                      }];
     [UIView commitAnimations];
@@ -129,41 +129,37 @@ ABNewPersonViewControllerDelegate
     NSString *imageCell;
     NSString *textCell;
     
-    imageCell = @"icon_profile";    
+    imageCell = @"icon_profile";
     textCell = self.person.role;
-    NSMutableDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithUnsignedInt:TAG_AVATAR_CELL], @"tag",
-                                 textCell, @"textCell",
-                                 [NSNumber numberWithUnsignedInt:64], @"minHeight",
-                                 nil];
+    NSDictionary *dict = @{@"tag": @TAG_AVATAR_CELL, @"textCell" : textCell, @"minHeight" : @64};
     [self.items addObject:dict];
     
     imageCell = @"icon_email";
     textCell = self.person.userName;
-    [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell", [NSNumber numberWithUnsignedInt:TAG_EMAIL_CELL], @"tag", nil]];
+    [self.items addObject:@{@"imageCell": imageCell, @"textCell": textCell, @"tag": @TAG_EMAIL_CELL}];
     
     if (self.person.contact) {
         imageCell = @"icon_sms";
-        textCell = self.person.contact;        
-        [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell", [NSNumber numberWithUnsignedInt:TAG_SMS_CELL], @"tag", nil]];
+        textCell = self.person.contact;
+        [self.items addObject:@{@"imageCell": imageCell, @"textCell": textCell, @"tag": @TAG_SMS_CELL}];
     }
     
     if (self.person.like) {
         imageCell = @"icon_like";
         textCell = self.person.like;
-        [self.items addObject:[NSDictionary dictionaryWithObjectsAndKeys: imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
+        [self.items addObject:@{@"imageCell": imageCell, @"textCell": textCell, @"tag": @0}];
     }
     
     if (self.person.dislike) {
         imageCell = @"icon_dislike";
         textCell = self.person.dislike;
-        [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
+        [self.items addObject:@{@"imageCell": imageCell, @"textCell": textCell, @"tag": @0}];
     }
     
     if (self.person.visitedCount) {
         imageCell = @"icon_star";
         textCell = [NSString stringWithFormat:@"%@ visitors", self.person.visitedCount];
-        [self.items addObject:[[NSDictionary alloc] initWithObjectsAndKeys:imageCell, @"imageCell", textCell, @"textCell",[NSNumber numberWithUnsignedInt:0], @"tag", nil]];
+        [self.items addObject:@{@"imageCell": imageCell, @"textCell": textCell, @"tag": @0}];
     }
 }
 
@@ -198,7 +194,7 @@ ABNewPersonViewControllerDelegate
     [addContactButton setFrame:CGRectMake(0, 0, addContactImage.size.width, addContactImage.size.height)];
     UIBarButtonItem *reloadBarButton = [[UIBarButtonItem alloc] initWithCustomView:addContactButton];
     [addContactButton addTarget:self action:@selector(addContactAction) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [self.navigationItem setRightBarButtonItem:reloadBarButton];
 }
 
@@ -254,7 +250,7 @@ ABNewPersonViewControllerDelegate
     ABRecordSetValue(person, kABPersonOrganizationProperty, @"2359Media", &error);
     ABRecordSetValue(person, kABPersonNoteProperty, CFBridgingRetain(self.person.role), &error);
     
-    NSData *dataRef = UIImagePNGRepresentation(self.person.avatar);    
+    NSData *dataRef = UIImagePNGRepresentation(self.person.avatar);
     ABPersonSetImageData(person, (CFDataRef)CFBridgingRetain(dataRef), nil);
     
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(nil, nil);
@@ -265,7 +261,7 @@ ABNewPersonViewControllerDelegate
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Can not add %@ to your Address Book?", self.person.name] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         NSLog(@"Error: %@", error);
-    }    
+    }
     
     return person;
 }
@@ -290,14 +286,14 @@ ABNewPersonViewControllerDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Potentially incomplete method implementation.
+    //#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
+    //#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return self.items.count;
 }
@@ -309,7 +305,7 @@ ABNewPersonViewControllerDelegate
     
     if (!cell) {
         cell = [[MEStaffDetailsCustomViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                            reuseIdentifier:CellIdentifier];
+                                                   reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -319,14 +315,14 @@ ABNewPersonViewControllerDelegate
         [cell.imageCell setImage:self.person.avatar];
     }
     
-        
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     //    dispatch_async(dispatch_get_main_queue(), ^{S)
     //        [MECustomAnimation animationDurationOfLayer:cell.layer];
-  //      } }
+    //      } }
 }
 
 #define FONT_SIZE 11.0f
@@ -336,20 +332,20 @@ ABNewPersonViewControllerDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    CGFloat height = 0;    
+    CGFloat height = 0;
     
-//    CGSize labelSize = [myLabel.text sizeWithFont:myLabel.font
-//                                constrainedToSize:myLabel.frame.size
-//                                    lineBreakMode:UILineBreakModeWordWrap];
-//    CGFloat labelHeight = labelSize.height;
+    //    CGSize labelSize = [myLabel.text sizeWithFont:myLabel.font
+    //                                constrainedToSize:myLabel.frame.size
+    //                                    lineBreakMode:UILineBreakModeWordWrap];
+    //    CGFloat labelHeight = labelSize.height;
     
     // Get the text so we can measure it
     NSDictionary *dict = (NSDictionary *) [self.items objectAtIndex:indexPath.row];
     NSString *text = [dict objectForKey:@"textCell"];
     if ([dict objectForKey:@"minHeight"]) {
-      height = [(NSNumber *)[dict objectForKey:@"minHeight"] intValue];
+        height = [(NSNumber *)[dict objectForKey:@"minHeight"] intValue];
     }
-        
+    
     //UILabel *content = (UILabel *)[[(UITableViewCell *)[(UITableView *)self cellForRowAtIndexPath:indexPath] contentView] viewWithTag:1];
     //text = [items objectAtIndex:indexPath.row];
     
@@ -358,12 +354,12 @@ ABNewPersonViewControllerDelegate
     
     // Get the size of the text given the CGSize we just made as a constraint
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByCharWrapping];
-        
+    
     // Get the height of our measurement
     if (height < size.height) {
         height = size.height;
-    }    
-        
+    }
+    
     if (self.fistLoadTableView && height > CELL_HEIGHT_FIRST_LOAD) {
         height = CELL_HEIGHT_FIRST_LOAD;
     }
@@ -389,7 +385,7 @@ ABNewPersonViewControllerDelegate
     if (cell.tag == TAG_EMAIL_CELL) {
         [self showComposer:@"Hi,\n Just test!"];
     } else if (cell.tag == TAG_SMS_CELL) {
-        [self sendInAppSMS];        
+        [self sendInAppSMS];
     }
     
 }
@@ -439,7 +435,7 @@ ABNewPersonViewControllerDelegate
 			break;
 	}
     
-    self.view.alpha = 0.5;    
+    self.view.alpha = 0.5;
     [self dismissViewControllerAnimated:YES completion:^(void){
         [UIView animateWithDuration:0.3 animations:^{
             self.view.alpha = 1;
@@ -498,8 +494,8 @@ ABNewPersonViewControllerDelegate
 			NSLog(@"Cancelled");
 			break;
             
-		case MessageComposeResultFailed:            
-			alert = [[UIAlertView alloc] initWithTitle:@"MiniEvalApp" message:@"Unknown Error" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];            
+		case MessageComposeResultFailed:
+			alert = [[UIAlertView alloc] initWithTitle:@"MiniEvalApp" message:@"Unknown Error" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			[alert show];
 			break;
 		case MessageComposeResultSent:

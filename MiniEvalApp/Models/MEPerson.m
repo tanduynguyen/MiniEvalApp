@@ -11,15 +11,6 @@
 
 #import "AFImageRequestOperation.h"
 
-NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.profile-image.loaded";
-
-#ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
-@interface MEPerson ()
-+ (NSOperationQueue *)sharedProfileImageRequestOperationQueue;
-@end
-#endif
-
-
 @implementation MEPerson{
 @private
     NSString *_avatarImageURLString;
