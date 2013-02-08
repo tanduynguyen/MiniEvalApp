@@ -649,10 +649,14 @@
 		8DB5C3AA16ACE7FD008D5E02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: 2359 Media Pte Ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: 2359 Media Pte Ltd";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MiniEvalApp/MiniEvalApp-Prefix.pch";
 				INFOPLIST_FILE = "MiniEvalApp/MiniEvalApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0A281EA1-0EEC-4EC5-A94A-2B984BFA99B3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0A281EA1-0EEC-4EC5-A94A-2B984BFA99B3";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
