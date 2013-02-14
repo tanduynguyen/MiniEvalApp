@@ -109,8 +109,7 @@ UITabBarControllerDelegate
     
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchStuff:)];
     
-    self.navigationItem.rightBarButtonItems = [[NSArray alloc] initWithObjects:refeshButton, searchButton, nil
-                                               ];
+    self.navigationItem.rightBarButtonItems = @[refeshButton, searchButton];
     
     [self.tableView setTableHeaderView:nil];
     
@@ -147,11 +146,11 @@ UITabBarControllerDelegate
         results = [NSKeyedUnarchiver unarchiveObjectWithData:personsData];
         
         for (int i = 0; i < self.results.count; i++) {
-            MEPerson *person = [self.results objectAtIndex:i];
+            MEPerson *person = (self.results)[i];
             NSPredicate *pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"SELF.userId = '%@'", person.userId]];
             NSArray *filtered = [results filteredArrayUsingPredicate:pred];
             if (filtered.count > 0) {
-                MEPerson *tmp = [filtered objectAtIndex:0];
+                MEPerson *tmp = filtered[0];
                 person.visitedCount = tmp.visitedCount;
             }
         }
@@ -160,11 +159,11 @@ UITabBarControllerDelegate
     [MEPerson findHighestVisitedCount:self.results];
     
     //set up ADLivelyTableView
-    NSArray * transforms = [NSArray arrayWithObjects:ADLivelyTransformFan, ADLivelyTransformCurl, ADLivelyTransformFade, ADLivelyTransformHelix, ADLivelyTransformWave, nil];
+    NSArray * transforms = @[ADLivelyTransformFan, ADLivelyTransformCurl, ADLivelyTransformFade, ADLivelyTransformHelix, ADLivelyTransformWave];
     ADLivelyTableView * livelyTableView = (ADLivelyTableView *)self.tableView;
     livelyTableView.initialCellTransformBlock = nil;
     [livelyTableView reloadData];
-    livelyTableView.initialCellTransformBlock = [transforms objectAtIndex:random() % [transforms count]];
+    livelyTableView.initialCellTransformBlock = transforms[random() % [transforms count]];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -214,10 +213,10 @@ UITabBarControllerDelegate
                                             reuseIdentifier:CellIdentifier];
     }
     
-    MEPerson *person = [self.results objectAtIndex:indexPath.row];
+    MEPerson *person = (self.results)[indexPath.row];
     
     if(tableView == self.searchDisplayController.searchResultsTableView){
-        person = [self.filteredArray objectAtIndex:indexPath.row];
+        person = (self.filteredArray)[indexPath.row];
         CGRect customFrame = cell.avatar.frame;
         customFrame.size.width /= 1.5;
         customFrame.size.height /= 1.5;
@@ -235,11 +234,11 @@ UITabBarControllerDelegate
         return;
     
     NSIndexPath *indexPath = [[self.tableView indexPathsForSelectedRows] lastObject];
-    MEPerson *person = [self.results objectAtIndex:indexPath.row];
+    MEPerson *person = (self.results)[indexPath.row];
     
     if ([sender.superview isEqual:self.searchDisplayController.searchResultsTableView]) {
         indexPath = [[self.searchDisplayController.searchResultsTableView indexPathsForSelectedRows] lastObject];
-        person = [self.filteredArray objectAtIndex:indexPath.row];
+        person = (self.filteredArray)[indexPath.row];
     }
     
     //increase the visited Count
@@ -271,7 +270,7 @@ UITabBarControllerDelegate
 shouldReloadTableForSearchString:(NSString *)searchString {
     // Tells the table data source to reload when text changes
     [self filterContentForSearchText:searchString scope:
-     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+     [self.searchDisplayController.searchBar scopeButtonTitles][[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     // Return YES to cause the search result table view to be reloaded.
     return YES;
 }
@@ -280,7 +279,7 @@ shouldReloadTableForSearchString:(NSString *)searchString {
 shouldReloadTableForSearchScope:(NSInteger)searchOption {
     // Tells the table data source to reload when scope bar selection changes
     [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:
-     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
+     [self.searchDisplayController.searchBar scopeButtonTitles][searchOption]];
     // Return YES to cause the search result table view to be reloaded.
     return YES;
 }

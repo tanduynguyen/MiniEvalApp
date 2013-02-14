@@ -483,7 +483,7 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
 - (void)cancelConnection {
     NSDictionary *userInfo = nil;
     if ([self.request URL]) {
-        userInfo = [NSDictionary dictionaryWithObject:[self.request URL] forKey:NSURLErrorFailingURLErrorKey];
+        userInfo = @{NSURLErrorFailingURLErrorKey: [self.request URL]};
     }
     self.error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:userInfo];
 
@@ -556,7 +556,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
             if (username && password) {
                 credential = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistenceNone];
             } else if (username) {
-                credential = [[[NSURLCredentialStorage sharedCredentialStorage] credentialsForProtectionSpace:[challenge protectionSpace]] objectForKey:username];
+                credential = [[NSURLCredentialStorage sharedCredentialStorage] credentialsForProtectionSpace:[challenge protectionSpace]][username];
             } else {
                 credential = [[NSURLCredentialStorage sharedCredentialStorage] defaultCredentialForProtectionSpace:[challenge protectionSpace]];
             }
@@ -713,7 +713,7 @@ didReceiveResponse:(NSURLResponse *)response
     [aCoder encodeObject:self.response forKey:@"response"];
     [aCoder encodeObject:self.error forKey:@"error"];
     [aCoder encodeObject:self.responseData forKey:@"responseData"];
-    [aCoder encodeObject:[NSNumber numberWithLongLong:self.totalBytesRead] forKey:@"totalBytesRead"];
+    [aCoder encodeObject:@(self.totalBytesRead) forKey:@"totalBytesRead"];
 }
 
 #pragma mark - NSCopying

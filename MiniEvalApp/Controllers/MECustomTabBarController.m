@@ -22,7 +22,7 @@
     self.tabBar.hidden = YES;
     
     NSArray *nibObjects = [[NSBundle mainBundle] loadNibNamed:@"MECustomTabBar" owner:self options:nil];
-    self.customTabBarView = [nibObjects objectAtIndex:0];
+    self.customTabBarView = nibObjects[0];
     
     CGRect customTabBarFrame = self.customTabBarView.frame;
     customTabBarFrame.origin.y = self.view.frame.size.height - customTabBarFrame.size.height;
@@ -42,7 +42,7 @@
     if (self.selectedIndex == index)
         return;
     
-    UIViewController *viewController = [self.viewControllers objectAtIndex:index];
+    UIViewController *viewController = (self.viewControllers)[index];
     
     UIView * fromView = self.selectedViewController.view;
     UIView * toView = viewController.view;

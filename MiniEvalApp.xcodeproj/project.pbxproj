@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		847F70A216BE3EB90015C5DA /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 847F70A116BE3EB90015C5DA /* icon57x57.png */; };
 		847F70A416BE3EC00015C5DA /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 847F70A316BE3EC00015C5DA /* icon114x114.png */; };
+		84EAD0E316CD1C0C0035C557 /* UIColor+MEColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EAD0E216CD1C0C0035C557 /* UIColor+MEColor.m */; };
 		8D07C1D916B223B900690C0C /* MECustomTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D07C1D816B223B900690C0C /* MECustomTabBar.xib */; };
 		8D07C1FC16B264EF00690C0C /* KTNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07C1F916B264EF00690C0C /* KTNavigationBar.m */; };
 		8D9398C816AF8F420039AEF7 /* icon_add_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9398AF16AF8F420039AEF7 /* icon_add_contact.png */; };
@@ -83,6 +84,8 @@
 /* Begin PBXFileReference section */
 		847F70A116BE3EB90015C5DA /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon57x57.png; path = ../../icon57x57.png; sourceTree = "<group>"; };
 		847F70A316BE3EC00015C5DA /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114x114.png; path = ../../icon114x114.png; sourceTree = "<group>"; };
+		84EAD0E116CD1C0C0035C557 /* UIColor+MEColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+MEColor.h"; path = "Categories/UIColor+MEColor.h"; sourceTree = "<group>"; };
+		84EAD0E216CD1C0C0035C557 /* UIColor+MEColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+MEColor.m"; path = "Categories/UIColor+MEColor.m"; sourceTree = "<group>"; };
 		8D07C1D816B223B900690C0C /* MECustomTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MECustomTabBar.xib; path = XIBs/MECustomTabBar.xib; sourceTree = "<group>"; };
 		8D07C1F816B264EF00690C0C /* KTNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTNavigationBar.h; sourceTree = "<group>"; };
 		8D07C1F916B264EF00690C0C /* KTNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTNavigationBar.m; sourceTree = "<group>"; };
@@ -203,6 +206,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84EAD0DF16CD1BBB0035C557 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				84EAD0E116CD1C0C0035C557 /* UIColor+MEColor.h */,
+				84EAD0E216CD1C0C0035C557 /* UIColor+MEColor.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		8D4CC9BB16ACEDFE00DCB309 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +323,7 @@
 		8DB5C38B16ACE7FD008D5E02 /* MiniEvalApp */ = {
 			isa = PBXGroup;
 			children = (
+				84EAD0DF16CD1BBB0035C557 /* Categories */,
 				8D4CC9BB16ACEDFE00DCB309 /* Controllers */,
 				8D4CC9C016ACEE6A00DCB309 /* Models */,
 				8D4CC9C116ACEE7100DCB309 /* Views */,
@@ -549,6 +562,7 @@
 				8D97C3AC16B762CB00FC6A9D /* MEStaffCustomViewCell.m in Sources */,
 				8D97C3AD16B762CB00FC6A9D /* MEStaffDetailsCustomViewCell.m in Sources */,
 				8D97C3F016B7A19500FC6A9D /* MECustomAnimation.m in Sources */,
+				84EAD0E316CD1C0C0035C557 /* UIColor+MEColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

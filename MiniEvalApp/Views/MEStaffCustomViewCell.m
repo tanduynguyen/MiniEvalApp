@@ -7,7 +7,7 @@
 //
 
 #import "MEStaffCustomViewCell.h"
-
+#import "UIColor+MEColor.h"
 #import "UIImageView+AFNetworking.h"
 
 @implementation MEStaffCustomViewCell
@@ -37,9 +37,9 @@
     UIColor *genderCellColor;
     
     if ([person.gender isEqualToString:@"male"]) {
-        genderCellColor = UIColorFromRGB(kDarkOrganColor);
+        genderCellColor = [UIColor kDarkOrganColor];
     } else {
-        genderCellColor = UIColorFromRGB(kDarkBlueColor);
+        genderCellColor = [UIColor kDarkOrganColor];
     }
     
     [self.nameLabel setTextColor:genderCellColor];    
@@ -52,7 +52,7 @@
     
     UIView *backView = [[UIView alloc] initWithFrame:self.frame];
     if (indexPath.row % 2) {
-        backView.backgroundColor = UIColorFromRGB(kLightOrganColor);
+        backView.backgroundColor = [UIColor kLightOrganColor];
     } else {
         backView.backgroundColor = [UIColor whiteColor];
     }

@@ -309,7 +309,7 @@ ABNewPersonViewControllerDelegate
     }
     
     // Configure the cell...
-    NSDictionary *dict = [self.items objectAtIndex:indexPath.row];
+    NSDictionary *dict = (self.items)[indexPath.row];
     [cell setContentData:dict atIndex:indexPath];
     if (cell.tag == TAG_AVATAR_CELL) {
         [cell.imageCell setImage:self.person.avatar];
@@ -340,10 +340,10 @@ ABNewPersonViewControllerDelegate
     //    CGFloat labelHeight = labelSize.height;
     
     // Get the text so we can measure it
-    NSDictionary *dict = (NSDictionary *) [self.items objectAtIndex:indexPath.row];
-    NSString *text = [dict objectForKey:@"textCell"];
-    if ([dict objectForKey:@"minHeight"]) {
-        height = [(NSNumber *)[dict objectForKey:@"minHeight"] intValue];
+    NSDictionary *dict = (NSDictionary *) (self.items)[indexPath.row];
+    NSString *text = dict[@"textCell"];
+    if (dict[@"minHeight"]) {
+        height = [(NSNumber *)dict[@"minHeight"] intValue];
     }
     
     //UILabel *content = (UILabel *)[[(UITableViewCell *)[(UITableView *)self cellForRowAtIndexPath:indexPath] contentView] viewWithTag:1];
@@ -400,7 +400,7 @@ ABNewPersonViewControllerDelegate
 	
 	tempMailCompose.mailComposeDelegate = self;
 	
-	[tempMailCompose setToRecipients:[NSArray arrayWithObject:self.person.userName]];
+	[tempMailCompose setToRecipients:@[self.person.userName]];
 	//[tempMailCompose setCcRecipients:[NSArray arrayWithObject:@"ipad@me.com"]];
 	[tempMailCompose setSubject:@"iPhone App recommendation"];
 	[tempMailCompose setMessageBody:body isHTML:NO];
@@ -479,7 +479,7 @@ ABNewPersonViewControllerDelegate
 	if([MFMessageComposeViewController canSendText])
 	{
 		picker.body = @"Hello from Duy Nguyen";
-		picker.recipients = [NSArray arrayWithObjects:self.person.contact, nil];
+		picker.recipients = @[self.person.contact];
 		picker.messageComposeDelegate = self;
         [self presentViewController:picker animated:YES completion:^(void){}];
 	}

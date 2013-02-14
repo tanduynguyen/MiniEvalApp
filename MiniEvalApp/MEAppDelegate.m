@@ -7,38 +7,30 @@
 //
 
 #import "MEAppDelegate.h"
+#import "UIColor+MEColor.h"
 
 
 @implementation MEAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    
-    UIColor *DarkOrganColor = UIColorFromRGB(kDarkOrganColor);
-    UIColor *MainColor = UIColorFromRGB(kMainColor);
+{    
     
     self.window.backgroundColor = [UIColor lightGrayColor];
     
-    [[UINavigationBar appearance] setTintColor:MainColor];
+    [[UINavigationBar appearance] setTintColor:[UIColor kMainColor]];
     
     [[UINavigationBar appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIColor whiteColor],
-      UITextAttributeTextColor,
-      MainColor,
-      UITextAttributeTextShadowColor,
-      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-      UITextAttributeTextShadowOffset,
-      [UIFont fontWithName:@"Helvetica" size:20.0],
-      UITextAttributeFont,
-      nil]];
+     @{UITextAttributeTextColor: [UIColor whiteColor],
+      UITextAttributeTextShadowColor: [UIColor kMainColor],
+      UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+      UITextAttributeFont: [UIFont fontWithName:@"Helvetica" size:20.0]}];
     
     
-    [[UITabBar appearance] setTintColor:DarkOrganColor];
+    [[UITabBar appearance] setTintColor:[UIColor kDarkOrganColor]];
     
-    [[UIBarButtonItem appearance] setTintColor:DarkOrganColor];
+    [[UIBarButtonItem appearance] setTintColor:[UIColor kDarkOrganColor]];
     
-    [[UISearchBar appearance] setTintColor:DarkOrganColor];
+    [[UISearchBar appearance] setTintColor:[UIColor kDarkOrganColor]];
     
     return YES;
 }

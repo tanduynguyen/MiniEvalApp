@@ -21,11 +21,11 @@
     transition.duration = 0.3;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
-    NSArray *arrayCATransition = [NSArray arrayWithObjects: kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, kCATransitionFade, nil];    
-    transition.type = [arrayCATransition objectAtIndex:random() % [arrayCATransition count]];
+    NSArray *arrayCATransition = @[kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, kCATransitionFade];    
+    transition.type = arrayCATransition[random() % [arrayCATransition count]];
     
-    NSArray *arrayCATransitionSubType = [NSArray arrayWithObjects: kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom, nil];
-    transition.subtype = [arrayCATransitionSubType objectAtIndex:random() % [arrayCATransitionSubType count]];
+    NSArray *arrayCATransitionSubType = @[kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom];
+    transition.subtype = arrayCATransitionSubType[random() % [arrayCATransitionSubType count]];
     
     
     [sourceViewController.navigationController.view.layer addAnimation:transition

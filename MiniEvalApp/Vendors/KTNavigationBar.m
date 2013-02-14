@@ -7,6 +7,7 @@
 //
 
 #import "KTNavigationBar.h"
+#import "UIColor+MEColor.h"
 
 
 @implementation KTNavigationBar 
@@ -15,11 +16,10 @@
 {
    [super drawRect:rect];   
     
-    UIColor *DarkOrganColor = UIColorFromRGB(kDarkOrganColor);
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColor(context, CGColorGetComponents( [DarkOrganColor CGColor]));
+    CGContextSetFillColor(context, CGColorGetComponents( [[UIColor kDarkOrganColor] CGColor]));
     CGContextFillRect(context, rect);
-    self.tintColor = DarkOrganColor;
+    self.tintColor = [UIColor kDarkOrganColor];
 }
 
 @end

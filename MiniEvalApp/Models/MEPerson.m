@@ -38,18 +38,18 @@
     self = [super init];
     
     if (self) {
-        self.userId = [[personDictionary objectForKey:@"_id"] objectForKey:@"$oid"];
-        self.name = [NSString stringWithUTF8String:[(NSString *)[personDictionary objectForKey:@"name"] UTF8String]];
-        self.userName = [personDictionary objectForKey:@"userName"];
-        self.role = [personDictionary objectForKey:@"role"];
-        self.like = [personDictionary objectForKey:@"like"];
-        self.dislike = [personDictionary objectForKey:@"dislike"];
+        self.userId = personDictionary[@"_id"][@"$oid"];
+        self.name = @([(NSString *)personDictionary[@"name"] UTF8String]);
+        self.userName = personDictionary[@"userName"];
+        self.role = personDictionary[@"role"];
+        self.like = personDictionary[@"like"];
+        self.dislike = personDictionary[@"dislike"];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = @"M/d/yy HH:mm";
-        self.timeStamp = [dateFormatter dateFromString:[personDictionary objectForKey:@"timeStamp"]];
-        self.gender = [personDictionary objectForKey:@"gender"];
-        self.image = [personDictionary objectForKey:@"image"];
-        self.contact = [personDictionary objectForKey:@"contact"];
+        self.timeStamp = [dateFormatter dateFromString:personDictionary[@"timeStamp"]];
+        self.gender = personDictionary[@"gender"];
+        self.image = personDictionary[@"image"];
+        self.contact = personDictionary[@"contact"];
     }
     
     return self;

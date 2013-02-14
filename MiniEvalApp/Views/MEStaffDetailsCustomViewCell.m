@@ -21,13 +21,13 @@
                atIndex:(NSIndexPath *)indexPath
 {
     if (self) {        
-        [self setTag:[(NSNumber *)[dictionary objectForKey:@"tag"] intValue]];
+        [self setTag:[(NSNumber *)dictionary[@"tag"] intValue]];
                 
-        if ([dictionary objectForKey:@"imageCell"]) {
-            [self.imageCell setImage:[UIImage imageNamed:[dictionary objectForKey:@"imageCell"]]];
+        if (dictionary[@"imageCell"]) {
+            [self.imageCell setImage:[UIImage imageNamed:dictionary[@"imageCell"]]];
         }
         
-        self.textCell.text = [dictionary objectForKey:@"textCell"];     
+        self.textCell.text = dictionary[@"textCell"];     
         [self.textCell setNumberOfLines:0];
         [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];        
     }    
