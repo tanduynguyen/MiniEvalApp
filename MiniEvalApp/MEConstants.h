@@ -10,9 +10,5 @@
 
 @interface MEConstants : NSObject
 
-extern NSString * const kAppAPIBaseURLString;
-extern NSString * const kAppAPIPath;
-extern NSString * const kAppAPIToken;
-extern NSString * const kAppJSONPath;
 
 @end

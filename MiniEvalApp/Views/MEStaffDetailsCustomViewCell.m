@@ -29,7 +29,8 @@
         
         self.textCell.text = dictionary[@"textCell"];     
         [self.textCell setNumberOfLines:0];
-        [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];        
+        [self.textCell setLineBreakMode:NSLineBreakByWordWrapping];
+        self.textCell.tag = 2;
     }    
 }
 

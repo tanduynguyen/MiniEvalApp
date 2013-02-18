@@ -15,7 +15,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         __sharedInstance = [[MEAppAPIClient alloc] initWithBaseURL:
-                            [NSURL URLWithString:kAppAPIBaseURLString]];
+                            [NSURL URLWithString:kAppAPIBaseURL]];
     });
     
     return __sharedInstance;

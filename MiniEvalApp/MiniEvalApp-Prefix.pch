@@ -66,6 +66,13 @@
     #define TAG_EMAIL_CELL 3
     #define TAG_SMS_CELL 4
 
+    #define kAppAPIBaseURL @"https://dl.dropbox.com/"
+    #define kAppAPIPath @"/u/11295402/MiniEval/data.json"
+    #define kAppAPIToken @""
+    #define kAppJSONPath @"https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http%3A%2F%2Fwww.digg.com%2Frss%2Findex.xml"
+    #define kInfoWebsite @"http://2359media.com/"
+
+
     #import "MEConstants.h"
 
 #endif

@@ -8,6 +8,17 @@
 
 #import "MECustomTabBarView.h"
 
+@interface MECustomTabBarView()
+
+@property (strong, nonatomic) IBOutlet UIButton *contactsButton;
+@property (strong, nonatomic) IBOutlet UIButton *infoButton;
+
+
+- (IBAction)touchContactsButton:(id)sender;
+- (IBAction)touchInfoButton:(id)sender;
+
+@end
+
 @implementation MECustomTabBarView
 
 //Let the delegate know that a tab has been touched

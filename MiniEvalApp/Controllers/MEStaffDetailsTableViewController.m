@@ -131,7 +131,7 @@ ABNewPersonViewControllerDelegate
     
     imageCell = @"icon_profile";
     textCell = self.person.role;
-    NSDictionary *dict = @{@"tag": @TAG_AVATAR_CELL, @"textCell" : textCell, @"minHeight" : @64};
+    NSDictionary *dict = @{@"tag": @TAG_AVATAR_CELL, @"textCell" : textCell};
     [self.items addObject:dict];
     
     imageCell = @"icon_email";
@@ -231,22 +231,9 @@ ABNewPersonViewControllerDelegate
     ABRecordRef person = ABPersonCreate();
     CFErrorRef  error = NULL;
     
-    //name
-    ABRecordSetValue(person, kABPersonFirstNameProperty, CFBridgingRetain(self.person.name), NULL);
-    
-    // email
-    ABMutableMultiValueRef email = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(email, CFBridgingRetain(self.person.userName), CFSTR("email"), NULL);
-    ABRecordSetValue(person, kABPersonEmailProperty, email, &error);
-    CFRelease(email);
-    
-    // mobile
-    ABMutableMultiValueRef mobile = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(mobile, CFBridgingRetain(self.person.contact), CFSTR("mobile"), NULL);
-    ABRecordSetValue(person, kABPersonPhoneProperty, mobile, &error);
-    CFRelease(mobile);
-    
-    
+    ABRecordSetValue(person, kABPersonFirstNameProperty, CFBridgingRetain(self.person.name), &error);
+    ABRecordSetValue(person, kABPersonEmailProperty, CFBridgingRetain(self.person.userName), &error);
+    ABRecordSetValue(person, kABPersonPhoneProperty, CFBridgingRetain(self.person.contact), &error);    
     ABRecordSetValue(person, kABPersonOrganizationProperty, @"2359Media", &error);
     ABRecordSetValue(person, kABPersonNoteProperty, CFBridgingRetain(self.person.role), &error);
     
@@ -328,26 +315,22 @@ ABNewPersonViewControllerDelegate
 #define FONT_SIZE 11.0f
 #define CELL_CONTENT_WIDTH_PERCENT 0.75
 #define CELL_CONTENT_MARGIN 10.0f
-#define CELL_HEIGHT_FIRST_LOAD 70.0f
+#define CELL_HEIGHT_FIRST_LOAD 80.0f
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    CGFloat height = 0;
+    MEStaffDetailsCustomViewCell *cell =  (MEStaffDetailsCustomViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];    
+    CGFloat height = cell.frame.size.height;    
     
-    //    CGSize labelSize = [myLabel.text sizeWithFont:myLabel.font
-    //                                constrainedToSize:myLabel.frame.size
-    //                                    lineBreakMode:UILineBreakModeWordWrap];
-    //    CGFloat labelHeight = labelSize.height;
+//    CGSize labelSize = [cell.textLabel.text sizeWithFont:cell.textLabel.font
+//                                   constrainedToSize:cell.textLabel.frame.size
+//                                       lineBreakMode:NSLineBreakByCharWrapping];
+//    height = labelSize.height;
     
     // Get the text so we can measure it
     NSDictionary *dict = (NSDictionary *) (self.items)[indexPath.row];
     NSString *text = dict[@"textCell"];
-    if (dict[@"minHeight"]) {
-        height = [(NSNumber *)dict[@"minHeight"] intValue];
-    }
     
-    //UILabel *content = (UILabel *)[[(UITableViewCell *)[(UITableView *)self cellForRowAtIndexPath:indexPath] contentView] viewWithTag:1];
-    //text = [items objectAtIndex:indexPath.row];
     
     // Get a CGSize for the width and, effectively, unlimited height
     CGSize constraint = CGSizeMake((CELL_CONTENT_WIDTH_PERCENT * self.view.frame.size.width) - (CELL_CONTENT_MARGIN * 2), 20000.0f);
@@ -357,7 +340,7 @@ ABNewPersonViewControllerDelegate
     
     // Get the height of our measurement
     if (height < size.height) {
-        height = size.height;
+        height = size.height + CELL_CONTENT_MARGIN * 2;
     }
     
     if (self.fistLoadTableView && height > CELL_HEIGHT_FIRST_LOAD) {
@@ -365,7 +348,7 @@ ABNewPersonViewControllerDelegate
     }
     
     // return the height, with a bit of extra padding in
-    return height + (CELL_CONTENT_MARGIN * 2);
+    return height;
 }
 
 

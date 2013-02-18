@@ -21,7 +21,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    NSURL *url = [NSURL URLWithString:@"http://2359media.com/"];
+    NSURL *url = [NSURL URLWithString:kInfoWebsite];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
     
