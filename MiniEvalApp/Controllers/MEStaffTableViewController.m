@@ -164,6 +164,7 @@ UITabBarControllerDelegate
     livelyTableView.initialCellTransformBlock = nil;
     [livelyTableView reloadData];
     livelyTableView.initialCellTransformBlock = transforms[random() % [transforms count]];
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated
